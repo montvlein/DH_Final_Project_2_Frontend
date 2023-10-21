@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header } from '@/components'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Golden Ticket',
   description: 'App de venta de entradas de eventos'
 }
 
-export default function RootLayout ({
+export default function RootLayout({
   children
 }: {
   children: React.ReactNode
@@ -17,6 +18,7 @@ export default function RootLayout ({
       <body className='relative'>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )

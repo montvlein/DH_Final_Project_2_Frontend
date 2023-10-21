@@ -4,10 +4,10 @@ import Link from 'next/link'
 
 const Footer: React.FC = () => {
     return (
-        <footer className="#D9D9D9 py-8">
-            <div className="container mx-auto flex flex-wrap">
+        <footer className="#D9D9D9 fixed bottom-0 left-0 w-full bg-gray-300 py-8">
+            <div className="container flex flex-wrap">
                 {/* Logo */}
-                <div className="w-full md:w-1/5 text-center md:text-left">
+                <div className="pl-2 w-full md:w-1/5 text-center md:text-left">
                     <Image
                         src="/logoFooter.png"
                         alt="goldenTicket"
@@ -17,25 +17,30 @@ const Footer: React.FC = () => {
                 </div>
 
                 {/* Company */}
-                <div className="w-full md:w-1/5 text-center md:text-left">
-                    <h5 className="uppercase mb-4 font-bold">Company</h5>
-                    <ul className="mb-4">
+                <div className="w-full md:w-1/5 text-center md:text-left pl-2">
+                    <h5 className="mb-4 font-poppins text-xl font-semibold leading-6 text-left">
+                        Compañia
+                    </h5>
+
+                    <ul className="font-poppins text-base font-medium leading-6 text-gray-500">
                         <li>
-                            <a href="#" className="text-gray-500">About Us</a>
+                            <a href="#">About Us</a>
                         </li>
                         <li>
-                            <a href="#" className="text-gray-500">Carrer</a>
+                            <a href="#">Carrer</a>
                         </li>
                         <li>
-                            <a href="#" className="text-gray-500">FAQ</a>
+                            <a href="#">FAQ</a>
                         </li>
                     </ul>
                 </div>
 
                 {/* Contact */}
                 <div className="w-full md:w-1/5 text-center md:text-left">
-                    <h5 className="uppercase mb-4 font-bold">Contact</h5>
-                    <address className="not-italic mb-4 text-gray-500">
+                    <h5 className="mb-4 font-poppins text-xl font-semibold leading-6 text-left">
+                        Contacto
+                    </h5>
+                    <address className="not-italic mb-4 font-poppins text-base font-medium leading-6 text-left text-gray-500">
                         contacto@goldenticket.com<br />
                         +54 (342) 5087-137
                     </address>
@@ -43,13 +48,15 @@ const Footer: React.FC = () => {
 
                 {/* More */}
                 <div className="w-full md:w-1/5 text-center md:text-left">
-                    <h5 className="uppercase mb-4 font-bold">More</h5>
-                    <ul className="mb-4">
+                    <h5 className="mb-4 font-poppins text-xl font-semibold leading-6 text-left">
+                        Más
+                    </h5>
+                    <ul className="not-italic mb-4 font-poppins text-base font-medium leading-6 text-left text-gray-500">
                         <li>
-                            <a href="#" className="text-gray-500">Privacy Policy</a>
+                            <a href="#">Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="#" className="text-gray-500">Terms of Service</a>
+                            <a href="#">Terms of Service</a>
                         </li>
                     </ul>
                 </div>
@@ -85,7 +92,7 @@ const Footer: React.FC = () => {
                     <div>
                         <ul className="mb-4">
                             <li>
-                                <a href="#" className="text-gray-500 ml-4">
+                                <a href="#" className="font-poppins text-base font-medium leading-6 text-gray-500">
                                     Discover our app
                                 </a>
                             </li>
@@ -112,12 +119,11 @@ const Footer: React.FC = () => {
                     </div>
                 </div></div>
             <div className="w-full  text-center  mt-6 mb-4">
-                <div className="text-gray-500">
+                <div className="w-full text-center mt-6 mb-4 font-poppins text-base font-medium leading-4 text-gray-500">
                     All rights reserved@goldenticket.com.ar
                 </div>
             </div>
         </footer>
-
     )
 }
 

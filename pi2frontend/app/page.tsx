@@ -1,5 +1,4 @@
-import Footer from "@/components/Footer"
-import Header from "@/components/Header"
+import Header from '@/components/Header'
 
 const Home: React.FC = () => {
   return (
@@ -7,7 +6,7 @@ const Home: React.FC = () => {
       <Header />
 
       {/* Contenido de la página */}
-      <Footer />
+
     </div>)
 }
 
