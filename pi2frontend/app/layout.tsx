@@ -15,10 +15,11 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className='relative'>
+      <body className='relative flex flex-col h-screen'>
         <Header />
-        {children}
-        <Footer />
+        <main className="flex-1">
+          {children}
+        </main>
       </body>
     </html>
   )
