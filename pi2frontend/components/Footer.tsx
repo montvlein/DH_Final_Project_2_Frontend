@@ -4,102 +4,104 @@ import Link from 'next/link'
 
 const Footer: React.FC = () => {
     return (
-        <footer className="#D9D9D9 fixed bottom-0 left-0 w-full bg-gray-300 py-8">
-            <div className="container flex flex-wrap">
+        <div className="bottom-0 left-0 w-full bg-gray-300 py-10">
+            <div className="container flex flex-nowrap flex-row my-2">
                 {/* Logo */}
-                <div className="pl-2 w-full md:w-1/5 text-center md:text-left">
+                <div className="w-1/2 md:w-1/4 text-center md:text-left pl-4 pr-4">
                     <Image
-                        src="/logoFooter.png"
+                        src="/logoFooter.svg"
                         alt="goldenTicket"
                         width={443}
                         height={143}
                     />
                 </div>
-
                 {/* Company */}
-                <div className="w-full md:w-1/5 text-center md:text-left pl-2">
-                    <h5 className="mb-4 font-poppins text-xl font-semibold leading-6 text-left">
+                <div className="w-full md:w-1/5 pl-2 text-center md:text-left hidden md:block">
+                    <h5 className="mb-4 font-poppins text-xl font-semibold">
                         Compañia
                     </h5>
 
-                    <ul className="font-poppins text-base font-medium leading-6 text-gray-500">
+                    <ul className="font-poppins text-base font-medium text-gray-500">
                         <li>
-                            <a href="#">About Us</a>
+                            <Link href="/about">
+                                About Us
+                            </Link>
                         </li>
                         <li>
-                            <a href="#">Carrer</a>
+                            <Link href="/career">
+                                Career
+                            </Link>
                         </li>
                         <li>
-                            <a href="#">FAQ</a>
+                            <Link href="/faq">
+                                FAQ
+                            </Link>
                         </li>
                     </ul>
                 </div>
 
                 {/* Contact */}
-                <div className="w-full md:w-1/5 text-center md:text-left">
-                    <h5 className="mb-4 font-poppins text-xl font-semibold leading-6 text-left">
+                <div className="w-full md:w-1/5 text-center md:text-left hidden md:block mr-2">
+                    <h5 className="mb-4 font-poppins text-xl font-semibold">
                         Contacto
                     </h5>
-                    <address className="not-italic mb-4 font-poppins text-base font-medium leading-6 text-left text-gray-500">
+                    <address className="not-italic mb-4 font-poppins text-base font-medium text-gray-500">
                         contacto@goldenticket.com<br />
-                        +54 (342) 5087-137
+                        +54 (342) 5087-277
                     </address>
                 </div>
 
                 {/* More */}
-                <div className="w-full md:w-1/5 text-center md:text-left">
-                    <h5 className="mb-4 font-poppins text-xl font-semibold leading-6 text-left">
+                <div className="w-full md:w-1/5 text-center md:text-left hidden md:block">
+                    <h5 className="mb-4 font-poppins text-xl font-semibold">
                         Más
                     </h5>
-                    <ul className="not-italic mb-4 font-poppins text-base font-medium leading-6 text-left text-gray-500">
+                    <ul className="font-poppins text-base font-medium text-gray-500">
                         <li>
-                            <a href="#">Privacy Policy</a>
+                            <Link href="/privacy">
+                                Privacy Policy
+                            </Link>
                         </li>
                         <li>
-                            <a href="#">Terms of Service</a>
+                            <Link href="/termsofservice">
+                                Terms of Service
+                            </Link>
                         </li>
                     </ul>
                 </div>
 
                 {/* Social Media */}
-                <div className="w-full md:w-1/5 text-center md:text-left">
+                <div className="w-1/3 md:w-1/4 text-center md:text-center mr-1">
                     <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Link href="https://www.facebook.com">
                             <Image
                                 src="/fb.png"
                                 alt="facebook"
-                                width={43}
-                                height={41}
+                                width={49}
+                                height={47}
                             />
                         </Link>
                         <Link href="https://www.instagram.com">
                             <Image
                                 src="/ig.png"
                                 alt="instagram"
-                                width={48}
-                                height={45}
+                                width={53}
+                                height={50}
                             />
                         </Link>
                         <Link href="https://twitter.com">
                             <Image
                                 src="/tw.png"
                                 alt="twitter"
-                                width={43}
-                                height={41}
+                                width={49}
+                                height={47}
                             />
                         </Link>
                     </div>
-                    <div>
-                        <ul className="mb-4">
-                            <li>
-                                <a href="#" className="font-poppins text-base font-medium leading-6 text-gray-500">
-                                    Discover our app
-                                </a>
-                            </li>
-                        </ul>
+                    <div className="font-poppins text-base font-medium text-gray-500 mb-2">
+                        Discover our app
                     </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                         <Link href="https://appstore.com">
                             <Image
                                 src="/GPlay.png"
@@ -117,14 +119,15 @@ const Footer: React.FC = () => {
                             />
                         </Link>
                     </div>
-                </div></div>
-            <div className="w-full  text-center  mt-6 mb-4">
-                <div className="w-full text-center mt-6 mb-4 font-poppins text-base font-medium leading-4 text-gray-500">
+                </div>
+            </div>
+            <div className="w-full text-center mt-6 mb-4">
+                <div className="w-full text-center mt-6 mb-4 font-poppins md:text-base text-sm font-medium text-gray-500">
                     All rights reserved@goldenticket.com.ar
                 </div>
             </div>
-        </footer>
+
+        </div>
     )
 }
-
 export default Footer
