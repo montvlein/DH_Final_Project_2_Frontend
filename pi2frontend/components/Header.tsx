@@ -4,7 +4,7 @@ import { CiMenuFries } from 'react-icons/ci'
 
 const Header: React.FC = () => {
   return (
-    <div className='w-full  absolute z-10'>
+    <div className='w-full sticky top-0'>
       <nav className='h-118 mx-auto flex justify-between items-center sm:px-16 px-6 py-4 bg-black shadow-md'>
         <Link href='/' className='flex justify-center items-center'>
         <Image
