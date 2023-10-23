@@ -1,4 +1,5 @@
 import EventListCatalog from "@/components/events/catalog"
+import { Hero } from '@/components'
 
 const Home: React.FC = () => {
   const categories = [
@@ -9,6 +10,7 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <Hero />
       <EventListCatalog categories={categories}/>
     </>
   )
