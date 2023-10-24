@@ -15,9 +15,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className='relative flex flex-col h-screen'>
+      <body className='relative flex flex-col h-screen w-full'>
         <Header />
-        <main className="flex-1">
+        <main className="flex-1 w-full">
           {children}
         </main>
         <Footer />
