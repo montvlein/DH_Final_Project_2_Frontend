@@ -10,8 +10,10 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Hero />
-      <Search />
+      <div className='relative'>
+        <Hero />
+        <Search />
+      </div>
       <EventListCatalog categories={categories}/>
     </>
   )

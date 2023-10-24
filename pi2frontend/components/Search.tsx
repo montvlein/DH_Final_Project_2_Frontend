@@ -15,7 +15,8 @@ const Search: React.FC = () => {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto p-6 rounded-l md:flex md:items-center md:space-x-4 md:justify-center md:space-y-0 md:mb-0" style={{ backgroundColor: '#2B2B2B', borderRadius: '20px' }}>
+
+    <div className="absolute -bottom-10 inset-x-0 max-w-screen-xl mx-auto p-6 rounded-l md:flex md:items-center md:space-x-4 md:justify-center md:space-y-0 md:mb-0" style={{ backgroundColor: '#2B2B2B', borderRadius: '20px' }}>
       <form className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col">
           <label htmlFor="name" className="text-white font-dm-sans text-base font-normal">Busca tu evento</label>
