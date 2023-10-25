@@ -10,7 +10,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className='relative'>
+      <div className='relative lg:h-full'>
         <Hero />
         <Search />
       </div>

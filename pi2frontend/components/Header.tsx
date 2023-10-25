@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       <nav className='h-118 mx-auto flex justify-between items-center sm:px-16 px-6 py-4 bg-black shadow-md'>
         <Link href='/' className='flex justify-center items-center'>
         <Image
-          src='/Icon Design Logo.svg'
+          src='/Logo (6) 2.svg'
           alt='logo'
           width={295}
           height={92}
@@ -17,10 +17,11 @@ const Header: React.FC = () => {
         </Link>
         <CiMenuFries size= '2rem'color="white" className="md:hidden"/>
         <div className= "hidden md:block">
-          <div className="flex space-x-10">
+          <div className="flex space-x-4">
             <Link href='/' className= "text-white font-montserrat text-base font-normal">Inicio</Link>
             <Link href='/' className= "text-white font-montserrat text-base font-normal">Soporte</Link>
-            <Link href='/' className= "text-white font-montserrat text-base font-normal">Inicia Sesión</Link>4
+            <Link href='/' className= "text-white font-montserrat text-base font-normal">Inicia Sesión</Link>
+            <Link href='/' className= "text-white font-montserrat text-base font-normal">Registrate</Link>
           </div>
         </div>
       </nav>
