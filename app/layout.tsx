@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'App de venta de entradas de eventos'
 }
 
-export default function RootLayout({
+export default function RootLayout ({
   children
 }: {
   children: React.ReactNode

@@ -1,19 +1,21 @@
-import EventListCatalog from "@/components/events/catalog"
-import { Hero } from '@/components'
-
-import Header from '@/components/Header'
+import EventListCatalog from '@/components/events/catalog'
+import { Hero, Search, Subcription } from '@/components'
 
 const Home: React.FC = () => {
   const categories = [
-    { title: "Deportes", img: '/deportes.svg' },
-    { title: "Conciertos", img: '/conciertos.svg' },
-    { title: "Teatros", img: '/teatros.svg' }
+    { title: 'Deportes', img: '/deportes.svg' },
+    { title: 'Conciertos', img: '/conciertos.svg' },
+    { title: 'Teatros', img: '/teatros.svg' }
   ]
 
   return (
     <>
-      <Hero />
-      <EventListCatalog categories={categories} />
+      <div className='relative lg:h-full'>
+        <Hero />
+        <Search />
+      </div>
+      <EventListCatalog categories={categories}/>
+      <Subcription />
     </>
   )
 }
