@@ -3,14 +3,14 @@ import { Hero, Search, Subcription } from '@/components'
 
 const Home: React.FC = () => {
   const categories = [
-    { title: 'Deportes', img: '/deportes.svg' },
-    { title: 'Conciertos', img: '/conciertos.svg' },
-    { title: 'Teatros', img: '/teatros.svg' }
+    { title: 'Deportes', img: 'https://media.tycsports.com/files/2022/03/02/396970/river-pibes_862x485.jpg' },
+    { title: 'Conciertos', img: 'https://aeronoticias.com.pe/noticiero/wp-content/uploads/2022/10/apla.jpg' },
+    { title: 'Teatros', img: 'https://www.sanangel.edu.mx/sites/default/files/gdi/OBRA%20DE%20TEATRO.jpg' }
   ]
 
   return (
     <>
-      <div className='relative lg:h-full'>
+      <div className='relative'>
         <Hero />
         <Search />
       </div>
