@@ -19,7 +19,7 @@ const EventListCatalog: React.FC<EventListCatalogProps>  = function({categories}
             </div>
             <div className="p-4 flex flex-col gap-6 lg:flex-row">
             { categories.map( cat => (
-                <Link href={`to/${cat.title}`} className="relative rounded-2xl overflow-hidden lg:max-h-none ">
+                <Link href={`category/${cat.title}`} className="relative rounded-2xl overflow-hidden lg:max-h-none ">
                     <div className="bg-black opacity-40 shadow-inner absolute top-0 left-0 w-full h-full rounded-2xl transition-opacity hover:opacity-0"></div>
                     <Image
                     src={cat.img}

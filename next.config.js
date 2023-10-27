@@ -20,6 +20,12 @@ const nextConfig = {
             port: '',
             pathname: '/sites/default/files/**',
           },
+          {
+            protocol: 'https',
+            hostname: '6.soompi.io',
+            port: '',
+            pathname: '/**',
+          },
         ],
       },
 }
