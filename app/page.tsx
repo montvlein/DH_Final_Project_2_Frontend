@@ -1,5 +1,6 @@
 import EventListCatalog from '@/components/events/catalog'
 import { Hero, Search, Subcription } from '@/components'
+import NextEventList from '@/components/events/nextEventList'
 
 const Home: React.FC = () => {
   const categories = [
@@ -15,6 +16,7 @@ const Home: React.FC = () => {
         <Search />
       </div>
       <EventListCatalog categories={categories}/>
+      <NextEventList  categories={categories} />
       <Subcription />
     </>
   )
