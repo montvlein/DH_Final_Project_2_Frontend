@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import React from 'react';
+import Image from 'next/image'
+import React from 'react'
 
 const TerminosCondiciones: React.FC = () => {
     return (
@@ -47,7 +47,7 @@ const TerminosCondiciones: React.FC = () => {
                 </div>
             </div >
         </>
-    );
-};
+    )
+}
 
-export default TerminosCondiciones;
+export default TerminosCondiciones
