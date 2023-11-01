@@ -5,13 +5,13 @@ import TerminosCondiciones from '@/components/detalles/TerminosCondiciones'
 import React from 'react'
 
 const detalles: React.FC = () => {
-    return (
-        <>
-            <BuscadorEventos />
-            <Hero1 />
-            <Info />
-            <TerminosCondiciones />
-        </>
-    )
+  return (
+    <>
+      <BuscadorEventos />
+      <Hero1 />
+      <Info />
+      <TerminosCondiciones />
+    </>
+  )
 }
 export default detalles
