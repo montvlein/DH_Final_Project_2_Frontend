@@ -41,7 +41,7 @@ const Info: React.FC = () => {
   return (
     <>
       <div className='flex flex-col md:flex-row bg-white'>
-        <div className="flex-1 ">
+        <div className="flex-1">
           <p className="font-Montserrat text-3xl font-semibold leading-11 tracking-tighter text-center text-gray-600 my-2 ml-4">    Próximas fechas</p>
           <div className="">
             <ul >
@@ -71,27 +71,29 @@ const Info: React.FC = () => {
             </ul>
           </div>
         </div>
-        <div className="flex lg:flex-row pt-8 mr-2">
-          {/* Imagen */}
-          <Image
-            src="/INFO.svg"
-            alt="Info"
-            width={70}
-            height={100}
-            className="w-32 h-32 sm:w-56 sm:h-56 "
-          />
-        </div>
+        <div className="flex ml-4 md:ml-0">
+          <div className='pt-8 mr-2 lg:flex-col '>
+            {/* Imagen */}
+            <Image
+              src="/INFO.svg"
+              alt="Info"
+              width={70}
+              height={100}
+              className="w-32 h-32 sm:w-56 sm:h-56 "
+            />
+          </div>
+          <div className="w-[878px] pt-6 mr-16 ms:mr-0">
+            <h3 className="font-Montserrat text-3xl font-normal leading-14 tracking-tighter text-left">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
+            </h3>
+            <p className="font-Montserrat text-base font-normal leading-7 tracking-tighter text-left">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dicta similique aliquid. Ipsum, recusandae. Maxime eos numquam necessitatibus ullam sequi alias, quaerat a eveniet odit expedita recusandae adipisci, repellat nihil.
 
-        <div className="w-2/3 pt-6 pr-8 ">
-          <h3 className="font-Montserrat text-3xl font-normal leading-14 tracking-tighter text-left">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quas aliquam maiores debitis corporis voluptates
-          </h3>
-          <p className="font-Montserrat text-base font-normal leading-7 tracking-tighter text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dicta similique aliquid. Ipsum, recusandae. Maxime eos numquam necessitatibus ullam sequi alias, quaerat a eveniet odit expedita recusandae adipisci, repellat nihil.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, voluptates dolore. Veritatis dolor obcaecati soluta quia dicta omnis in illo, sequi aperiam unde dolorum nesciunt! Nostrum animi tempore laudantium tempora!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, voluptates dolore. Veritatis dolor obcaecati soluta quia dicta omnis in illo, sequi aperiam unde dolorum nesciunt! Nostrum animi tempore laudantium tempora!
+            </p>
 
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, voluptates dolore. Veritatis dolor obcaecati soluta quia dicta omnis in illo, sequi aperiam unde dolorum nesciunt! Nostrum animi tempore laudantium tempora!
-          </p>
-        </div>
+          </div></div>
       </div >
     </>
   )
