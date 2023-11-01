@@ -15,8 +15,8 @@ const Home: React.FC = () => {
         <Hero />
         <Search />
       </div>
-      <EventListCatalog categories={categories}/>
-      <NextEventList  categories={categories} />
+      <EventListCatalog categories={categories} />
+      <NextEventList categories={categories} />
       <Subcription />
     </>
   )
