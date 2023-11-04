@@ -15,10 +15,10 @@ const FormRegistro: React.FC = () => {
     console.log(data)
   }
   return (
-    <> <div className='bg-black flex'>
-      <div className='bg-[#F8F7F3]  px-20 py-10'>
+    <>
+      <div className='bg-[#F8F7F3]  px-2 py-2'>
         <h1 className="font-poppins text-4xl font-bold leading-60 tracking-normal text-left text-[#975D93]">Registrate!</h1>
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center  px-20 py-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label htmlFor="nombre" className="block text-gray-700">Nombre</label>
@@ -49,7 +49,6 @@ const FormRegistro: React.FC = () => {
                     id="apellido"
                     type="text"
                     className={`border border-gray-300 p-2 w-[480px] rounded ${errors.apellido !== null && errors.apellido !== undefined ? 'border-red-500' : ''}`}
-
                   />
                 )}
               />
@@ -99,7 +98,6 @@ const FormRegistro: React.FC = () => {
           </form>
         </div>
       </div>
-    </div>
     </>
   )
 }
