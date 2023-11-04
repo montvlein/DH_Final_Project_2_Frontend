@@ -1,5 +1,5 @@
 import NextEventCard from './nextEventCard'
-import { Category } from '@/models/Category'
+import type { Category } from '@/models/Category'
 import PropTypes from 'prop-types'
 import { eventList } from '@/api/data'
 
@@ -8,7 +8,6 @@ interface EventListProps {
 }
 
 const NextEventList: React.FC<EventListProps> = function ({ categories }) {
-
   return (
     <section className='flex flex-col gap-4 place-items-center bg-white p-2 font-semibold text-gray-900'>
         <h3 className='text-3xl text-center font-bold'>Próximos eventos en <span className='text-gray-600'>Buenos Aires.</span></h3>
@@ -25,7 +24,7 @@ const NextEventList: React.FC<EventListProps> = function ({ categories }) {
 export default NextEventList
 
 interface ChooserProps {
-  categories: Category[];
+  categories: Category[]
 }
 
 const Chooser: React.FC<ChooserProps> = function ({ categories }) {

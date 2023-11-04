@@ -1,22 +1,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Evento } from '@/models/Event'
+import type { Evento } from '@/models/Event'
 
 interface NextEventCardProp {
   evento: Evento
 }
 
 const NextEventCard: React.FC<NextEventCardProp> = function ({ evento }) {
-
   const day = evento.dateList[0].dayAndHour.getDate()
   const meses = [
-    "ENE", "FEB", "MAR", "ABR",
-    "MAY", "JUN", "JUL", "AGO",
-    "SEP", "OCT", "NOV", "DIC"
-  ];
-  
-  const monthNum = evento.dateList[0].dayAndHour.getMonth();
-  const monthName = meses[monthNum];
+    'ENE', 'FEB', 'MAR', 'ABR',
+    'MAY', 'JUN', 'JUL', 'AGO',
+    'SEP', 'OCT', 'NOV', 'DIC'
+  ]
+  const monthNum = evento.dateList[0].dayAndHour.getMonth()
+  const monthName = meses[monthNum]
 
   return (
     <article className='rounded-2xl overflow-hidden shadow-xl max-w-sm'>

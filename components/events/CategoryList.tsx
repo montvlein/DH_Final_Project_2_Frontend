@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Category } from '@/models/Category'
+import type { Category } from '@/models/Category'
 import PropTypes from 'prop-types'
 
 interface CategoryListProps {
-  categories: Category[];
+  categories: Category[]
 }
 
 const CategoryList: React.FC<CategoryListProps> = function ({ categories }) {
