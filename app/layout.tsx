@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Header } from '@/components'
 import Footer from '@/components/Footer'
+import { ReduxProvider } from '@/redux/provider'
 
 export const metadata: Metadata = {
   title: 'Golden Ticket',
@@ -16,11 +17,13 @@ export default function RootLayout ({
   return (
     <html lang="en">
       <body className='relative flex flex-col h-screen w-full'>
-        <Header />
-        <main className="flex-1 w-full">
-          {children}
-        </main>
-        <Footer />
+        <ReduxProvider>
+          <Header />
+          <main className="flex-1 w-full">
+            {children}
+          </main>
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   )

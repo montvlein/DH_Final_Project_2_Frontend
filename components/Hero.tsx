@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
               Tu próxima mejor noche te está esperando.<br /> Y tenemos las entradas.
             </h1>
           </div>
-          <div className='flex flex-col items-end p-10'>
+          <div className='flex flex-col items-end p-10 lg:pb-20'>
             <p className='text-white font-poppins font-semibold text-4xl'>Foo Fighters</p>
             <p className='text-white font-poppins font-medium text-xl '> Live in Concert</p>
           </div>
