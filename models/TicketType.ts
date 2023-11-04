@@ -1,6 +1,6 @@
 export interface TicketType {
-    id: BigInt;
+    id: number;
     name: string;
-    price: string;
-    stock: string;
+    price: number;
+    stock: number;
 }

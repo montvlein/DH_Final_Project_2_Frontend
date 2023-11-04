@@ -1,7 +1,7 @@
 import { TicketType } from "./TicketType";
 
 export interface EventDateTime {
-    id: BigInt;
+    id: number;
     dayAndHour: Date;
     ticketTypeList: TicketType[]
 }

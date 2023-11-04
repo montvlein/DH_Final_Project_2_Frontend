@@ -1,5 +1,5 @@
 export interface Venue {
-    id: BigInt;
+    id: number;
     name: string;
     country: string;
     city: string;

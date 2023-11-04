@@ -1,7 +1,7 @@
 export interface Ticket {
-    id: BigInt;
-    idEvent: BigInt;
-    idUser: BigInt;
-    idTicketType: BigInt;
-    idEventDateTime: BigInt;
+    id: number;
+    idEvent: number;
+    idUser: number;
+    idTicketType: number;
+    idEventDateTime: number;
 }
