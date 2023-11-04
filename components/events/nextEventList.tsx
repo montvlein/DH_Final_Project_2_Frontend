@@ -1,17 +1,13 @@
 import NextEventCard from './nextEventCard'
+import { Category } from '@/models/Category'
 import PropTypes from 'prop-types'
+import { eventList } from '@/api/data'
 
-interface Category {
-  title: string
-  img: string
-}
-
-interface EventListCatalogProps {
+interface EventListProps {
   categories: Category[]
 }
 
-const NextEventList: React.FC<EventListCatalogProps> = function ({ categories }) {
-  const eventList = [1, 2, 3, 4, 5, 6]
+const NextEventList: React.FC<EventListProps> = function ({ categories }) {
 
   return (
     <section className='flex flex-col gap-4 place-items-center bg-white p-2 font-semibold text-gray-900'>
@@ -19,7 +15,7 @@ const NextEventList: React.FC<EventListCatalogProps> = function ({ categories })
         <div className='p-4 flex flex-col gap-6 w-full lg:w-auto'>
             <Chooser categories={categories} />
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
-                { eventList.map((e, i) => <NextEventCard key={i}/>)}
+                { eventList.map((e, i) => <NextEventCard key={i} evento={e}/>)}
             </div>
         </div>
     </section>
@@ -28,7 +24,11 @@ const NextEventList: React.FC<EventListCatalogProps> = function ({ categories })
 
 export default NextEventList
 
-const Chooser: React.FC<EventListCatalogProps> = function ({ categories }) {
+interface ChooserProps {
+  categories: Category[];
+}
+
+const Chooser: React.FC<ChooserProps> = function ({ categories }) {
   const [selected] = ['Top Selling']
   return (
     <div className='flex gap-6 text-gray-500 overflow-x-auto'>
