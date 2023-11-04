@@ -6,11 +6,11 @@ const Logo: React.FC = () => {
     <>
 
       <Image
-        src="/logoRegistro.svg"
+        src="/registroIzq.svg"
         alt="logo"
-        width={379}
+        width={779}
         height={233}
-        className="w-[880px]"
+        className=""
       />
 
     </>
