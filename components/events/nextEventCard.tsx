@@ -1,14 +1,15 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from 'next/link'
+import Image from 'next/image'
 
 const NextEventCard: React.FC = function () {
   const cat = {
     title: 'id',
     img: 'https://6.soompi.io/wp-content/uploads/image/20230824065223_2023082406_blackpink-2.png?s=900x600&e=t'
-  };
+  }
+
   return (
     <article className='rounded-2xl overflow-hidden shadow-xl max-w-sm'>
-      <Link href={`event/${cat.title}`} className='relative lg:max-h-none '>
+      <Link href={`event/${cat.title}`} className='relative lg:max-h-none'>
         <Image
           src={cat.img}
           alt={cat.title}
@@ -30,7 +31,7 @@ const NextEventCard: React.FC = function () {
         </div>
       </Link>
     </article>
-  );
-};
+  )
+}
 
-export default NextEventCard;
+export default NextEventCard

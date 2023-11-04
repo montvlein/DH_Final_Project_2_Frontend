@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types'
 
 interface Category {
   title: string
@@ -38,7 +38,7 @@ const EventListCatalog: React.FC<EventListCatalogProps> = function ({ categories
 }
 
 EventListCatalog.propTypes = {
-  categories: PropTypes.array.isRequired,
-};
+  categories: PropTypes.array.isRequired
+}
 
 export default EventListCatalog
