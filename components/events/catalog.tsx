@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import PropTypes from 'prop-types'
 
 interface Category {
   title: string
@@ -18,8 +19,8 @@ const EventListCatalog: React.FC<EventListCatalogProps> = function ({ categories
         <h3 className="text-3xl text-center text-gray-900 font-bold">Los espectáculos que te encantan. <span className="text-gray-600">En directo.</span></h3>
       </div>
       <div className="p-4 flex flex-col gap-6 lg:flex-row">
-        {categories.map(cat => (
-          <Link href={`category/${cat.title}`} className="relative rounded-2xl overflow-hidden lg:max-h-none ">
+        {categories.map((cat, i) => (
+          <Link href={`category/${cat.title}`} className="relative rounded-2xl overflow-hidden lg:max-h-none" key={i}>
             <div className="bg-black opacity-40 shadow-inner absolute top-0 left-0 w-full h-full rounded-2xl transition-opacity hover:opacity-0"></div>
             <Image
               src={cat.img}
@@ -34,6 +35,10 @@ const EventListCatalog: React.FC<EventListCatalogProps> = function ({ categories
       </div>
     </section>
   )
+}
+
+EventListCatalog.propTypes = {
+  categories: PropTypes.array.isRequired
 }
 
 export default EventListCatalog
