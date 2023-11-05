@@ -9,8 +9,8 @@ const Logo: React.FC = () => {
         src="/registroIzq.svg"
         alt="logo"
         width={779}
-        height={233}
-        className=""
+        height={23}
+        className="hidden md:block"
       />
 
     </>
