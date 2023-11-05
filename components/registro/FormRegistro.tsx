@@ -2,13 +2,16 @@
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import type { User } from './../../models/User'
+import Link from 'next/link'
 
 const FormRegistro: React.FC = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<User>()
   const onSubmit: (data: User) => void = (data) => {
     console.log(data)
+    return (
+      <Link href="/">
+      </Link>)
   }
-
 
   return (
     <>
