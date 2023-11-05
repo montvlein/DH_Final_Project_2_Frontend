@@ -9,7 +9,7 @@ const Logo: React.FC = () => {
         src="/registroIzq.svg"
         alt="logo"
         width={779}
-        height={233}
+        height={150}
         className=""
       />
 

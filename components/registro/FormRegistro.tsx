@@ -1,62 +1,73 @@
 'use client'
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
-
-interface FormData {
-  nombre: string
-  apellido: string
-  email: string
-  contrasena: string
-}
+import type { User } from './../../models/User'
 
 const FormRegistro: React.FC = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<FormData>()
-  const onSubmit: (data: FormData) => void = (data) => {
+  const { control, handleSubmit, formState: { errors } } = useForm<User>()
+  const onSubmit: (data: User) => void = (data) => {
     console.log(data)
   }
+
+
   return (
     <>
-      <div className='bg-[#F8F7F3]  px-2 py-2'>
-        <h1 className="font-poppins text-4xl font-bold leading-60 tracking-normal text-left text-[#975D93]">Registrate!</h1>
-        <div className="flex justify-center items-center  px-20 py-4">
+      <div className='bg-[#F8F7F3]   py-2 w-full'>
+        <h1 className="font-poppins text-4xl font-bold leading-60 tracking-normal text-left ml-2 text-[#975D93]">Registrate!</h1>
+        <div className="flex justify-center items-center  py-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
-              <label htmlFor="nombre" className="block text-gray-700">Nombre</label>
               <Controller
-                name="nombre"
+                name="firstName"
                 control={control}
                 rules={{ required: 'El nombre es obligatorio' }}
                 render={({ field }) => (
                   <input
                     {...field}
-                    id="nombre"
+                    id="firstName"
                     type="text"
-                    className={`border border-gray-300 p-2 w-[480px] rounded ${errors.nombre !== null && errors.nombre !== undefined ? 'border-red-500' : ''}`}
+                    placeholder='Nombre'
+                    className={`placeholder-top border border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.firstName !== null && errors.firstName !== undefined ? 'border-red-500' : ''}`}
+                    style={{
+                      fontFamily: 'Poppins',
+                      fontSize: '16px',
+                      fontWeight: 400,
+                      lineHeight: '24px',
+                      letterSpacing: '0em',
+                      textAlign: 'left'
+                    }}
                   />
                 )}
               />
-              {errors.nombre !== null && errors.nombre !== undefined && <p className="text-red-500">{errors.nombre.message}</p>}
+              {errors.firstName !== null && errors.firstName !== undefined && <p className="text-red-500">{errors.firstName.message}</p>}
             </div>
             <div className="mb-4">
-              <label htmlFor="apellido" className="block text-gray-700">Apellido</label>
               <Controller
-                name="apellido"
+                name="lastName"
                 control={control}
                 rules={{ required: 'El apellido es obligatorio' }}
                 render={({ field }) => (
                   <input
                     {...field}
-                    id="apellido"
+                    id="lastName"
                     type="text"
-                    className={`border border-gray-300 p-2 w-[480px] rounded ${errors.apellido !== null && errors.apellido !== undefined ? 'border-red-500' : ''}`}
+                    placeholder='Apellido'
+                    className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.lastName !== null && errors.lastName !== undefined ? 'border-red-500' : ''}`}
+                    style={{
+                      fontFamily: 'Poppins',
+                      fontSize: '16px',
+                      fontWeight: 400,
+                      lineHeight: '24px',
+                      letterSpacing: '0em',
+                      textAlign: 'left'
+                    }}
                   />
                 )}
               />
-              {errors.apellido !== null && errors.apellido !== undefined && <p className="text-red-500">{errors.apellido.message}</p>}
+              {errors.lastName !== null && errors.lastName !== undefined && <p className="text-red-500">{errors.lastName.message}</p>}
             </div>
 
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700">Email</label>
               <Controller
                 name="email"
                 control={control}
@@ -66,8 +77,16 @@ const FormRegistro: React.FC = () => {
                     {...field}
                     id="email"
                     type="text"
-                    className={`border border-gray-300 p-2 w-[480px] rounded ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
-
+                    placeholder='Email'
+                    className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
+                    style={{
+                      fontFamily: 'Poppins',
+                      fontSize: '16px',
+                      fontWeight: 400,
+                      lineHeight: '24px',
+                      letterSpacing: '0em',
+                      textAlign: 'left'
+                    }}
                   />
                 )}
               />
@@ -75,25 +94,45 @@ const FormRegistro: React.FC = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="contrasena" className="block text-gray-700">Contraseña</label>
               <Controller
-                name="contrasena"
+                name="password"
                 control={control}
-                rules={{ required: 'La contraseña es obligatoria' }}
+                rules={{
+                  required: 'La contraseña es obligatoria',
+                  validate: (value) => {
+                    if (value.length < 8) {
+                      return 'La contraseña debe tener al menos 8 caracteres.'
+                    }
+                    if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
+                      return 'La contraseña debe contener tanto mayúsculas como minúsculas.'
+                    }
+                    return true
+                  }
+                }}
                 render={({ field }) => (
                   <input
                     {...field}
-                    id="contrasena"
+                    id="password"
                     type="password"
-                    className={`border border-gray-300 p-2 w-[480px] rounded ${errors.contrasena !== null && errors.contrasena !== undefined ? 'border-red-500' : ''}`}
+                    placeholder='Contraseña'
+                    className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14  ${errors.password !== null && errors.password !== undefined ? 'border-red-500' : ''}`}
+                    style={{
+                      fontFamily: 'Poppins',
+                      fontSize: '16px',
+                      fontWeight: 400,
+                      lineHeight: '24px',
+                      letterSpacing: '0em',
+                      textAlign: 'left'
+                    }}
                   />
                 )}
               />
-              {errors.nombre !== null && errors.contrasena !== undefined && <p className="text-red-500">{errors.contrasena.message}</p>}
+              {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px]">{errors.password.message}</p>}
+              <p className="font-poppins text-xs text-[#975D93] font-normal leading-5 ml-1">Mínimo 8 caracteres con una combinación de letras mayúsculas y minúsculas.</p>
             </div>
 
             <div className="mt-6">
-              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Confirmar</button>
+              <button type="submit" className="bg-[#975D93]  text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14">Confirmar</button>
             </div>
           </form>
         </div>
