@@ -1,16 +1,18 @@
 'use client'
 import React from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import type { User } from './../../models/User'
-import Link from 'next/link'
+// import { useRouter } from 'next/router'
 
 const FormRegistro: React.FC = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<User>()
-  const onSubmit: (data: User) => void = (data) => {
-    console.log(data)
-    return (
-      <Link href="/">
-      </Link>)
+  // const router = useRouter()
+  const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<User>()
+  const onSubmit: SubmitHandler<User> = async () => {
+    const values = getValues()
+    console.log(values)
+    alert('Usuario creado')
+    // await fetch("http://localhost:3000/api/create", { method: "POST", body: JSON.stringify(values) }) Router.push("/products") };
+    // router.push('/')
   }
 
   return (
@@ -26,7 +28,7 @@ const FormRegistro: React.FC = () => {
                 rules={{ required: 'El nombre es obligatorio' }}
                 render={({ field }) => (
                   <input
-                    {...field}
+                    {...register('firstName')}
                     id="firstName"
                     type="text"
                     placeholder='Nombre'
@@ -51,7 +53,7 @@ const FormRegistro: React.FC = () => {
                 rules={{ required: 'El apellido es obligatorio' }}
                 render={({ field }) => (
                   <input
-                    {...field}
+                    {...register('lastName')}
                     id="lastName"
                     type="text"
                     placeholder='Apellido'
@@ -77,7 +79,7 @@ const FormRegistro: React.FC = () => {
                 rules={{ required: 'El email es obligatorio', pattern: { value: /^\S+@\S+$/i, message: 'Email no válido' } }}
                 render={({ field }) => (
                   <input
-                    {...field}
+                    {...register('email')}
                     id="email"
                     type="text"
                     placeholder='Email'
@@ -114,7 +116,7 @@ const FormRegistro: React.FC = () => {
                 }}
                 render={({ field }) => (
                   <input
-                    {...field}
+                    {...register('password')}
                     id="password"
                     type="password"
                     placeholder='Contraseña'
@@ -135,7 +137,8 @@ const FormRegistro: React.FC = () => {
             </div>
 
             <div className="mt-6">
-              <button type="submit" className="bg-[#975D93]  text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14">Confirmar</button>
+              <button type="submit" className=" text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14"
+                style={{ background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)' }}>Confirmar</button>
             </div>
           </form>
         </div>

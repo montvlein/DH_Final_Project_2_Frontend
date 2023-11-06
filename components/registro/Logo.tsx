@@ -10,7 +10,7 @@ const Logo: React.FC = () => {
         alt="logo"
         width={779}
         height={150}
-        className=""
+        className="hidden md:block"
       />
 
     </>
