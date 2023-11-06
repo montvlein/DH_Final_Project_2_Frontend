@@ -1,7 +1,7 @@
-import FormRegistro from '@/components/registro/FormRegistro'
-import Logo from '@/components/registro/Logo'
-import TituloRegistro from '@/components/registro/TituloRegistro'
-import YaTienesCuenta from '@/components/registro/YaTienesCuenta'
+import FormRegistro from '@/components/signup/FormRegistro'
+import Logo from '@/components/signup/Logo'
+import TituloRegistro from '@/components/signup/TituloRegistro'
+import YaTienesCuenta from '@/components/signup/YaTienesCuenta'
 
 const registro: React.FC = () => {
   return (

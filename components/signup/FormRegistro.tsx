@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
-import type { User } from './../../models/User'
+import type { User } from '../../models/User'
 // import { useRouter } from 'next/router'
 
 const FormRegistro: React.FC = () => {
