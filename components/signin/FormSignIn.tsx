@@ -74,10 +74,10 @@ const FormSignIn: React.FC = () => {
                 />
               )}
             />
-            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px]">{errors.password.message}</p>}
+            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px] ">{errors.password.message}</p>}
           </div>
 
-          <div className="mt-8">
+          <div className="mt-10">
             <button type="submit" className="text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
           </div>
         </form>
