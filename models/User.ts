@@ -8,4 +8,5 @@ export interface User {
   phone: string
   documentType: string
   documentNumber: string
+  password: string
 }
