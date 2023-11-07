@@ -2,17 +2,23 @@
 import React from 'react'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import type { User } from '../../models/User'
+import { logIn } from './../../redux/features/auth-slice'
+import { useDispatch } from 'react-redux'
+import type { AppDispatch } from '@/redux/store'
+// import { redirect } from 'next/navigation'
 // import { useRouter } from 'next/router'
 
 const FormSignIn: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>()
   // const router = useRouter()
   const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<User>()
   const onSubmit: SubmitHandler<User> = async () => {
     const values = getValues()
     console.log(values)
-    alert('Usuario creado')
-    // await fetch("http://localhost:3000/api/create", { method: "POST", body: JSON.stringify(values) }) Router.push("/products") };
+    alert('login exitoso')
+    dispatch(logIn(values.email))
     // router.push('/')
+    // await fetch("http://localhost:3000/api/create", { method: "POST", body: JSON.stringify(values) }) Router.push("/products") };
   }
 
   return (
@@ -69,7 +75,6 @@ const FormSignIn: React.FC = () => {
               )}
             />
             {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px]">{errors.password.message}</p>}
-            <p className="font-poppins text-xs text-[#975D93] font-normal leading-5 ml-1">Mínimo 8 caracteres con una combinación de letras mayúsculas y minúsculas.</p>
           </div>
 
           <div className="mt-8">
