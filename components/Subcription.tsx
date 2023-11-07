@@ -18,8 +18,8 @@ const Subcription: React.FC = () => {
   const onError: SubmitErrorHandler<ISuscriptionEmail> = () => { alert('Email invalido.') }
 
   return (
-    <div className='bg-white flex justify-center py-6 '>
-      <div className='w-10/12 bg-[#390F36] rounded-tl-[129px] rounded-bl-xl rounded-br-xl flex flex-col items-center'>
+    <div className='bg-white flex justify-center py-6 text-gray-900'>
+      <div className='w-8/12 bg-[#390F36] rounded-tl-[129px] rounded-bl-xl rounded-br-xl flex flex-col items-center'>
         <div className="relative w-full">
           <span className="absolute -right-6 -top-6 w-3/12 md:w-1/12 md:-right-7">
             <Image
@@ -30,35 +30,39 @@ const Subcription: React.FC = () => {
               />
           </span>
         </div>
-        <h1 className='text-[#D791D2] font-poppins font-semibold text-base md:text-2xl p-16 text-center xl:text-4xl xl:w-9/12'>
+        <h2 className='text-[#D791D2] font-poppins font-semibold text-base md:text-2xl py-6 px-16 text-center xl:text-4xl xl:w-9/12'>
           Recibe noticias de grandes eventos y ofertas directamente en tu email.
-        </h1>
-        <form className="flex flex-col justify-center space-x-5 pb-10 space-y-5 w-full md:flex-row" onSubmit={handleSubmit(onSubmit, onError)}>
-          <div className="relative flex items-center px-6 md:items-end">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-10 w-full md:pt-6">
-              <Image
-                src='/input email.svg'
-                alt='logo'
-                width={20}
-                height={20}
-              />
-            </span>
+        </h2>
+        <form className="flex flex-col justify-center gap-4 pb-10 px-10 w-full md:flex-row" onSubmit={handleSubmit(onSubmit, onError)}>
+          <label htmlFor="subsName">
             <input
-              id="name"
+              id="subsName"
               type="text"
+              placeholder='Tu nombre'
+              className="text-gray-900 rounded-xl h-12 px-6 w-full xl:w-96"
+              { ... register('email')}
+              />
+          </label>
+          <label htmlFor='email' className="relative">
+            <Image
+              src='/input email.svg'
+              alt='logo'
+              width={20}
+              height={20}
+              className="absolute top-3 left-4 h-6 w-6"
+            />
+            <input
+              id="subsEmail"
+              type="email"
               placeholder='Tu email'
-              className="bg-white rounded-xl h-12 pl-12 w-full xl:w-96"
+              className="text-grey-700 rounded-xl pl-12 h-12 w-full xl:w-96"
               { ... register('email')}
             />
-          </div>
+          </label>
           <button
             className="text-white px-6 py-3 rounded-xl"
             style={{
               background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)',
-              marginLeft: '25px',
-              marginRight: '25px',
-              paddingLeft: '25px',
-              paddingRight: '25px'
             }}>
             Subscribe
           </button>
