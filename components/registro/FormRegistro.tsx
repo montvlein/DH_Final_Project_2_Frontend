@@ -6,8 +6,34 @@ import Link from 'next/link'
 
 const FormRegistro: React.FC = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<User>()
+
+  const createUser = async (user: User) => {
+    const apiUrl = '/api/users/create'
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.status === 201) {
+        const data = await response.json();
+        console.log('Usuario creado con éxito:', data);
+        // Realiza cualquier acción adicional que necesites después de crear el usuario
+      } else {
+        console.error('Error al crear el usuario');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    }
+  };
+
+
   const onSubmit: (data: User) => void = (data) => {
     console.log(data)
+    createUser(data)
     return (
       <Link href="/">
       </Link>)
@@ -15,7 +41,7 @@ const FormRegistro: React.FC = () => {
 
   return (
     <>
-      <div className='bg-[#F8F7F3]   py-2 w-full'>
+      <div className='bg-[#F8F7F3]   py-2 w-full text-gray-900'>
         <h1 className="font-poppins text-4xl font-bold leading-60 tracking-normal text-left ml-2 text-[#975D93]">Registrate!</h1>
         <div className="flex justify-center items-center  py-4">
           <form onSubmit={handleSubmit(onSubmit)}>

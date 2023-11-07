@@ -3,6 +3,7 @@ import { EventDateTime } from "@/models/DateTime";
 import { Evento } from "@/models/Event";
 import { TicketType } from "@/models/TicketType";
 import { Venue } from "@/models/Venue";
+import { User } from "@/models/User";
 
 export const categories: Category[] = [
     { title: 'Deportes', imageUrl: 'https://media.tycsports.com/files/2022/03/02/396970/river-pibes_862x485.jpg' },
@@ -14,7 +15,8 @@ const venue1: Venue = {
   id: 1,
   name: "Teatro Vorterix",
   country: "Argentina",
-  city: "CABA"
+  city: "CABA",
+  address: ""
 }
 
 const ticketType1: TicketType = {
@@ -43,3 +45,4 @@ const event1: Evento = {
 }
 
 export const eventList: Evento[] = [ event1, event1, event1 ]
+export const userList: User[] = [];
