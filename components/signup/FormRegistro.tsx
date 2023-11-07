@@ -42,7 +42,7 @@ const FormRegistro: React.FC = () => {
                 />
               )}
             />
-            {errors.firstName !== null && errors.firstName !== undefined && <p className="text-red-500">{errors.firstName.message}</p>}
+            {errors.firstName !== null && errors.firstName !== undefined && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
           </div>
           <div className="mb-4">
             <Controller
@@ -55,7 +55,7 @@ const FormRegistro: React.FC = () => {
                   id="lastName"
                   type="text"
                   placeholder='Apellido'
-                  className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.lastName !== null && errors.lastName !== undefined ? 'border-red-500' : ''}`}
+                  className={`border focus:border-purple-700 border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.lastName !== null && errors.lastName !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -67,7 +67,7 @@ const FormRegistro: React.FC = () => {
                 />
               )}
             />
-            {errors.lastName !== null && errors.lastName !== undefined && <p className="text-red-500">{errors.lastName.message}</p>}
+            {errors.lastName !== null && errors.lastName !== undefined && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
           </div>
 
           <div className="mb-4">
@@ -93,7 +93,7 @@ const FormRegistro: React.FC = () => {
                 />
               )}
             />
-            {errors.email !== null && errors.email !== undefined && <p className="text-red-500">{errors.email.message}</p>}
+            {errors.email !== null && errors.email !== undefined && <p className="text-red-500 text-sm">{errors.email.message}</p>}
           </div>
 
           <div className="mb-4">
@@ -130,13 +130,12 @@ const FormRegistro: React.FC = () => {
                 />
               )}
             />
-            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px]">{errors.password.message}</p>}
+            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px] text-sm">{errors.password.message}</p>}
             <p className="font-poppins text-xs text-[#975D93] font-normal leading-5 ml-1">Mínimo 8 caracteres con una combinación de letras mayúsculas y minúsculas.</p>
           </div>
 
-          <div className="mt-6">
-            <button type="submit" className=" text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14"
-              style={{ background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)' }}>Confirmar</button>
+          <div className="mt-8">
+            <button type="submit" className="text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
           </div>
         </form>
       </div>

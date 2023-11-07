@@ -17,13 +17,13 @@ const FormSignIn: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center  py-2">
+      <div className="flex justify-center items-center  pt-6 pb-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div className="mb-8">
             <Controller
               name="email"
               control={control}
-              rules={{ required: 'El email es obligatorio', pattern: { value: /^\S+@\S+$/i, message: 'Email no válido' } }}
+              rules={{ required: 'Ingrese su email' }}
               render={({ field }) => (
                 <input
                   {...register('email')}
@@ -49,18 +49,7 @@ const FormSignIn: React.FC = () => {
             <Controller
               name="password"
               control={control}
-              rules={{
-                required: 'La contraseña es obligatoria',
-                validate: (value) => {
-                  if (value.length < 8) {
-                    return 'La contraseña debe tener al menos 8 caracteres.'
-                  }
-                  if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
-                    return 'La contraseña debe contener tanto mayúsculas como minúsculas.'
-                  }
-                  return true
-                }
-              }}
+              rules={{ required: 'Ingrese su contraseña' }}
               render={({ field }) => (
                 <input
                   {...register('password')}
@@ -83,9 +72,8 @@ const FormSignIn: React.FC = () => {
             <p className="font-poppins text-xs text-[#975D93] font-normal leading-5 ml-1">Mínimo 8 caracteres con una combinación de letras mayúsculas y minúsculas.</p>
           </div>
 
-          <div className="mt-6">
-            <button type="submit" className=" text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14"
-              style={{ background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)' }}>Confirmar</button>
+          <div className="mt-8">
+            <button type="submit" className="text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
           </div>
         </form>
       </div>

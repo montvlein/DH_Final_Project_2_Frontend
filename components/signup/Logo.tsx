@@ -8,7 +8,7 @@ const Logo: React.FC = () => {
       <Image
         src="/registroIzq.svg"
         alt="logo"
-        width={779}
+        width={979}
         height={150}
         className="hidden md:block"
       />

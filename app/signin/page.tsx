@@ -1,7 +1,7 @@
 import FormSignIn from '@/components/signin/FormSignIn'
 import TituloSignIn from '@/components/signin/TituloSignIn'
-import YaTienesCuenta from '@/components/signin/YaTienesCuenta'
 import Logo from '@/components/signup/Logo'
+import NoTienesCuenta from '@/components/signin/NoTienesCuenta'
 
 const registro: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const registro: React.FC = () => {
       <div className='bg-[#F8F7F3]   w-full'>
         <TituloSignIn />
         <FormSignIn />
-        <YaTienesCuenta />
+        <NoTienesCuenta />
       </div>
     </div>
     </>
