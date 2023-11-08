@@ -43,13 +43,6 @@ const event1: Evento = {
   category: { title: 'Teatros', imageUrl: 'https://www.sanangel.edu.mx/sites/default/files/gdi/OBRA%20DE%20TEATRO.jpg' },
   venue: venue1
 }
-// const userList: User = {
-//  id: 1,
-//  firstName: 'Dolores',
-//  lastName: 'Aleman',
-//  email: 'dolores@gmail.com.com',
-//  password: 'Contrasena'
-// }
 
 export const eventList: Evento[] = [event1, event1, event1]
-export const userList: User[] = [];
+export const userList: User[] = []

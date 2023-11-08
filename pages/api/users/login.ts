@@ -1,14 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default (req: NextApiRequest, res: NextApiResponse): void => {
+// import { listarUsuarios } from './listarUsuarios'
+// import type { User } from './../../../models/User'
+
+export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   if (req.method === 'POST') {
     const { email, password } = req.body as { email: string; password: string }
-    // Verificar las credenciales del usuario en tu sistema
-    if (email === 'usuario@example.com' && password === 'contraseña') {
-      // Las credenciales son válidas, puedes generar un token de autenticación aquí
-      const token = 'token_de_autenticacion'
 
-      // Devolver el token en la respuesta
+    // const users: User[] = await listarUsuarios()
+    // console.log(users)
+
+    // const usuario = users.find((user) => user.email === email)
+    const usuarioHardcodeado = {
+      email: 'doloresalemang@gmail.com',
+      password: 'Dolores123'
+    }
+    if (usuarioHardcodeado.email === email && usuarioHardcodeado.password === password) {
+      const token = 'tokenDeIngreso'
+
       res.status(200).json({ token })
     } else {
       res.status(401).json({ error: 'Credenciales inválidas' })
