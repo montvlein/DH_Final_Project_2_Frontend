@@ -12,7 +12,6 @@ const signIn: React.FC = () => {
         <TituloSignIn />
         <FormSignIn />
         <NoTienesCuenta />
-        <button className='p-4 rounded bg-rose-300'>Consologear usuarios</button>
       </div>
     </div>
   )
