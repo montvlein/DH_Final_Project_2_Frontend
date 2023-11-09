@@ -23,7 +23,7 @@ const FormRegistro: React.FC = () => {
       if (response.status === 201) {
         const data = await response.json()
         console.log('Usuario creado con éxito:', data)
-        window.location.href = '/'
+        window.location.href = `profile/${data.id}`
       } else {
         console.error('Error al crear el usuario')
       }
