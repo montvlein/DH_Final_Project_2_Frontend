@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const NoTienesCuenta: React.FC = () => {
   return (
-    <><div className="flex flex-col justify-center items-center mb-8">
+    <><div className="flex flex-col justify-center items-center">
       <hr className="border-t border-gray-400 w-40 my-4 inline-block" />
       <p className='font-montserrat text-base font-light leading-5 tracking-normal '>¿No tienes una cuenta?</p>
       <Link href="/signup">

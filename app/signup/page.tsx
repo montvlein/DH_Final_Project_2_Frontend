@@ -5,7 +5,7 @@ import YaTienesCuenta from '@/components/signup/YaTienesCuenta'
 
 const signUp: React.FC = () => {
   return (
-    <><div className='flex'>
+    <><div className='flex h-screen'>
       <Logo />
       <div className='bg-[#F8F7F3]   w-full'>
         <TituloRegistro />
