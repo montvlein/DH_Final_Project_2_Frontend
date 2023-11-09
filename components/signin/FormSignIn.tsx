@@ -1,16 +1,17 @@
 'use client'
-import type { FormEvent } from 'react'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import type { User } from '../../models/User'
 import { logIn } from './../../redux/features/auth-slice'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
+import { useState } from 'react'
 
 const FormSignIn: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<User>()
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  const onSubmit: SubmitHandler<User> = async (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit: SubmitHandler<User> = async (data) => {
     const values = getValues()
     const response = await fetch('http://localhost:3000/api/users/login', {
       method: 'POST',
@@ -27,7 +28,7 @@ const FormSignIn: React.FC = () => {
       dispatch(logIn(values.email))
       window.location.href = '/'
     } else {
-      console.error('Error de autenticacion')
+      setErrorMessage('Credenciales inválidas')
     }
   }
 
@@ -85,6 +86,7 @@ const FormSignIn: React.FC = () => {
               )}
             />
             {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px] ">{errors.password.message}</p>}
+            {errorMessage !== null && <p className="text-red-500 pl-1">{errorMessage}</p>}
           </div>
 
           <div className="mt-10">
