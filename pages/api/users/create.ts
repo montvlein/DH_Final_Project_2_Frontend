@@ -1,16 +1,21 @@
 // pages/api/users/create.js
 
-import { NextApiRequest, NextApiResponse } from 'next';
+import { type NextApiRequest, type NextApiResponse } from 'next'
 import { userList } from '../../../api/data'
 
-let nextUserId = 1;
+let nextUserId = 1
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+const createUser = (req: NextApiRequest, res: NextApiResponse): any => {
   if (req.method === 'POST') {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body as {
+      firstName: string
+      lastName: string
+      email: string
+      password: string
+    }
 
-    if (!firstName || !lastName || !email || !password) {
-      return res.status(400).json({ error: 'Faltan campos obligatorios' });
+    if (firstName !== '' && lastName !== '' && email !== '' && password !== '') {
+      res.status(400).json({ error: 'Faltan campos obligatorios' }); return
     }
 
     const newUser = {
@@ -18,13 +23,15 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       firstName,
       lastName,
       email,
-      password,
-    };
+      password
+    }
 
-    userList.push(newUser);
+    userList.push(newUser)
 
-    res.status(201).json(newUser);
+    res.status(201).json(newUser)
   } else {
-    res.status(405).json({ error: 'Método no permitido' });
+    res.status(405).json({ error: 'Método no permitido' })
   }
-};
+}
+
+export default createUser

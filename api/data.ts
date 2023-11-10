@@ -55,7 +55,7 @@ const event1: Evento = {
   detailImageUrl: 'https://phsnews.com/wp-content/uploads/2023/03/Copy-of-Featured-Image-Template-4-1-900x600.png',
   description: 'Género de danza que se basa en la interpretación y visión individual del bailarín o coreógrafo.',
   category: { title: 'Conciertos', imageUrl: 'https://aeronoticias.com.pe/noticiero/wp-content/uploads/2022/10/apla.jpg' },
-  venue: venue4
+  venue: venue2
 }
 
 const event2: Evento = {
@@ -95,4 +95,11 @@ const event4: Evento = {
 }
 
 export const eventList: Evento[] = [event1, event2, event3, event4]
-export const userList: User[] = []
+export const userList: User[] = [{
+  id: 1,
+  firstName: 'Dolores',
+  lastName: 'Aleman',
+  email: 'doloresalemang@gmail.com',
+  password: 'Dolores123',
+  rol: 'USER'
+}]
