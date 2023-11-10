@@ -28,8 +28,10 @@ const FormRegistro: React.FC = () => {
         const data = await response.json()
         console.log('Usuario creado con éxito:', data)
         dispatch(logIn(data.email))
-        dispatch(setUser(data))
         dispatch(openModal())
+        dispatch(setUser(data))
+        console.log(data.id)
+
         // window.location.href = `profile/${data.id}`
       } else {
         console.error('Error al crear el usuario')

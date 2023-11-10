@@ -27,6 +27,8 @@ const ModalSu: React.FC = () => {
 
   const handleCloseModal = (): void => {
     dispatch(closeModal())
+    window.location.href = '/profile/1'
+    // window.location.href = `profile/${data.id}`
   }
 
   return (
