@@ -4,7 +4,7 @@ import React from 'react'
 const TerminosCondiciones: React.FC = () => {
   return (
     <>
-      <div className="flex lg:flex-row bg-white pt-3 pl-4">
+      <div className="flex lg:flex-row bg-white pt-3 pl-4 mb-20">
         <div className="pt-8 pr-2 sm:w-1/8 ">
           {/* Imagen */}
           <Image
