@@ -1,19 +1,10 @@
 import React from 'react'
-import Image from 'next/image'
 
 const Logo: React.FC = () => {
   return (
-    <>
+    <div className="bg-[url('/registroIzq.png')] hidden md:block bg-cover bg-center bg-size-50 w-full">
+    </div >
 
-      <Image
-        src="/registroIzq.svg"
-        alt="logo"
-        width={979}
-        height={150}
-        className="hidden md:block"
-      />
-
-    </>
   )
 }
 
