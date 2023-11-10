@@ -13,7 +13,7 @@ const FormRegistro: React.FC = () => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
-    const apiUrl = 'http://localhost:3000/api/users/create'
+    const apiUrl = '/api/users/create'
 
     try {
       const response = await fetch(apiUrl, {
