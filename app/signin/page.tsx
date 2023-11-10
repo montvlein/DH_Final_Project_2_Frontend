@@ -1,12 +1,19 @@
-import Logo from '@/components/registro/Logo'
+'use client'
+import Logo from '@/components/signup/Logo'
+import FormSignIn from '@/components/signin/FormSignIn'
+import TituloSignIn from '@/components/signin/TituloSignIn'
+import NoTienesCuenta from '@/components/signin/NoTienesCuenta'
 
-const registro: React.FC = () => {
+const signIn: React.FC = () => {
   return (
-    <><div className='flex'>
+    <div className='flex'>
       <Logo />
-      <p>INICIAR SESION</p>
+      <div className='bg-[#F8F7F3]   w-full'>
+        <TituloSignIn />
+        <FormSignIn />
+        <NoTienesCuenta />
+      </div>
     </div>
-    </>
   )
 }
-export default registro
+export default signIn

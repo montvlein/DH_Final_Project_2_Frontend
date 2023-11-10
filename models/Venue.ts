@@ -3,4 +3,5 @@ export interface Venue {
     name: string;
     country: string;
     city: string;
+    address: string;
 }

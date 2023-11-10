@@ -1,7 +1,7 @@
 const Hero: React.FC = () => {
   return (
     <>
-      <div className="bg-[url('/image42.png')] bg-cover bg-center h-auto lg:h-full" >
+      <div className="bg-[url('/image42.png')] bg-cover bg-center h-auto lg:h-full min-h-[50vh]" >
         <div className="lg:h-full lg:flex lg:flex-col lg:justify-center md:pl-20">
           <p className= 'max-w-screen text-pink-500 font-poppins font-semibold text-lg p-5 pr-20 uppercase'>
             tus shows favoritos en un solo lugar

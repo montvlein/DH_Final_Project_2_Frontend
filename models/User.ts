@@ -3,10 +3,10 @@ export interface User {
   firstName: string
   lastName: string
   email: string
-  rol: string
-  birthdate: Date
-  phone: string
-  documentType: string
-  documentNumber: string
-  password: string
+  rol?: string
+  birthdate?: Date
+  phone?: string
+  documentType?: string
+  documentNumber?: string
+  password?: string
 }

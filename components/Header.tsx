@@ -5,23 +5,21 @@ import { CiMenuFries } from 'react-icons/ci'
 const Header: React.FC = () => {
   return (
     <div className='w-full sticky top-0 z-50'>
-      <nav className='h-118 mx-auto flex justify-between items-center sm:px-16 px-6 py-4 bg-black shadow-md'>
+      <nav className='mx-auto flex justify-between items-center sm:px-16 px-6 py-4 bg-black shadow-md'>
         <Link href='/' className='flex justify-center items-center'>
-        <Image
-          src='/Logo (6) 2.svg'
-          alt='logo'
-          width={295}
-          height={92}
-          className='object-contain'
-        />
+          <Image
+            src='/Logo (6) 2.svg'
+            alt='logo'
+            width={100}
+            height={50}
+            className='object-contain'
+          />
         </Link>
         <CiMenuFries size= '2rem'color="white" className="md:hidden"/>
         <div className= "hidden md:block">
-          <div className="flex space-x-4">
-            <Link href='/' className= "text-white font-montserrat text-base font-normal">Inicio</Link>
-            <Link href='/' className= "text-white font-montserrat text-base font-normal">Soporte</Link>
-            <Link href='/' className= "text-white font-montserrat text-base font-normal">Inicia Sesión</Link>
-            <Link href='/' className= "text-white font-montserrat text-base font-normal">Registrate</Link>
+          <div className="flex items-center space-x-4">
+            <Link href='/signin' className= "text-white font-montserrat text-base font-normal rounded-full bg-slate-700 p-2 px-4 border-2 border-transparent hover:border-pink-500 hover:bg-transparent">Inicia Sesión</Link>
+            <Link href='/signup' className= "text-white font-montserrat text-base font-normal border-2 border-slate-100 rounded-full p-2 px-4 hover:border-pink-500 ">Registrate</Link>
           </div>
         </div>
       </nav>
