@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import type { User } from '../../models/User'
 import { logIn } from './../../redux/features/auth-slice'
+import { setUser } from '@/redux/features/activeUser-slice'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 
@@ -10,7 +11,7 @@ const FormSignIn: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<User>()
 
-  const onSubmit: SubmitHandler<User> = async (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit: SubmitHandler<any> = async (e: FormEvent<HTMLFormElement>) => {
     const values = getValues()
     const response = await fetch('http://localhost:3000/api/users/login', {
       method: 'POST',
@@ -20,11 +21,9 @@ const FormSignIn: React.FC = () => {
 
     if (response.status === 200) {
       const data = await response.json()
-      console.log(data)
       localStorage.setItem('token', data.token)
-      const values = getValues()
-      console.log(values)
-      dispatch(logIn(values.email))
+      dispatch(logIn(data.user.email))
+      dispatch(setUser(data.user))
       window.location.href = '/'
     } else {
       console.error('Error de autenticacion')

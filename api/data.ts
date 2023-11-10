@@ -1,9 +1,9 @@
-import { Category } from "@/models/Category";
-import { EventDateTime } from "@/models/DateTime";
-import { Evento } from "@/models/Event";
-import { TicketType } from "@/models/TicketType";
-import { Venue } from "@/models/Venue";
-import { User } from "@/models/User";
+import { Category } from '@/models/Category';
+import { EventDateTime } from '@/models/DateTime';
+import { Evento } from '@/models/Event';
+import { TicketType } from '@/models/TicketType';
+import { Venue } from '@/models/Venue';
+import { User } from '@/models/User';
 
 export const categories: Category[] = [
   { title: 'Deportes', imageUrl: 'https://media.tycsports.com/files/2022/03/02/396970/river-pibes_862x485.jpg' },
@@ -13,10 +13,10 @@ export const categories: Category[] = [
 
 const venue1: Venue = {
   id: 1,
-  name: "Teatro Vorterix",
-  country: "Argentina",
-  city: "CABA",
-  address: ""
+  name: 'Teatro Vorterix',
+  country: 'Argentina',
+  city: 'CABA',
+  address: 'Dirección 1'
 }
 
 const ticketType1: TicketType = {
@@ -45,4 +45,11 @@ const event1: Evento = {
 }
 
 export const eventList: Evento[] = [event1, event1, event1]
-export const userList: User[] = []
+export const userList: User[] = [{
+  id: 1,
+  firstName: 'Dolores',
+  lastName: 'Aleman',
+  email: 'doloresalemang@gmail.com',
+  password: 'Dolores123',
+  rol: 'USER'
+}]
