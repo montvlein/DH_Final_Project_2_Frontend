@@ -4,6 +4,8 @@ import Buybar from '@/components/detalles/Buybar'
 import Info from '@/components/detalles/Info'
 import TerminosCondiciones from '@/components/detalles/TerminosCondiciones'
 import React from 'react'
+import Hero2 from '@/components/detalles/Hero2'
+import { eventList } from '@/api/data'
 
 const detalles: React.FC = () => {
   return (
@@ -12,6 +14,7 @@ const detalles: React.FC = () => {
       <Hero1 />
       <Buybar />
       <Info />
+      <Hero2 evento={eventList[0]}/>
       <TerminosCondiciones />
     </>
   )
