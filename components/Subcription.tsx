@@ -62,7 +62,7 @@ const Subcription: React.FC = () => {
           <button
             className="text-white px-6 py-3 rounded-xl"
             style={{
-              background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)',
+              background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
             }}>
             Subscribe
           </button>

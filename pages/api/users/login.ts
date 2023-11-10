@@ -1,24 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-// import { listarUsuarios } from './listarUsuarios'
-// import type { User } from './../../../models/User'
+import { userList } from '../../../api/data'
 
-export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const login = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   if (req.method === 'POST') {
-    const { email, password } = req.body as { email: string; password: string }
+    const { email, password } = req.body as { email: string, password: string }
 
-    // const users: User[] = await listarUsuarios()
-    // console.log(users)
+    const user = userList?.find((user) => user?.email === email)
 
-    // const usuario = users.find((user) => user.email === email)
-    const usuarioHardcodeado = {
-      email: 'doloresalemang@gmail.com',
-      password: 'Dolores123'
-    }
-    if (usuarioHardcodeado.email === email && usuarioHardcodeado.password === password) {
-      const token = 'tokenDeIngreso'
+    if (user !== undefined && user?.password === password) {
+      const token = user.id
+      user.password = undefined
 
-      res.status(200).json({ token })
+      res.status(200).json({ token, user })
     } else {
       res.status(401).json({ error: 'Credenciales inválidas' })
     }
@@ -26,3 +20,5 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     res.status(405).json({ error: 'Método no permitido' })
   }
 }
+
+export default login

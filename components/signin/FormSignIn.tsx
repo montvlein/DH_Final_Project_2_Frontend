@@ -2,6 +2,7 @@
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import type { User } from '../../models/User'
 import { logIn } from './../../redux/features/auth-slice'
+import { setUser } from '@/redux/features/activeUser-slice'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { useState } from 'react'
@@ -21,11 +22,9 @@ const FormSignIn: React.FC = () => {
 
     if (response.status === 200) {
       const data = await response.json()
-      console.log(data)
       localStorage.setItem('token', data.token)
-      const values = getValues()
-      console.log(values)
-      dispatch(logIn(values.email))
+      dispatch(logIn(data.user.email))
+      dispatch(setUser(data.user))
       window.location.href = '/'
     } else {
       setErrorMessage('Credenciales inválidas')

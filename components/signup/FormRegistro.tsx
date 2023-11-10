@@ -2,10 +2,12 @@
 import React from 'react'
 import type { User } from '../../models/User'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { openModal } from '@/redux/features/modal-slice'
 import ModalSu from './ModalSu'
+import { useDispatch } from 'react-redux'
+import { logIn } from '@/redux/features/auth-slice'
+import { setUser } from '@/redux/features/activeUser-slice'
 
 const FormRegistro: React.FC = () => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
@@ -25,6 +27,8 @@ const FormRegistro: React.FC = () => {
       if (response.status === 201) {
         const data = await response.json()
         console.log('Usuario creado con éxito:', data)
+        dispatch(logIn(data.email))
+        dispatch(setUser(data))
         dispatch(openModal())
         // window.location.href = `profile/${data.id}`
       } else {
@@ -122,7 +126,7 @@ const FormRegistro: React.FC = () => {
               control={control}
               rules={{
                 required: 'La contraseña es obligatoria',
-                validate: (value) => {
+                validate: (value: any) => {
                   if (value.length < 8) {
                     return 'La contraseña debe tener al menos 8 caracteres.'
                   }

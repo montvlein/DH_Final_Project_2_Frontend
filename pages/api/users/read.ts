@@ -1,13 +1,14 @@
 // pages/api/users/read.ts
 
-import { NextApiRequest, NextApiResponse } from 'next';
+import { type NextApiRequest, type NextApiResponse } from 'next'
 import { userList } from '../../../api/data'
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+const getAllUser = (req: NextApiRequest, res: NextApiResponse): any => {
   if (req.method === 'GET') {
-    // ... Resto del código para responder con la lista de usuarios desde el array users
-    return res.status(200).json(userList);
+    res.status(200).json(userList)
   } else {
-    res.status(405).json({ error: 'Método no permitido' });
+    res.status(405).json({ error: 'Método no permitido' })
   }
-};
+}
+
+export default getAllUser
