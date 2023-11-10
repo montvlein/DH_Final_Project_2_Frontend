@@ -44,7 +44,7 @@ const ModalSu: React.FC = () => {
         width={76}
         height={70}
       />
-      <h2 className="font-poppins text-2xl font-medium leading-10 text-center mb-6">
+      <h2 className="font-poppins text-2xl font-medium leading-10 text-center mb-6 text-gray-900">
         Tu registro se ha realizado con éxito
       </h2>
       <button
