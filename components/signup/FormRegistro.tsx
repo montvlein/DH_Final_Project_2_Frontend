@@ -2,17 +2,16 @@
 import React from 'react'
 import type { User } from '../../models/User'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
+import type { AppDispatch } from '@/redux/store'
+import { openModal } from '@/redux/features/modal-slice'
+import ModalSu from './ModalSu'
 import { useDispatch } from 'react-redux'
 import { logIn } from '@/redux/features/auth-slice'
 import { setUser } from '@/redux/features/activeUser-slice'
-import type { AppDispatch } from '@/redux/store'
 
 const FormRegistro: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>()
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
-  // const values = getValues()
-  // console.log('dolo', values)
-
+  const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
     const apiUrl = 'http://localhost:3000/api/users/create'
 
@@ -29,8 +28,11 @@ const FormRegistro: React.FC = () => {
         const data = await response.json()
         console.log('Usuario creado con éxito:', data)
         dispatch(logIn(data.email))
+        dispatch(openModal())
         dispatch(setUser(data))
-        window.location.href = `profile/${data.id}`
+        console.log(data.id)
+
+        // window.location.href = `profile/${data.id}`
       } else {
         console.error('Error al crear el usuario')
       }
@@ -160,6 +162,7 @@ const FormRegistro: React.FC = () => {
 
           <div className="mt-8">
             <button type="submit" className="text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
+            <ModalSu></ModalSu>
           </div>
         </form>
       </div>
