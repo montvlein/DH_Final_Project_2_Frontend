@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Logo: React.FC = () => {
+const LogoSi: React.FC = () => {
   return (
     <div className="bg-[url('/signinIzq.svg')] hidden md:block bg-cover bg-center bg-size-50 w-full">
     </div >
@@ -8,4 +8,4 @@ const Logo: React.FC = () => {
   )
 }
 
-export default Logo
+export default LogoSi

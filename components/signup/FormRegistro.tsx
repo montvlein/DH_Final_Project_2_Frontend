@@ -2,12 +2,18 @@
 import React from 'react'
 import type { User } from '../../models/User'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
+// import SuccessModal from './SuccessModal'
+import { useDispatch } from 'react-redux'
+import type { AppDispatch } from '@/redux/store'
+import { openModal } from '@/redux/features/modal-slice'
+import Modal from './Modal'
 
 const FormRegistro: React.FC = () => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
+  // const [isModalOpen, setIsModalOpen] = useState(false)
   // const values = getValues()
   // console.log('dolo', values)
-
+  const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
     const apiUrl = 'http://localhost:3000/api/users/create'
 
@@ -23,7 +29,9 @@ const FormRegistro: React.FC = () => {
       if (response.status === 201) {
         const data = await response.json()
         console.log('Usuario creado con éxito:', data)
-        window.location.href = `profile/${data.id}`
+        // setIsModalOpen(true)
+        dispatch(openModal())
+        // window.location.href = `profile/${data.id}`
       } else {
         console.error('Error al crear el usuario')
       }
@@ -31,7 +39,9 @@ const FormRegistro: React.FC = () => {
       console.error('Error de red:', error)
     }
   }
-
+  // const handleCloseModal = (): void => {
+  //   setIsModalOpen(false)
+  // }
   return (
     <>
       <div className="flex justify-center items-center  py-2">
@@ -153,6 +163,7 @@ const FormRegistro: React.FC = () => {
 
           <div className="mt-8">
             <button type="submit" className="text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
+            <Modal />
           </div>
         </form>
       </div>
@@ -160,3 +171,4 @@ const FormRegistro: React.FC = () => {
   )
 }
 export default FormRegistro
+// <SuccessModal isOpen={isModalOpen} onRequestClose={handleCloseModal} />

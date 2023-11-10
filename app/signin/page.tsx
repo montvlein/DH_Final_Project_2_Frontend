@@ -2,7 +2,7 @@
 import FormSignIn from '@/components/signin/FormSignIn'
 import TituloSignIn from '@/components/signin/TituloSignIn'
 import NoTienesCuenta from '@/components/signin/NoTienesCuenta'
-import Logo from '@/components/signin/logo'
+import Logo from '@/components/signin/LogoSi'
 
 const signIn: React.FC = () => {
   return (
