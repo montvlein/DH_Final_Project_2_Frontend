@@ -18,7 +18,7 @@ const EventCardList: React.FC<EventCardListProp> = function ({ evento }) {
 
   return (
     <article className='rounded-2xl overflow-hidden shadow-xl max-w-lg'>
-      <Link href={`event/${evento.id}`} className='relative lg:max-h-none'>
+      <Link href={`/event/${evento.id}`} passHref className='relative lg:max-h-none'>
         <Image
           src={evento.bannerImageUrl}
           alt={evento.name}
