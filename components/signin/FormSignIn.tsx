@@ -33,8 +33,8 @@ const FormSignIn: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center  pt-6 pb-4">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex justify-center items-center pt-6 pb-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-[480px]">
           <div className="mb-8">
             <Controller
               name="email"
@@ -46,7 +46,7 @@ const FormSignIn: React.FC = () => {
                   id="email"
                   type="text"
                   placeholder='Email'
-                  className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 rounded-xl h-14 w-full ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -72,7 +72,7 @@ const FormSignIn: React.FC = () => {
                   id="password"
                   type="password"
                   placeholder='Contraseña'
-                  className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14  ${errors.password !== null && errors.password !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 rounded-xl h-14 w-full ${errors.password !== null && errors.password !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -84,12 +84,14 @@ const FormSignIn: React.FC = () => {
                 />
               )}
             />
-            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px] ">{errors.password.message}</p>}
+            {errors.password !== null && errors.password !== undefined && <p className="text-red-500">{errors.password.message}</p>}
             {errorMessage !== null && <p className="text-red-500 pl-1">{errorMessage}</p>}
           </div>
 
           <div className="mt-10">
-            <button type="submit" className="text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
+            <button type="submit" className="text-white font-poppins text-base font-medium w-full rounded-xl h-14 bg-gradient-to-b from-[#975D93] to-[#DCA6D8] transition duration-300 hover:to-[#975D93] ">
+              Confirmar
+            </button>
           </div>
         </form>
       </div>

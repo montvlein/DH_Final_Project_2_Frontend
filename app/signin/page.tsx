@@ -8,7 +8,7 @@ const signIn: React.FC = () => {
   return (
     <div className='flex h-screen'>
       <Logo />
-      <div className='bg-[#F8F7F3]  w-full'>
+      <div className='bg-[#F8F7F3]  w-full '>
         <TituloSignIn />
         <FormSignIn />
         <NoTienesCuenta />

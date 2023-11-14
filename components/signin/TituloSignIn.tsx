@@ -8,7 +8,8 @@ const TituloSignIn: React.FC = () => {
         src="/logoRegistro.svg"
         alt="iosStore"
         width={175}
-        height={224} />
+        height={224}
+        className="lg:w-auto w-24 h-auto  lg:mt-0" />
     </div>
     </>
   )
