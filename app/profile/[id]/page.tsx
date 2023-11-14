@@ -1,11 +1,8 @@
 const registro: React.FC = () => {
   return (
-    <>
-    <div className="bg-gradient-to-r from-[#DCA6D8] to-[#975D93] h-1/3">
-
-    </div>
-    <div className="relative flex justify-center h-screen">
-      <section className="absolute lg:left-20 -top-32 flex flex-col w-11/12">
+    <div className="relative flex justify-center lg:items-center p-8">
+      <div className="absolute top-0 w-full bg-gradient-to-r from-[#DCA6D8] to-[#975D93] h-1/4"></div>
+      <section className="flex flex-col z-10 w-11/12">
           <div className="m-4">
             <h2 className="text-white font-semibold text-2xl">Mi cuenta</h2>
             <p className="font-semibold text-base">Modifica tus datos personales y de contacto</p>
@@ -63,7 +60,6 @@ const registro: React.FC = () => {
           </div>
       </section>
     </div>
-    </>
   )
 }
 export default registro
