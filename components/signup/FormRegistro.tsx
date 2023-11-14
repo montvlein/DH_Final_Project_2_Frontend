@@ -43,8 +43,8 @@ const FormRegistro: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center  py-2">
-        <form onSubmit={handleSubmit(createUser)}>
+      <div className="flex justify-center items-center pb-2">
+        <form onSubmit={handleSubmit(createUser)} className="w-full lg:w-[480px]">
           <div className="mb-4">
             <Controller
               name="firstName"
@@ -56,7 +56,7 @@ const FormRegistro: React.FC = () => {
                   id="firstName"
                   type="text"
                   placeholder='Nombre'
-                  className={`placeholder-top border border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.firstName !== null && errors.firstName !== undefined ? 'border-red-500' : ''}`}
+                  className={`placeholder-top border border-gray-300 pl-4 w-full lg:w-[480px] rounded-xl h-14 ${errors.firstName !== null && errors.firstName !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -81,7 +81,7 @@ const FormRegistro: React.FC = () => {
                   id="lastName"
                   type="text"
                   placeholder='Apellido'
-                  className={`border focus:border-purple-700 border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.lastName !== null && errors.lastName !== undefined ? 'border-red-500' : ''}`}
+                  className={`border focus:border-purple-700 border-gray-300 pl-4 w-full lg:w-[480px] rounded-xl h-14 ${errors.lastName !== null && errors.lastName !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -107,7 +107,7 @@ const FormRegistro: React.FC = () => {
                   id="email"
                   type="text"
                   placeholder='Email'
-                  className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14 ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 w-full lg:w-[480px] rounded-xl h-14 ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -144,7 +144,7 @@ const FormRegistro: React.FC = () => {
                   id="password"
                   type="password"
                   placeholder='Contraseña'
-                  className={`border border-gray-300 pl-4 w-[480px] rounded-xl h-14  ${errors.password !== null && errors.password !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 w-full lg:w-[480px] rounded-xl h-14 ${errors.password !== null && errors.password !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -156,17 +156,18 @@ const FormRegistro: React.FC = () => {
                 />
               )}
             />
-            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-[480px] text-sm">{errors.password.message}</p>}
+            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-full text-sm">{errors.password.message}</p>}
             <p className="font-poppins text-xs text-[#975D93] font-normal leading-5 ml-1">Mínimo 8 caracteres con una combinación de letras mayúsculas y minúsculas.</p>
           </div>
 
-          <div className="mt-8">
-            <button type="submit" className="text-white font-poppins text-base font-medium w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
+          <div className="mt-6">
+            <button type="submit" className="text-white font-poppins text-base font-medium w-full lg:w-[480px] rounded-xl h-14 bg-gradient-to-b from-[#975D93]  to-[#DCA6D8] transition duration-300  hover:to-[#975D93] ">Confirmar</button>
             <ModalSu></ModalSu>
           </div>
         </form>
       </div>
     </>
+
   )
 }
 export default FormRegistro
