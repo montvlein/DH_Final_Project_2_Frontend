@@ -98,16 +98,16 @@ const FormRegistro: React.FC = () => {
 
           <div className="mb-4">
             <Controller
-              name="email"
+              name="mail"
               control={control}
               rules={{ required: 'El email es obligatorio', pattern: { value: /^\S+@\S+$/i, message: 'Email no válido' } }}
               render={({ field }) => (
                 <input
-                  {...register('email')}
+                  {...register('mail')}
                   id="email"
                   type="text"
                   placeholder='Email'
-                  className={`border border-gray-300 pl-4 w-full lg:w-[480px] rounded-xl h-14 ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 w-full lg:w-[480px] rounded-xl h-14 ${errors.mail !== null && errors.mail !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -119,7 +119,7 @@ const FormRegistro: React.FC = () => {
                 />
               )}
             />
-            {errors.email !== null && errors.email !== undefined && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+            {errors.mail !== null && errors.mail !== undefined && <p className="text-red-500 text-sm">{errors.mail.message}</p>}
           </div>
 
           <div className="mb-4">

@@ -58,12 +58,12 @@ const Info: React.FC = () => {
                 >
                   <div className="flex justify-center gap-8">
                     <div>
-                      <p className="text-lg font-semibold leading-tight mt-1" style={{ color: lugar.id % 2 === 0 ? 'violet' : 'white' }}
+                      <p className="text-lg font-semibold leading-tight mt-1" style={{ color: lugar.id % 2 === 0 ? '#975D93' : 'white' }}
                       >{lugar.lugar}</p>
 
-                      <p className="text-lg font-semibold leading-tight" style={{ color: lugar.id % 2 === 0 ? 'violet' : 'white' }}
+                      <p className="text-lg font-semibold leading-tight" style={{ color: lugar.id % 2 === 0 ? '#975D93' : 'white' }}
                       >{lugar.pais}</p>  </div> <div>
-                      <p className="text-lg font-semibold leading-tight" style={{ color: lugar.id % 2 === 0 ? 'violet' : 'white' }}>{lugar.mes}</p>
+                      <p className="text-lg font-semibold leading-tight" style={{ color: lugar.id % 2 === 0 ? '#975D93' : 'white' }}>{lugar.mes}</p>
                       <p className="font-DM+Sans text-3xl font-bold leading-15 tracking-normal text-left">{lugar.dia}</p></div>
                   </div>
                 </li>
