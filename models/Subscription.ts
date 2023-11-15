@@ -1,4 +1,4 @@
-export interface User {
+export interface User { // Subcription
     id: number;
     firstName: string;
     lastName: string;
