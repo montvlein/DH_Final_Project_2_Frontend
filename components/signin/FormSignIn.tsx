@@ -37,16 +37,16 @@ const FormSignIn: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-[480px]">
           <div className="mb-8">
             <Controller
-              name="email"
+              name="mail"
               control={control}
               rules={{ required: 'Ingrese su email' }}
               render={({ field }) => (
                 <input
-                  {...register('email')}
+                  {...register('mail')}
                   id="email"
                   type="text"
                   placeholder='Email'
-                  className={`border border-gray-300 pl-4 rounded-xl h-14 w-full ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 rounded-xl h-14 w-full ${errors.mail !== null && errors.mail !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -58,7 +58,7 @@ const FormSignIn: React.FC = () => {
                 />
               )}
             />
-            {errors.email !== null && errors.email !== undefined && <p className="text-red-500">{errors.email.message}</p>}
+            {errors.mail !== null && errors.mail !== undefined && <p className="text-red-500">{errors.mail.message}</p>}
           </div>
 
           <div className="mb-4">
