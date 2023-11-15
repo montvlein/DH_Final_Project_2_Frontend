@@ -20,7 +20,7 @@ const EventCardList: React.FC<EventCardListProp> = function ({ evento }) {
     <article className='rounded-2xl overflow-hidden shadow-xl max-w-lg'>
       <Link href={`/event/${evento.id}`} passHref className='relative lg:max-h-none'>
         <Image
-          src={evento.bannerImageUrl}
+          src={evento.miniImageUrl}
           alt={evento.name}
           width={1000}
           height={197}
@@ -28,13 +28,13 @@ const EventCardList: React.FC<EventCardListProp> = function ({ evento }) {
         />
         <div className='p-4 flex gap-6'>
           <p className='flex flex-col items-center font-bold'>
-            <span className='text-blue-500'>{ monthName }</span>
-            <span className='text-3xl'>{ day }</span>
+            <span className='text-blue-500'>{monthName}</span>
+            <span className='text-3xl'>{day}</span>
           </p>
           <div className='text-base'>
-            <h4 className='mb-2'><strong>Evento: </strong>{ evento.name }</h4>
-            <h4 className='mb-2'><strong>Lugar: </strong>{ evento.venue.name }</h4>
-            <h4 className='mb-2'><strong>Dirección: </strong>{ evento.venue.address }</h4>
+            <h4 className='mb-2'><strong>Evento: </strong>{evento.name}</h4>
+            <h4 className='mb-2'><strong>Lugar: </strong>{evento.venue.name}</h4>
+            <h4 className='mb-2'><strong>Dirección: </strong>{evento.venue.address}</h4>
           </div>
         </div>
       </Link>

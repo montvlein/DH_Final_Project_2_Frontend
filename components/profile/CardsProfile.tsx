@@ -2,11 +2,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Evento } from '@/models/Event'
 
-interface NextEventCardProp {
+interface CardProp {
   evento: Evento
 }
 
-const NextEventCard: React.FC<NextEventCardProp> = function ({ evento }) {
+const CardsProfile: React.FC<CardProp> = function ({ evento }) {
   const day = evento.dateList[0].dayAndHour.getDate()
   const meses = [
     'ENE', 'FEB', 'MAR', 'ABR',
@@ -15,16 +15,15 @@ const NextEventCard: React.FC<NextEventCardProp> = function ({ evento }) {
   ]
   const monthNum = evento.dateList[0].dayAndHour.getMonth()
   const monthName = meses[monthNum]
-
   return (
-    <article className='rounded-2xl overflow-hidden shadow-xl max-w-sm'>
-      <Link href={`event/${evento.id}`} className='relative lg:max-h-none'>
+    <article className='rounded-2xl overflow-hidden shadow-xl mx-24 my-2'>
+      <Link href={`/event/${evento.id}`} passHref className='relative lg:max-h-none'>
         <Image
-          src={evento.miniImageUrl}
+          src={evento.bannerImageUrl}
           alt={evento.name}
-          width={344}
+          width={1000}
           height={197}
-          className='object-cover w-full'
+          className='object-cover w-full h-64'
         />
         <div className='p-4 flex gap-6'>
           <p className='flex flex-col items-center font-bold'>
@@ -43,4 +42,4 @@ const NextEventCard: React.FC<NextEventCardProp> = function ({ evento }) {
   )
 }
 
-export default NextEventCard
+export default CardsProfile

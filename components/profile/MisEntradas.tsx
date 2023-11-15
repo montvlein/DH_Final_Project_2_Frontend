@@ -1,3 +1,6 @@
+import CardsProfile from '@/components/profile/CardsProfile'
+import { eventList } from '../../api/data'
+
 const MisEntradas: React.FC = () => {
   return (
     <section className="flex flex-col z-10 w-11/12">
@@ -9,8 +12,10 @@ const MisEntradas: React.FC = () => {
           <button className="grow py-4 uppercase font-semibold lg:text-2xl text-[#975D93] border-2 border-transparent border-b-[#DCA6D8]">MIS ENTRADAS</button>
           <button className="grow py-4 uppercase font-semibold lg:text-2xl"><div className="mr-10"></div></button>
         </div>
-        <div className="p-8 h-[620px]">
-
+        <div className="p-8 ">
+          {eventList.map((evento) => (
+            <CardsProfile key={evento.id} evento={evento} />
+          ))}
         </div>
       </div>
     </section>

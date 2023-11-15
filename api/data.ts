@@ -99,7 +99,7 @@ export const userList: User[] = [{
   id: 1,
   firstName: 'Dolores',
   lastName: 'Aleman',
-  email: 'doloresalemang@gmail.com',
+  mail: 'doloresalemang@gmail.com',
   password: 'Dolores123',
-  rol: 'USER'
+  role: 'USER'
 }]
