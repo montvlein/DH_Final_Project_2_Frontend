@@ -16,7 +16,7 @@ const CardsProfile: React.FC<CardProp> = function ({ evento }) {
   const monthNum = evento.dateList[0].dayAndHour.getMonth()
   const monthName = meses[monthNum]
   return (
-    <article className='rounded-2xl overflow-hidden shadow-xl mx-24 my-2'>
+    <article className='rounded-2xl overflow-hidden shadow-xl  md:mx-24 my-2'>
       <Link href={`/event/${evento.id}`} passHref className='relative lg:max-h-none'>
         <Image
           src={evento.bannerImageUrl}
