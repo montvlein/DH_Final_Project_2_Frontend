@@ -48,12 +48,25 @@ const DetalleEntradas: React.FC<CardProp> = () => {
           <div className='pl-3 pt-1 bg-[#F8F8F8]'><p className='font-montserrat text-2xl font-bold leading-29 tracking-normal text-left'>Detalle de pago</p>
             <p className='font-montserrat text-2xl font-normal leading-29 tracking-normal text-left text-gray-600'> Medio de pago: Visa</p>
           </div>
-
+          <div>
+            <div className='flex justify-between mx-4 mt-14 pb-2 border-b border-solid border-[#975D93]'>
+              <p className=' text-xl'>Monto</p>
+              <p>$ 20,700.00</p>
+            </div>
+            <div className='flex justify-between mx-4 py-6 border-b border-solid border-[#975D93]'>
+              <p className=' text-xl'>Tarjeta</p><p>XXXXXXXXXXXX4242</p>
+            </div>
+            <div className='flex justify-between mx-4 py-6 border-b border-solid border-[#975D93]'>
+              <p className=' text-xl'>Estado</p>
+              <p className='text-[#3D37F1] font-bold'>Pagado</p></div>
+            <div className='flex justify-between mx-4 mt-4'>
+              <p className=' text-xl'>Fecha</p><p>11/11/2023</p>
+            </div>
+          </div>
         </div>
       </div>
       <button type="button" className="text-white font-poppins text-base font-medium mt-4 w-full  h-12 bg-gradient-to-b from-[#975D93] to-[#DCA6D8] transition duration-300 hover:to-[#975D93]">  Reenviar entrada </button>
-        </div > 
- )
-}        
-      
+    </div >
+  )
+}
 export default DetalleEntradas
