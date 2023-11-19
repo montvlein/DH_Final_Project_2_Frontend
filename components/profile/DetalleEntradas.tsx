@@ -1,21 +1,29 @@
+'use client'
 import { eventList } from '../../api/data'
 import type { Evento } from '@/models/Event'
-
+import ModalEE from './ModalEE'
+import type { AppDispatch } from '@/redux/store'
+import { openModal } from '@/redux/features/modalEE-slice'
+import { useDispatch } from 'react-redux'
 interface CardProp {
   evento: Evento
 }
 const DetalleEntradas: React.FC<CardProp> = () => {
   console.log(eventList)
-
+  const dispatch = useDispatch<AppDispatch>()
+  const submit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()// Evitar que el formulario se envíe
+    dispatch(openModal())
+  }
   return (
-    <div className="flex flex-col z-10 w-11/12">
-      <div className="m-4 mb-10">
+    <div className="flex flex-col  w-11/12">
+      <div className="m-4 mb-10 z-10">
         <h2 className="text-white font-semibold text-2xl">Mis entradas</h2>
       </div>
-      <div className=" bg-white dark:bg-gray-700 dark:text-white">
+      <div className="z-10 bg-white dark:bg-gray-700 dark:text-white">
 
         <div className=" bg-gray-300 p-3 text-2xl">{eventList[0].name} | {eventList[0].venue.name}  </div>
-        <div className="h-60 bg-gradient-to-r from-[#AEFFBB] to-[#00FFB2] my-2 flex items-center justify-center"><p className="font-montserrat text-4xl font-semibold leading-11 tracking-wide text-green-700">
+        <div className="z-10 h-60 bg-gradient-to-r from-[#AEFFBB] to-[#00FFB2] my-2 flex items-center justify-center"><p className="font-montserrat text-4xl font-semibold leading-11 tracking-wide text-green-700">
           Pago aprobado        </p></div>
 
       </div>
@@ -65,7 +73,9 @@ const DetalleEntradas: React.FC<CardProp> = () => {
           </div>
         </div>
       </div>
-      <button type="button" className="text-white font-poppins text-base font-medium mt-4 w-full  h-12 bg-gradient-to-b from-[#975D93] to-[#DCA6D8] transition duration-300 hover:to-[#975D93]">  Reenviar entrada </button>
+      <form onSubmit={submit} >
+        <button type="submit" className="text-white font-poppins text-base font-medium mt-4 w-full  h-12 bg-gradient-to-b from-[#975D93] to-[#DCA6D8] transition duration-300 hover:to-[#975D93]">  Reenviar entrada </button></form>
+      <ModalEE />
     </div >
   )
 }
