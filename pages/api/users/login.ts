@@ -4,9 +4,9 @@ import { userList } from '../../../api/data'
 
 const login = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   if (req.method === 'POST') {
-    const { email, password } = req.body as { email: string, password: string }
+    const { mail, password } = req.body as { mail: string, password: string }
 
-    const user = userList?.find((user) => user?.email === email)
+    const user = userList?.find((user) => user?.mail === mail)
 
     if (user !== undefined && user?.password === password) {
       const token = user.id
