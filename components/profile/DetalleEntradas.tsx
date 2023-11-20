@@ -1,14 +1,14 @@
 'use client'
 import { eventList } from '../../api/data'
-import type { Evento } from '@/models/Event'
+// import type { Evento } from '@/models/Event'
 import ModalEE from './ModalEE'
 import type { AppDispatch } from '@/redux/store'
 import { openModal } from '@/redux/features/modalEE-slice'
 import { useDispatch } from 'react-redux'
-interface CardProp {
-  evento: Evento
-}
-const DetalleEntradas: React.FC<CardProp> = () => {
+// interface CardProp {
+//  evento: Evento
+// }
+const DetalleEntradas: React.FC = () => {
   console.log(eventList)
   const dispatch = useDispatch<AppDispatch>()
   const submit = (event: React.FormEvent<HTMLFormElement>): void => {
