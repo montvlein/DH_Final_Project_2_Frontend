@@ -23,12 +23,12 @@ const DetalleEntradas: React.FC<CardProp> = () => {
       <div className="z-10 bg-white dark:bg-gray-700 dark:text-white">
 
         <div className=" bg-gray-300 p-3 text-2xl">{eventList[0].name} | {eventList[0].venue.name}  </div>
-        <div className="z-10 h-60 bg-gradient-to-r from-[#AEFFBB] to-[#00FFB2] my-2 flex items-center justify-center"><p className="font-montserrat text-4xl font-semibold leading-11 tracking-wide text-green-700">
+        <div className="z-10 h-40 lg:h-60 bg-gradient-to-r from-[#AEFFBB] to-[#00FFB2] my-2 flex items-center justify-center"><p className="font-montserrat text-2xl lg:text-4xl font-semibold leading-11 tracking-wide text-green-700">
           Pago aprobado        </p></div>
 
       </div>
-      <div className='flex gap-10'>
-        <div className='bg-[#D9D9D9] h-96 w-1/2'>
+      <div className='flex flex-col gap-10 lg:flex-row'>
+        <div className='bg-[#D9D9D9] h-96 w-full lg:w-1/2 '>
           <div className='pl-4 pt-1 bg-[#F8F8F8]'><p className='font-montserrat text-2xl font-bold leading-29 tracking-normal text-left'>Resumen de compra</p>
             <p className='font-montserrat text-2xl font-normal leading-29 tracking-normal text-left text-gray-600'>{eventList[0].name} | {eventList[0].venue.name}  </p>
           </div>
@@ -52,7 +52,7 @@ const DetalleEntradas: React.FC<CardProp> = () => {
             </div>
           </div>
         </div>
-        <div className='bg-[#D9D9D9] h-96 w-1/2'>
+        <div className='bg-[#D9D9D9] h-96 w-full lg:w-1/2'>
           <div className='pl-3 pt-1 bg-[#F8F8F8]'><p className='font-montserrat text-2xl font-bold leading-29 tracking-normal text-left'>Detalle de pago</p>
             <p className='font-montserrat text-2xl font-normal leading-29 tracking-normal text-left text-gray-600'> Medio de pago: Visa</p>
           </div>
