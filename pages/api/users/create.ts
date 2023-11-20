@@ -7,14 +7,14 @@ let nextUserId = 1
 
 const createUser = (req: NextApiRequest, res: NextApiResponse): any => {
   if (req.method === 'POST') {
-    const { firstName, lastName, email, password } = req.body as {
+    const { firstName, lastName, mail, password } = req.body as {
       firstName: string
       lastName: string
-      email: string
+      mail: string
       password: string
     }
 
-    if (firstName === '' || lastName === '' || email === '' || password === '') {
+    if (firstName === '' || lastName === '' || mail === '' || password === '') {
       res.status(400).json({ error: 'Faltan campos obligatorios' }); return
     }
 
@@ -22,7 +22,7 @@ const createUser = (req: NextApiRequest, res: NextApiResponse): any => {
       id: nextUserId++,
       firstName,
       lastName,
-      email,
+      mail,
       password
     }
 
