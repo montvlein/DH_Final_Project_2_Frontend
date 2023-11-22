@@ -9,10 +9,10 @@ const DatosPersonales: React.FC = () => {
         <p className="font-semibold text-base">Modifica tus datos personales y de contacto</p>
       </div>
       <div className="shadow-lg bg-white dark:bg-gray-700 dark:text-white">
-        <div className="flex gap-4 justify-around">
-          <button className=" py-4 uppercase font-semibold lg:text-2xl text-[#975D93] border-2 border-transparent border-b-[#DCA6D8]">Información personal</button>
-          <Link href={'/newpassword/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl ">Cambiar contraseña</button></Link>
-          <Link href={'/mytickets/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl ">Mis entradas</button></Link>
+        <div className="flex gap-2 justify-around">
+          <button className=" py-4 uppercase font-semibold lg:text-2xl text-xs  text-[#975D93] border-2 border-transparent border-b-[#DCA6D8]">Información personal</button>
+          <Link href={'/newpassword/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs  ">Cambiar contraseña</button></Link>
+          <Link href={'/mytickets/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs  ">Mis entradas</button></Link>
         </div>
         <form className="p-8">
           <div className="grid gap-6 mb-6 md:grid-cols-2">
@@ -54,7 +54,7 @@ const DatosPersonales: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4 border-2 border-transparent border-t-gray-100 p-8">
+          <div className="flex lg:justify-end gap-2 lg:gap-4 border-2 border-transparent border-t-gray-100 p-8">
             <button className="p-4 border-2">Cancelar</button>
             <button className="p-4 bg-gradient-to-t from-[#DCA6D8] to-[#975D93] text-white fonr-bold">Guardar cambios</button>
           </div>

@@ -9,12 +9,12 @@ const ChangePassword: React.FC = () => {
         <p className="font-semibold text-base">Modifica tu contraseña</p>
       </div>
       <div className="shadow-lg bg-white dark:bg-gray-700 dark:text-white">
-        <div className="flex gap-4 justify-around">
-          <Link href={'/profile/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl ">Información personal</button></Link>
-          <button className=" py-4 uppercase font-semibold lg:text-2xl text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] ">Cambiar contraseña</button>
-          <Link href={'/mytickets/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl ">Mis entradas</button></Link>
+        <div className="flex lg:gap-2 justify-around">
+          <Link href={'/profile/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Información personal</button></Link>
+          <button className=" py-4 uppercase font-semibold lg:text-2xl text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] text-xs  ">Cambiar contraseña</button>
+          <Link href={'/mytickets/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Mis entradas</button></Link>
         </div>
-        <form className="p-8">
+        <form className="p-8 lg:mx-28">
           <label htmlFor="passOld" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Contraseña actual</label>
           <input
             type="password"
@@ -37,7 +37,7 @@ const ChangePassword: React.FC = () => {
             placeholder="*****"
             required />
 
-          <div className="flex justify-end gap-4 border-2 border-transparent border-t-gray-100 p-8">
+          <div className="flex lg:justify-end gap-2 lg:gap-4 border-2 border-transparent border-t-gray-100 p-8">
             <button className="p-4 border-2">Cancelar</button>
             <button className="p-4 bg-gradient-to-t from-[#DCA6D8] to-[#975D93] text-white fonr-bold">Guardar cambios</button>
           </div>
