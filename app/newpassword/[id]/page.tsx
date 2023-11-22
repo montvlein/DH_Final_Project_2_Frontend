@@ -1,11 +1,11 @@
-import DatosPersonales from '@/components/profile/DatosPersonales'
+import ChangePassword from '@/components/profile/ChangePass'
 
-const registro: React.FC = () => {
+const NewPass: React.FC = () => {
   return (
     <div className="relative flex justify-center lg:items-center p-8">
       <div className="absolute top-0 w-full bg-gradient-to-r from-[#DCA6D8] to-[#975D93] h-60"></div>
-      <DatosPersonales />
+      <ChangePassword />
     </div>
   )
 }
-export default registro
+export default NewPass
