@@ -17,7 +17,7 @@ const CardsProfile: React.FC<CardProp> = function ({ evento }) {
   const monthName = meses[monthNum]
   return (
     <article className='rounded-2xl overflow-hidden shadow-xl  md:mx-24 my-2'>
-      <Link href={`/event/${evento.id}`} passHref className='relative lg:max-h-none'>
+      <Link href={`/ticketdetails/${evento.id}`} passHref className='relative lg:max-h-none'>
         <Image
           src={evento.bannerImageUrl}
           alt={evento.name}

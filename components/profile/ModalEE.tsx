@@ -28,6 +28,7 @@ const ModalEE: React.FC = () => {
 
   const handleCloseModal = (): void => {
     dispatch(closeModal())
+    window.location.href = '/mytickets/1'
   }
 
   return (
