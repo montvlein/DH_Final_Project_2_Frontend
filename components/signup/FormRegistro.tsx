@@ -14,7 +14,9 @@ const FormRegistro: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
     console.log(user)
-    const apiUrl = 'http://ec2-54-221-175-120.compute-1.amazonaws.com:8081/user/register'
+    const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
+    const endpoint = 'user/register'
+    const apiUrl = baseUrl + endpoint
 
     try {
       const response = await fetch(apiUrl, {

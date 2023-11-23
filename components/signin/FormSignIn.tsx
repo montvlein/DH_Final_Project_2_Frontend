@@ -14,7 +14,9 @@ const FormSignIn: React.FC = () => {
 
   const onSubmit: SubmitHandler<User> = async (data) => {
     const values = getValues()
-    const response = await fetch('http://ec2-54-221-175-120.compute-1.amazonaws.com:8081/user/login', {
+    const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
+    const endpoint = 'user/login'
+    const response = await fetch(baseUrl + endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
