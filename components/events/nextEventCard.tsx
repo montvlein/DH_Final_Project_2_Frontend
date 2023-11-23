@@ -7,13 +7,13 @@ interface NextEventCardProp {
 }
 
 const NextEventCard: React.FC<NextEventCardProp> = function ({ evento }) {
-  const day = evento.dateList[0].dayAndHour.getDate()
+  const day = evento.dateList[0].dateTime.getDate()
   const meses = [
     'ENE', 'FEB', 'MAR', 'ABR',
     'MAY', 'JUN', 'JUL', 'AGO',
     'SEP', 'OCT', 'NOV', 'DIC'
   ]
-  const monthNum = evento.dateList[0].dayAndHour.getMonth()
+  const monthNum = evento.dateList[0].dateTime.getMonth()
   const monthName = meses[monthNum]
 
   return (

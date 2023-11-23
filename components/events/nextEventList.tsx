@@ -14,7 +14,7 @@ const NextEventList: React.FC<EventListProps> = function ({ categories }) {
   const [selectedCategory, setSelectedCategory] = useState('Top Selling')
 
   const filteredEvents = eventList.filter((event) =>
-    selectedCategory === 'Top Selling' ? true : event.category.title === selectedCategory
+    selectedCategory === 'Top Selling' ? true : event.category.description === selectedCategory
   )
 
   return (
@@ -53,11 +53,11 @@ const Chooser: React.FC<ChooserProps> = function ({ categories, selectedCategory
       </button>
       {categories.map((cat) => (
         <button
-          key={cat.title}
-          onClick={() => { setSelectedCategory(cat.title) }}
-          className={selectedCategory === cat.title ? 'rounded-2xl bg-pink-400 py-2 px-6 text-white font-semibold' : 'text-sm lg:text-md'}
+          key={cat.description}
+          onClick={() => { setSelectedCategory(cat.description) }}
+          className={selectedCategory === cat.description ? 'rounded-2xl bg-pink-400 py-2 px-6 text-white font-semibold' : 'text-sm lg:text-md'}
         >
-          {cat.title}
+          {cat.description}
         </button>
       ))}
     </div>

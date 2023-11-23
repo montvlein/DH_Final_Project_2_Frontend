@@ -16,16 +16,16 @@ const CategoryList: React.FC<CategoryListProps> = function ({ categories }) {
       </div>
       <div className="p-4 flex flex-col gap-6 lg:flex-row">
         {categories.map((cat, i) => (
-          <Link href={`category/${cat.title}`} className="relative rounded-2xl overflow-hidden lg:max-h-none" key={i}>
+          <Link href={`category/${cat.description}`} className="relative rounded-2xl overflow-hidden lg:max-h-none" key={i}>
             <div className="bg-black opacity-40 shadow-inner absolute top-0 left-0 w-full h-full rounded-2xl transition-opacity hover:opacity-0"></div>
             <Image
-              src={cat.imageUrl}
-              alt={cat.title}
+              src={cat.urlImage}
+              alt={cat.description}
               width={433}
               height={234}
               className='object-cover w-full h-full'
             />
-            <span className="absolute bottom-3 left-3 text-white font-bold opacity-100">{cat.title}</span>
+            <span className="absolute bottom-3 left-3 text-white font-bold opacity-100">{cat.urlImage}</span>
           </Link>
         ))}
       </div>
