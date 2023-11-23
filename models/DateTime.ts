@@ -1,7 +1,7 @@
-import { TicketType } from "./TicketType";
+import type { TicketType } from './TicketType'
 
 export interface EventDateTime {
-    id: number;
-    dayAndHour: Date; // dateTime
-    ticketTypeList: TicketType[]
+  id: number
+  dateTime: Date
+  ticketTypeList: TicketType[]
 }

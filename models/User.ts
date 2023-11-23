@@ -10,3 +10,15 @@ export interface User {
   documentNumber?: string
   password?: string
 }
+export interface UserLi {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
+  role?: string
+  birthdate?: string
+  phone?: string
+  documentType?: string
+  documentNumber?: string
+  password?: string
+}

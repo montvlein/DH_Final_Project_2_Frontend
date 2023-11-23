@@ -5,18 +5,24 @@ import Info from '@/components/detalles/Info'
 import TerminosCondiciones from '@/components/detalles/TerminosCondiciones'
 import React from 'react'
 import Hero2 from '@/components/detalles/Hero2'
-import { eventList } from '@/api/data'
+import GetEvents from '@/services/GetEvents'
 
-const detalles: React.FC = () => {
+interface DetailsProps {
+  params: any
+}
+
+const Details: React.FC<DetailsProps> = async ({ params }) => {
+  const { id } = params
+  const eventList = await GetEvents()
   return (
     <>
       <BuscadorEventos />
-      <Hero1 />
-      <Buybar />
-      <Info />
-      <Hero2 evento={eventList[0]}/>
+      <Hero1 evento={eventList[id]}/>
+      <Buybar evento={eventList[id]}/>
+      <Info evento={eventList[id]}/>
+      <Hero2 evento={eventList[id]}/>
       <TerminosCondiciones />
     </>
   )
 }
-export default detalles
+export default Details

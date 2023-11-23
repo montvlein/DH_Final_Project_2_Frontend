@@ -1,6 +1,6 @@
 'use client'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
-import type { User } from '../../models/User'
+import type { UserLi } from '../../models/User'
 import { logIn } from './../../redux/features/auth-slice'
 import { setUser } from '@/redux/features/activeUser-slice'
 import { useDispatch } from 'react-redux'
@@ -9,21 +9,27 @@ import { useState } from 'react'
 
 const FormSignIn: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<User>()
+  const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<UserLi>()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  const onSubmit: SubmitHandler<User> = async (data) => {
+  const onSubmit: SubmitHandler<UserLi> = async (data) => {
     const values = getValues()
-    const response = await fetch('http://ec2-54-221-175-120.compute-1.amazonaws.com:8081/user/login', {
+    console.log(values.email)
+
+    const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
+    const endpoint = 'user/login'
+    const response = await fetch(baseUrl + endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
     })
 
-    if (response.status === 200) {
+    if (response.status === 202) {
+      console.log(values)
       const data = await response.json()
-      localStorage.setItem('token', data.token)
-      dispatch(logIn(data.user.email))
+      console.log(data)
+      localStorage.setItem('token', data.jwt)
+      dispatch(logIn(values.email))
       dispatch(setUser(data.user))
       window.location.href = '/'
     } else {
@@ -37,16 +43,16 @@ const FormSignIn: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-[480px]">
           <div className="mb-8">
             <Controller
-              name="mail"
+              name="email"
               control={control}
               rules={{ required: 'Ingrese su email' }}
               render={({ field }) => (
                 <input
-                  {...register('mail')}
+                  {...register('email')}
                   id="email"
                   type="text"
                   placeholder='Email'
-                  className={`border border-gray-300 pl-4 rounded-xl h-14 w-full ${errors.mail !== null && errors.mail !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 rounded-xl h-14 w-full ${errors.email !== null && errors.email !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -58,7 +64,7 @@ const FormSignIn: React.FC = () => {
                 />
               )}
             />
-            {errors.mail !== null && errors.mail !== undefined && <p className="text-red-500">{errors.mail.message}</p>}
+            {errors.email !== null && errors.email !== undefined && <p className="text-red-500">{errors.email.message}</p>}
           </div>
 
           <div className="mb-4">

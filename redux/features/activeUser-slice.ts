@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '@/models/User';
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import type { User } from '@/models/User'
 
 interface InitialState {
-  activeUser: User;
+  activeUser: User
 }
 
 const initialState: InitialState = {

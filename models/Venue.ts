@@ -1,7 +1,7 @@
 export interface Venue {
-    id: number;
-    name: string; // venue
-    country: string;
-    city: string;
-    address: string;
+  id: number
+  venue: string
+  country: string
+  city: string
+  address: string
 }

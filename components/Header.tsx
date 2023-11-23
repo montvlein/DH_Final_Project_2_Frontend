@@ -32,22 +32,22 @@ const Header: React.FC = () => {
             className='object-contain'
           />
         </Link>
-        <CiMenuFries size= '2rem'color="white" className="md:hidden"/>
+        <CiMenuFries size='2rem' color="white" className="md:hidden" />
         {
           userInfo.email !== ''
             ? <div className='flex gap-4'>
               <span>{userInfo.email}</span>
               <button
-               className='text-rose-500'
-               onClick={handleLogout}
+                className='text-rose-500'
+                onClick={handleLogout}
               >cerrar sesión</button>
             </div>
-            : <div className= "hidden md:block">
-            <div className="flex items-center space-x-4">
-              <Link href='/signin' className= "text-white font-montserrat text-base font-normal rounded-full bg-slate-700 p-2 px-4 border-2 border-transparent hover:border-pink-500 hover:bg-transparent">Inicia Sesión</Link>
-              <Link href='/signup' className= "text-white font-montserrat text-base font-normal border-2 border-slate-100 rounded-full p-2 px-4 hover:border-pink-500 ">Registrate</Link>
+            : <div className="hidden md:block">
+              <div className="flex items-center space-x-4">
+                <Link href='/signin' className="text-white font-montserrat text-base font-normal rounded-full bg-slate-700 p-2 px-4 border-2 border-transparent hover:border-pink-500 hover:bg-transparent">Inicia Sesión</Link>
+                <Link href='/signup' className="text-white font-montserrat text-base font-normal border-2 border-slate-100 rounded-full p-2 px-4 hover:border-pink-500 ">Registrate</Link>
+              </div>
             </div>
-          </div>
         }
       </nav>
     </div>
