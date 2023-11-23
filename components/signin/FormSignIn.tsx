@@ -30,7 +30,7 @@ const FormSignIn: React.FC = () => {
       console.log(data)
       localStorage.setItem('token', data.jwt)
       dispatch(logIn(values.email))
-      dispatch(setUser(data.user))
+      dispatch(setUser(values))
       window.location.href = '/'
     } else {
       setErrorMessage('Credenciales inválidas')
