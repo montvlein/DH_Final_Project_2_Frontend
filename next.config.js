@@ -45,6 +45,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'golden-ticket.s3.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 }

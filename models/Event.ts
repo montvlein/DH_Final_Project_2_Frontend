@@ -1,15 +1,15 @@
-import { Category } from "./Category";
-import { EventDateTime } from "./DateTime";
-import { Venue } from "./Venue";
+import type { Category } from './Category'
+import type { EventDateTime } from './DateTime'
+import type { Venue } from './Venue'
 
 export interface Evento {
-    id: number;
-    dateList: EventDateTime[];
-    name: string;
-    miniImageUrl: string;
-    bannerImageUrl: string;
-    detailImageUrl: string;
-    description?: string;
-    category: Category;
-    venue: Venue;
+  id: number
+  dateList: EventDateTime[]
+  name: string
+  miniImageUrl: string
+  bannerImageUrl: string
+  detailImageUrl: string
+  description?: string
+  category: Category
+  venue: Venue
 }
