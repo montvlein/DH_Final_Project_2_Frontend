@@ -1,9 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type { UserLi } from '@/models/User'
+import type { User } from '@/models/User'
 
 interface InitialState {
-  activeUser: UserLi
+  activeUser: User
 }
 
 const initialState: InitialState = {
@@ -11,7 +11,12 @@ const initialState: InitialState = {
     id: 0,
     firstName: '',
     lastName: '',
-    email: ''
+    mail: '',
+    birthDate: '',
+    phone: '',
+    role: '',
+    documentType: '',
+    documentNumber: ''
   }
 }
 
@@ -25,9 +30,12 @@ export const userInfo = createSlice({
       console.log(state)
       return initialState
     },
-    setUser: (state, action: PayloadAction<UserLi>) => {
-      state.activeUser = action.payload
-      sessionStorage.setItem('user', JSON.stringify(action.payload))
+    setUser: (state, action: PayloadAction<User>) => {
+      state.activeUser = {
+        ...state.activeUser,
+        ...action.payload
+      }
+      sessionStorage.setItem('user', JSON.stringify(state.activeUser))
     }
   }
 })

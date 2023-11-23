@@ -29,9 +29,25 @@ const FormSignIn: React.FC = () => {
       const data = await response.json()
       console.log(data)
       localStorage.setItem('token', data.jwt)
-      dispatch(logIn(values.email))
-      dispatch(setUser(values))
-      window.location.href = '/'
+      dispatch(logIn(data))
+      const endpoint2 = 'user/dataUser'
+
+      const obtenerUser = await fetch(baseUrl + endpoint2, {
+        method: 'GET',
+        headers: {
+          token: data.jwt,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (obtenerUser.status === 200) {
+        const infoUser = await obtenerUser.json()
+        console.log('Data del usuario:', infoUser)
+        dispatch(setUser(infoUser))
+        window.location.href = '/'
+      } else {
+        console.error('Second API call failed:', obtenerUser.status)
+      }
     } else {
       setErrorMessage('Credenciales inválidas')
     }

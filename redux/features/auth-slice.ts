@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 interface AuthState {
   isAuth: boolean
-  username: string
+  jwt: string
 }
 
 interface InitialState {
@@ -12,7 +12,7 @@ interface InitialState {
 const initialState: InitialState = {
   value: {
     isAuth: false,
-    username: ''
+    jwt: ''
   }
 }
 
@@ -27,7 +27,7 @@ export const auth = createSlice({
       return {
         value: {
           isAuth: true,
-          username: action.payload
+          jwt: action.payload
         }
       }
     }

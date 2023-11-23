@@ -4,7 +4,7 @@ export interface User {
   lastName: string
   mail: string
   role?: string
-  birthdate?: string
+  birthDate?: string
   phone?: string
   documentType?: string
   documentNumber?: string
