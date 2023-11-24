@@ -16,6 +16,9 @@ export default function RootLayout ({
 }): JSX.Element {
   return (
     <html lang="en">
+      <head>
+        <script src="https://live.decidir.com/static/v2.6.4/decidir.js"></script>
+      </head>
       <body className='relative flex flex-col h-screen w-full'>
         <ReduxProvider>
           <Header />
