@@ -6,15 +6,17 @@ import { setUser } from '@/redux/features/activeUser-slice'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { useState } from 'react'
+import Spinner from '../Spinner'
 
 const FormSignIn: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const [loading, setLoading] = useState(false)
   const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<UserLi>()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onSubmit: SubmitHandler<UserLi> = async (data) => {
+    setLoading(true)
     const values = getValues()
-    console.log(values.email)
 
     const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
     const endpoint = 'user/login'
@@ -24,6 +26,7 @@ const FormSignIn: React.FC = () => {
       body: JSON.stringify(values)
     })
 
+    setLoading(false)
     if (response.status === 202) {
       console.log(values)
       const data = await response.json()
@@ -56,6 +59,7 @@ const FormSignIn: React.FC = () => {
   return (
     <>
       <div className="flex justify-center items-center pt-6 pb-4">
+        { loading && <Spinner/> }
         <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-[480px]">
           <div className="mb-8">
             <Controller

@@ -34,9 +34,9 @@ const Header: React.FC = () => {
         </Link>
         <CiMenuFries size='2rem' color="white" className="md:hidden" />
         {
-          userInfo.email !== ''
+          userInfo.id !== 0
             ? <div className='flex gap-4'>
-              <span>{userInfo.email}</span>
+              <span>{userInfo?.mail}</span>
               <button
                 className='text-rose-500'
                 onClick={handleLogout}

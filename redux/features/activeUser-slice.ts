@@ -26,6 +26,7 @@ export const userInfo = createSlice({
   reducers: {
     clearUser: (state) => {
       state.activeUser = initialState.activeUser
+      localStorage.removeItem('token')
       sessionStorage.removeItem('user')
       console.log(state)
       return initialState

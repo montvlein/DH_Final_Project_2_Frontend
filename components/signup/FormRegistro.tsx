@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import type { User } from '../../models/User'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import type { AppDispatch } from '@/redux/store'
@@ -8,8 +8,10 @@ import ModalSu from './ModalSu'
 import { useDispatch } from 'react-redux'
 import { logIn } from '@/redux/features/auth-slice'
 import { setUser } from '@/redux/features/activeUser-slice'
+import Spinner from '../Spinner'
 
 const FormRegistro: React.FC = () => {
+  const [loading, setLoading] = useState(false)
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
@@ -19,6 +21,7 @@ const FormRegistro: React.FC = () => {
     const apiUrl = baseUrl + endpoint
 
     try {
+      setLoading(true)
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -26,14 +29,33 @@ const FormRegistro: React.FC = () => {
         },
         body: JSON.stringify(user)
       })
-
+      setLoading(false)
       if (response.status === 201) {
         const data = await response.json()
         console.log('Usuario creado con éxito:', data)
-        dispatch(logIn(data.email))
-        dispatch(openModal())
-        dispatch(setUser(data))
-        console.log(data.id)
+
+        localStorage.setItem('token', data.jwt)
+        dispatch(logIn(data))
+
+        const endpoint2 = 'user/dataUser'
+
+        const obtenerUser = await fetch(baseUrl + endpoint2, {
+          method: 'GET',
+          headers: {
+            token: data.jwt,
+            'Content-Type': 'application/json'
+          }
+        })
+
+        if (obtenerUser.status === 200) {
+          const infoUser = await obtenerUser.json()
+          console.log('Data del usuario:', infoUser)
+          dispatch(setUser(infoUser))
+          dispatch(openModal())
+        } else {
+          console.error('Second API call failed:', obtenerUser.status)
+        }
+
       } else {
         console.error('Error al crear el usuario')
       }
@@ -45,6 +67,7 @@ const FormRegistro: React.FC = () => {
   return (
     <>
       <div className="flex justify-center items-center pb-2">
+        { loading && <Spinner/> }
         <form onSubmit={handleSubmit(createUser)} className="w-full lg:w-[480px]">
           <div className="mb-4">
             <Controller

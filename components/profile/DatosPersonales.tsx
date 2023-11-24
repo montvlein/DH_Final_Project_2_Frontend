@@ -1,10 +1,51 @@
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
 
 const DatosPersonales: React.FC = () => {
   const userString = sessionStorage.getItem('user')
   const userObject = userString ? JSON.parse(userString) : null
-  console.log(userObject)
+  const [userData, setUserData] = useState(userObject)
+
+  const handleFirstnameChange = (e:any) => {
+    const name = e.target.value
+    const updatedUserData = {
+      ...userData,
+      firstName: name,
+    };
+
+    setUserData(updatedUserData);
+  }
+
+  const handleLastnameChange = (e:any) => {
+    const name = e.target.value
+    const updatedUserData = {
+      ...userData,
+      lastName: name,
+    };
+
+    setUserData(updatedUserData);
+  }
+
+  const handleEmailChange = (e:any) => {
+    const name = e.target.value
+    const updatedUserData = {
+      ...userData,
+      mail: name,
+    };
+
+    setUserData(updatedUserData);
+  }
+
+  const handlePhoneChange = (e:any) => {
+    const name = e.target.value
+    const updatedUserData = {
+      ...userData,
+      phone: name,
+    };
+
+    setUserData(updatedUserData);
+  }
 
   return (
     <section className="flex flex-col z-10 w-11/12">
@@ -23,20 +64,23 @@ const DatosPersonales: React.FC = () => {
             <div>
               <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
               <input type="text" id="first_name"
-                value={userObject?.firstName ?? ''}
+                value={userData?.firstName ?? ''}
+                onChange={handleFirstnameChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
             </div>
             <div>
               <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
               <input type="text" id="last_name"
-                value={userObject?.lastName ?? ''}
+                value={userData?.lastName ?? ''}
+                onChange={handleLastnameChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required />
             </div>
           </div>
           <div className="mb-6">
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
             <input type="email" id="email"
-              value={userObject?.mail ?? ''}
+              value={userData?.mail ?? ''}
+              onChange={handleEmailChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
           </div>
           <div className="grid gap-6 mb-6 md:grid-cols-2">
@@ -61,7 +105,8 @@ const DatosPersonales: React.FC = () => {
             <div>
               <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono</label>
               <input type="tel" id="phone"
-                value={userObject?.phone ?? ''}
+                value={userData?.phone ?? ''}
+                onChange={handlePhoneChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" />
             </div>
           </div>
