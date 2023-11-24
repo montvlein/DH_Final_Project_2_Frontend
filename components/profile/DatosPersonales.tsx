@@ -1,11 +1,12 @@
 'use client'
 import Link from 'next/link'
 import { useState } from 'react'
+import { userUseSelector } from '@/redux/store'
 
 const DatosPersonales: React.FC = () => {
-  const userString = sessionStorage.getItem('user')
-  const userObject = userString ? JSON.parse(userString) : null
-  const [userData, setUserData] = useState(userObject)
+  const userString = typeof window !== 'undefined' ? window.sessionStorage.getItem('user') : null
+  const userInfo = userString !== null ? JSON.parse(userString) : userUseSelector((state) => state.userInfo.activeUser)
+  const [userData, setUserData] = useState(userInfo)
 
   const handleFirstnameChange = (e:any) => {
     const name = e.target.value
