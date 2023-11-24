@@ -7,13 +7,13 @@ interface EventCardListProp {
 }
 
 const EventCardList: React.FC<EventCardListProp> = function ({ evento }) {
-  const day = evento.dateList[0].dayAndHour.getDate()
+  const day = evento.dateList[0].dateTime.getDate()
   const meses = [
     'ENE', 'FEB', 'MAR', 'ABR',
     'MAY', 'JUN', 'JUL', 'AGO',
     'SEP', 'OCT', 'NOV', 'DIC'
   ]
-  const monthNum = evento.dateList[0].dayAndHour.getMonth()
+  const monthNum = evento.dateList[0].dateTime.getMonth()
   const monthName = meses[monthNum]
 
   return (
@@ -33,7 +33,7 @@ const EventCardList: React.FC<EventCardListProp> = function ({ evento }) {
           </p>
           <div className='text-base'>
             <h4 className='mb-2'><strong>Evento: </strong>{evento.name}</h4>
-            <h4 className='mb-2'><strong>Lugar: </strong>{evento.venue.name}</h4>
+            <h4 className='mb-2'><strong>Lugar: </strong>{evento.venue.venue}</h4>
             <h4 className='mb-2'><strong>Dirección: </strong>{evento.venue.address}</h4>
           </div>
         </div>

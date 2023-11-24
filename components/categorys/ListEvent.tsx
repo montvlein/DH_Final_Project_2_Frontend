@@ -7,7 +7,7 @@ interface ListEventProps {
 }
 
 const ListEvent: React.FC<ListEventProps> = ({ selectedCategory }) => {
-  const filteredEvents = eventList.filter((event) => event.category.title === selectedCategory)
+  const filteredEvents = eventList.filter((event) => event.category.description === selectedCategory)
 
   return (
     <div className='flex flex-col items-center w-full gap-10 py-10'>

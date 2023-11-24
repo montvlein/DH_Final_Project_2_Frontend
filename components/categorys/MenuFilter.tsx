@@ -16,11 +16,11 @@ const MenuFilter: React.FC<MenuFilterProps> = ({ categories, selectedCategory, o
         <h2 className='text-[#DCA6D8] font-poppins text-3xl pb-2'>Categorias</h2>
         {categories.map((cat) => (
             <button
-              key={cat.title}
-              onClick={() => { onCategoryClick(cat.title) }}
-              className={selectedCategory === cat.title ? 'flex flex-col rounded-2xl bg-[#D791D2] py-2 px-6 text-lg text-white font-semibold' : 'flex flex-col text-white text-sm lg:text-lg py-2 px-6'}
+              key={cat.description}
+              onClick={() => { onCategoryClick(cat.description) }}
+              className={selectedCategory === cat.description ? 'flex flex-col rounded-2xl bg-[#D791D2] py-2 px-6 text-lg text-white font-semibold' : 'flex flex-col text-white text-sm lg:text-lg py-2 px-6'}
             >
-            {cat.title}
+            {cat.description}
             </button>
         ))}
       </div>

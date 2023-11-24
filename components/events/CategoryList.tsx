@@ -25,7 +25,7 @@ const CategoryList: React.FC<CategoryListProps> = function ({ categories }) {
               height={234}
               className='object-cover w-full h-full'
             />
-            <span className="absolute bottom-3 left-3 text-white font-bold opacity-100">{cat.urlImage}</span>
+            <span className="absolute bottom-3 left-3 text-white font-bold opacity-100">{cat.description}</span>
           </Link>
         ))}
       </div>
