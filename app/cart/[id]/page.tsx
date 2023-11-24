@@ -11,8 +11,6 @@ const ShoppingCart: React.FC = () => {
   const params:any = useParams()
   const  eventId = params.id;
 
-  const [ evento, setEvento ] = useState({ id:eventId })
-
   const [activeButton, setActiveButton] = useState<string>('entrega')
   const formRef = useRef<HTMLFormElement>(null)
   const handleButtonClick = (button: string): void => {
@@ -20,7 +18,6 @@ const ShoppingCart: React.FC = () => {
   }
   const handleFormSubmit = (): void => {
     formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
-    console.log('se hizo click para comprar')
   }
 
   return (
