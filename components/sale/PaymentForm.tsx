@@ -6,8 +6,8 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
 
 interface IPaymentForm {
-  numberCredit: number
-  expiry: number
+  numberCredit: string
+  expiry: string
   cvc: number
   name: string
   dni: number
@@ -18,11 +18,11 @@ interface IPaymentForm {
 const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElement | null> }): React.JSX.Element => {
   const { register, handleSubmit, getValues } = useForm<IPaymentForm>()
   const [state, setState] = useState({
-    numberCredit: '',
-    expiry: '',
-    cvc: '',
-    name: '',
-    dni: '',
+    numberCredit: '4507990000004905',
+    expiry: '08/20',
+    cvc: '123',
+    name: 'John Doe',
+    dni: '25123456',
     address: '',
     cp: '',
     focus: ''
@@ -30,13 +30,54 @@ const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElem
 
   const onSubmit: SubmitHandler<IPaymentForm> = async () => {
     const values = getValues()
-    console.log(values)
+    const expiryMonth = values.expiry.split('/')[0]
+    const expiryYear = values.expiry.split('/')[1]
+    const cardNumber = values.numberCredit.replace(/\s/g, '')
+
+    const data = {
+      "card_number": cardNumber,
+      "card_expiration_month": expiryMonth,
+      "card_expiration_year": expiryYear,
+      "security_code": values.cvc,
+      "card_holder_name": values.name,
+      "card_holder_identification": {
+        "type": "dni",
+        "number": values.dni
+      }
+    }
+
+    console.log(data);
+
+    const apiPaywayUrl = ''
+    const opt = {}
+
+    fetch(apiPaywayUrl, opt)
+      .then( res => res.json())
+      .then( data => console.log(data))
+      .catch(err => console.error(err.message))
   }
   const onError: SubmitErrorHandler<IPaymentForm> = () => { alert('Por favor, revisar los datos.') }
 
   const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = evt.target
-    setState((prev) => ({ ...prev, [name]: value }))
+    switch (name) {
+      case 'numberCredit':
+        const sanitizedValue = value.replace(/\D/g, '')
+        const formattedValue = sanitizedValue.replace(/(\d{4})/g, '$1 ').trim()
+        setState((prev) => ({ ...prev, [name]: formattedValue }))
+        break
+      case 'expiry':
+        setState((prev) => {
+          if (value.length === 3 && prev.expiry.length === 2) {
+            return { ...prev, [name]: value.substring(0, 2) + '/' + value.substring(2) };
+          }
+          return { ...prev, [name]: value };
+        });
+        break;
+      default:
+        setState((prev) => ({ ...prev, [name]: value }))
+        break
+    }
   }
 
   const handleInputFocus = (evt: React.ChangeEvent<HTMLInputElement>): void => {
@@ -64,19 +105,20 @@ const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElem
               value={state.name}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              className='w-full border-b border-black p-3 mb-5'
+              className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
           <div className='w-full'>
             <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Número de tarjeta</label>
             <input
-              type="number"
+              type="text"
               { ... register('numberCredit')}
               name='numberCredit'
               value={state.numberCredit}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              className='w-full border-b border-black p-3 mb-5'
+              maxLength={19}
+              className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
           <div className='w-full flex gap-5'>
@@ -89,32 +131,34 @@ const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElem
                 value={state.expiry}
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
-                className='w-full border-b border-black p-3 mb-5'
+                maxLength={7}
+                className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
               />
             </div>
             <div className='w-full'>
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Número de seguridad</label>
               <input
-                type="text"
+                type="number"
                 { ... register('cvc')}
                 name="cvc"
                 value={state.cvc}
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
-                className='w-full border-b border-black p-3 mb-5'
+                maxLength={3}
+                className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
               />
             </div>
           </div>
           <div className='w-full'>
             <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Documento de identidad</label>
             <input
-              type="text"
+              type="number"
               { ... register('dni')}
               name="dni"
               value={state.dni}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              className='w-full border-b border-black p-3 mb-5'
+              className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
         </div>
@@ -129,7 +173,7 @@ const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElem
               value={state.address}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              className='w-full border-b border-black p-3 mb-5'
+              className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
           <div className='w-full'>
@@ -141,7 +185,7 @@ const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElem
               value={state.cp}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              className='w-full border-b border-black p-3 mb-5'
+              className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
         </div>
