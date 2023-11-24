@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   }
 
   return (
-    <div className='w-full sticky top-0 z-50'>
+    <div className='w-full sticky top-0 z-50 min-h-[4.75rem]'>
       <nav className='mx-auto flex justify-between items-center sm:px-16 px-6 py-4 bg-black shadow-md'>
         <Link href='/' className='flex justify-center items-center'>
           <Image

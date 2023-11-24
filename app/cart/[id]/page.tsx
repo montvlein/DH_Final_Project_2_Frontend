@@ -5,8 +5,10 @@ import PaymentForm from '@/components/sale/PaymentForm'
 import PurchaseSummary from '@/components/sale/PurchaseSummary'
 import { useState, useRef } from 'react'
 import { useRouter, useParams  } from 'next/navigation'
+import Spinner from '@/components/Spinner'
 
 const ShoppingCart: React.FC = () => {
+  const [loading, setLoading] = useState(false)
   const router  = useRouter();
   const params:any = useParams()
   const  eventId = params.id;
@@ -18,16 +20,18 @@ const ShoppingCart: React.FC = () => {
   }
   const handleFormSubmit = (): void => {
     formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
+    console.log(loading)
   }
 
   return (
-    <>
+    <div className='min-h-screen'>
       <NavigationPayBar activeButton={activeButton} onButtonClick={handleButtonClick} />
+      { loading && <Spinner/> }
       {activeButton === 'entrega'
         ? (<DeliveryInfo />)
         : (
-            <div className='flex flex-col md:flex-row md:justify-between'>
-              <PaymentForm formRef={formRef} />
+          <div className='flex flex-col md:flex-row md:justify-between'>
+              <PaymentForm formRef={formRef} setLoading={setLoading} />
               <PurchaseSummary />
             </div>
           )}
@@ -49,7 +53,7 @@ const ShoppingCart: React.FC = () => {
           }}>
           Confirmar</button>
       </div>
-    </>
+    </div>
   )
 }
 export default ShoppingCart

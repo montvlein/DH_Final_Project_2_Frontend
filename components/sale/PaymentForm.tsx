@@ -15,7 +15,7 @@ interface IPaymentForm {
   cp: number
 }
 
-const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElement | null> }): React.JSX.Element => {
+const PaymentForm = ({ formRef, setLoading  }: { formRef: React.MutableRefObject<HTMLFormElement | null>; setLoading: React.Dispatch<React.SetStateAction<boolean>> }): React.JSX.Element => {
   const { register, handleSubmit, getValues } = useForm<IPaymentForm>()
   const [state, setState] = useState({
     numberCredit: '4507990000004905',
@@ -29,6 +29,8 @@ const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElem
   })
 
   const onSubmit: SubmitHandler<IPaymentForm> = async () => {
+    setLoading(true)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     const values = getValues()
     const expiryMonth = values.expiry.split('/')[0]
     const expiryYear = values.expiry.split('/')[1]
@@ -53,8 +55,15 @@ const PaymentForm = ({ formRef }: { formRef: React.MutableRefObject<HTMLFormElem
 
     fetch(apiPaywayUrl, opt)
       .then( res => res.json())
-      .then( data => console.log(data))
-      .catch(err => console.error(err.message))
+      .then( data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.error(err.message)
+      })
+      .finally(()=>{
+        setLoading(false)
+      })
   }
   const onError: SubmitErrorHandler<IPaymentForm> = () => { alert('Por favor, revisar los datos.') }
 
