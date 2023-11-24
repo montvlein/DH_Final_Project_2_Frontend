@@ -3,19 +3,32 @@
 import NextEventCard from './nextEventCard'
 import type { Category } from '@/models/Category'
 import PropTypes from 'prop-types'
-import { eventList } from '@/api/data'
 import { useState } from 'react'
+import type { Evento } from '@/models/Event'
 
 interface EventListProps {
   categories: Category[]
+  evento: Evento[]
 }
+type EventCategoryMappings = Record<string, string>
 
-const NextEventList: React.FC<EventListProps> = function ({ categories }) {
+const NextEventList: React.FC<EventListProps> = function ({ categories, evento }) {
   const [selectedCategory, setSelectedCategory] = useState('Top Selling')
 
-  const filteredEvents = eventList.filter((event) =>
-    selectedCategory === 'Top Selling' ? true : event.category.title === selectedCategory
-  )
+  const categoryMappings: EventCategoryMappings = {
+    Concierto: 'Conciertos',
+    Teatro: 'Teatros',
+    'Evento Deportivo': 'Deportes'
+  }
+
+  const getMappedCategoryDescription = (originalDescription: string): string => {
+    return categoryMappings[originalDescription] ?? originalDescription
+  }
+
+  const filteredEvents = evento.filter((event) => {
+    const mappedDescription = getMappedCategoryDescription(event.category.description)
+    return selectedCategory === 'Top Selling' || mappedDescription === selectedCategory
+  })
 
   return (
     <section className='flex flex-col gap-4 place-items-center bg-white p-2 font-semibold text-gray-900'>
@@ -53,11 +66,11 @@ const Chooser: React.FC<ChooserProps> = function ({ categories, selectedCategory
       </button>
       {categories.map((cat) => (
         <button
-          key={cat.title}
-          onClick={() => { setSelectedCategory(cat.title) }}
-          className={selectedCategory === cat.title ? 'rounded-2xl bg-pink-400 py-2 px-6 text-white font-semibold' : 'text-sm lg:text-md'}
+          key={cat.description}
+          onClick={() => { setSelectedCategory(cat.description) }}
+          className={selectedCategory === cat.description ? 'rounded-2xl bg-pink-400 py-2 px-6 text-white font-semibold' : 'text-sm lg:text-md'}
         >
-          {cat.title}
+          {cat.description}
         </button>
       ))}
     </div>
