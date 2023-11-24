@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { logOut } from '@/redux/features/auth-slice'
 import { clearUser } from '@/redux/features/activeUser-slice'
+import { FaUser } from 'react-icons/fa'
 
 const Header: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -37,10 +38,11 @@ const Header: React.FC = () => {
           userInfo.id !== 0
             ? <div className='flex gap-4'>
               <span>{userInfo?.mail}</span>
-              <button
-                className='text-rose-500'
-                onClick={handleLogout}
-              >cerrar sesión</button>
+              <Link href={'/profile/1'}>
+                <FaUser className='text-[#975D93] text-3xl' /></Link> <button
+                  className='text-[#975D93]'
+                  onClick={handleLogout}
+                >cerrar sesión</button>
             </div>
             : <div className="hidden md:block">
               <div className="flex items-center space-x-4">

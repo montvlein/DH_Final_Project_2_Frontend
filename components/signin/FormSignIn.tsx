@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { useState } from 'react'
 
-const FormSignIn: React.FC<any> = ({setLoading}:{setLoading: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const dispatch = useDispatch<AppDispatch>()
 
   const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<UserLi>()
