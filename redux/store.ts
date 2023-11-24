@@ -3,6 +3,7 @@ import authReducer from './features/auth-slice'
 import modalReducer from './features/modal-slice'
 import modalEEReducer from './features/modalEE-slice'
 import userInfoReducer from './features/activeUser-slice'
+import selectedTicketReducer from './features/selectEventTicket-slice'
 import type { TypedUseSelectorHook } from 'react-redux'
 import { useSelector } from 'react-redux'
 
@@ -11,7 +12,8 @@ export const store = configureStore({
     authReducer,
     modal: modalReducer,
     userInfo: userInfoReducer,
-    modalEE: modalEEReducer
+    modalEE: modalEEReducer,
+    selectedTicket: selectedTicketReducer
   }
 })
 

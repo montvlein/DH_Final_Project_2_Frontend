@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import Cards from 'react-credit-cards-2'
 import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store'
 
 interface IPaymentForm {
   numberCredit: string
@@ -15,67 +17,51 @@ interface IPaymentForm {
   cp: number
 }
 
-const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.MutableRefObject<HTMLFormElement | null>; setLoading: React.Dispatch<React.SetStateAction<boolean>>; setSuccess: React.Dispatch<React.SetStateAction<boolean>> }): React.JSX.Element => {
+const PaymentForm = ({ formRef, setLoading, setSuccess  }
+  : {
+    formRef: React.MutableRefObject<HTMLFormElement | null>
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setSuccess: React.Dispatch<React.SetStateAction<boolean>>
+  }): React.JSX.Element => {
+
   const { register, handleSubmit, getValues } = useForm<IPaymentForm>()
   const [state, setState] = useState({
-    numberCredit: '4507990000004905',
-    expiry: '08/24',
-    cvc: '123',
-    name: 'John Doe',
-    dni: '25123456',
+    numberCredit: '',
+    expiry: '',
+    cvc: '',
+    name: '',
+    dni: '',
     address: '',
     cp: '',
     focus: ''
   })
 
+  const selectedTicket = useSelector((state: RootState) => state.selectedTicket.ticket)
+
   const onSubmit: SubmitHandler<IPaymentForm> = async () => {
     setLoading(true)
+    // const values = getValues()
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    const values = getValues()
-    const expiryMonth = values.expiry.split('/')[0]
-    const expiryYear = values.expiry.split('/')[1]
-    const cardNumber = values.numberCredit.replace(/\s/g, '')
+    const apiTicketUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/event/ticket'
 
-    const cardData = {
-      "card_number": cardNumber,
-      "card_expiration_month": expiryMonth,
-      "card_expiration_year": expiryYear,
-      "security_code": values.cvc,
-      "card_holder_name": values.name,
-      "card_holder_identification": {
-        "type": "dni",
-        "number": values.dni
-      }
-    }
-
-    const publicApiKey = '4ae76f00234843d1af5994ed4674fd76'
-    const privateApiKey = '3891f691dc4f40b6941a25a68d17c7f4'
-    const apiPaywayUrl = 'https://developers.decidir.com/api/v2'
-    const paywayTokenEndpoint = '/tokens'
-    const paywayPaymentEndpoint = '/payment'
-    const setOptions = (apikey:string, data:any) => {
-      return {
-        method: "POST",
-        headers: {
-          "apikey": apikey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    }
-
-    fetch(apiPaywayUrl+paywayTokenEndpoint, setOptions(publicApiKey, cardData))
-      .then( res => res.json())
-      .then( data => {
-        console.log(data)
-        setSuccess(true)
-      })
-      .catch(err => {
-        console.error(err.message)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+    fetch(apiTicketUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(selectedTicket)
+    })
+    .then( res => res.json())
+    .then( data => {
+      console.log(data)
+      setSuccess(true)
+    })
+    .catch(err => {
+      console.error(err.message)
+    })
+    .finally(() => {
+      setLoading(false)
+    })
   }
   const onError: SubmitErrorHandler<IPaymentForm> = () => { alert('Por favor, revisar los datos.') }
 
@@ -128,6 +114,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
               value={state.name}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
+              placeholder='Cosme Fulanito'
               className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
@@ -141,6 +128,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
               onChange={handleInputChange}
               onFocus={handleInputFocus}
               maxLength={19}
+              placeholder='XXXX XXXX XXXX XXXX'
               className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
@@ -155,6 +143,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
                 maxLength={7}
+                placeholder='12/2024'
                 className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
               />
             </div>
@@ -168,6 +157,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
                 maxLength={3}
+                placeholder='123'
                 className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
               />
             </div>
@@ -181,6 +171,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
               value={state.dni}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
+              placeholder='XXxxxXXX'
               className='w-full border-b border-black p-3 mb-5 focus:outline-none focus:border-b-2 focus:border-blue-500 focus:font-semibold'
             />
           </div>
@@ -218,3 +209,48 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
 }
 
 export default PaymentForm
+
+function datosPagoTarjeta(values:any) {
+  const expiryMonth = values.expiry.split('/')[0]
+  const expiryYear = values.expiry.split('/')[1]
+  const cardNumber = values.numberCredit.replace(/\s/g, '')
+
+  const cardData = {
+    "card_number": cardNumber,
+    "card_expiration_month": expiryMonth,
+    "card_expiration_year": expiryYear,
+    "security_code": values.cvc,
+    "card_holder_name": values.name,
+    "card_holder_identification": {
+      "type": "dni",
+      "number": values.dni
+    }
+  }
+
+  const publicApiKey = '4ae76f00234843d1af5994ed4674fd76'
+  const privateApiKey = '3891f691dc4f40b6941a25a68d17c7f4'
+  const apiPaywayUrl = 'https://developers.decidir.com/api/v2'
+  const paywayTokenEndpoint = '/tokens'
+  const paywayPaymentEndpoint = '/payment'
+  const setOptions = (apikey:string, data:any) => {
+    return {
+      method: "POST",
+      headers: {
+        "apikey": apikey,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+  }
+
+  fetch(apiPaywayUrl+paywayTokenEndpoint, setOptions(publicApiKey, cardData))
+    .then( res => res.json())
+    .then( data => {
+      console.log(data)
+    })
+    .catch(err => {
+      console.error(err.message)
+    })
+    .finally(() => {
+    })
+}

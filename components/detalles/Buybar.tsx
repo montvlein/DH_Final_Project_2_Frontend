@@ -2,8 +2,10 @@
 
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
 import type { Evento } from '@/models/Event'
-import { userUseSelector } from '@/redux/store'
+import { AppDispatch, userUseSelector } from '@/redux/store'
 import { useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import { setSelectedTicket } from '../../redux/features/selectEventTicket-slice'
 
 interface IFormValues {
   place: string
@@ -15,6 +17,7 @@ interface InfoProps {
 }
 
 const Buybar: React.FC<InfoProps> = ({ evento }) => {
+  const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
   const userString = typeof window !== 'undefined' ? window.sessionStorage.getItem('user') : null
   const userInfo = userString !== null ? JSON.parse(userString) : userUseSelector((state) => state.userInfo.activeUser)
@@ -28,13 +31,19 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
   const onSubmit: SubmitHandler<IFormValues> = async () => {
     const values = getValues()
     const reserva = {
-      idEvent: eventId,
+      dateTime: {
+        id: parseInt(values.place)
+      },
+      ticketType: {
+        id: parseInt(values.price)
+      },
+      event: {
+        id: eventId
+      },
       idUser: userInfo.id,
-      idTicketType: values.price,
-      idDateTime: values.place,
-      amount: values.amount
+      amount: parseInt(values.amount)
     }
-    console.log(reserva)
+    dispatch(setSelectedTicket(reserva))
     router.push('/cart/' + eventId)
   }
   const onError: SubmitErrorHandler<IFormValues> = () => { alert('Por favor, revisar los datos.') }
@@ -94,9 +103,9 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
             style={{ border: '0', borderBottom: '2px solid #7778B0', backgroundColor: '#2B2B2B' }}
             className="border rounded px-2 py-1 text-white lg:w-52 xl:w-96">
               <option value=""disabled selected hidden>Cantidad</option>
-              <option value="1">1 entrada</option>
-              <option value="2">2 entradas</option>
-              <option value="3">3 entradas</option>
+              <option value={1}>1 entrada</option>
+              <option value={2}>2 entradas</option>
+              <option value={3}>3 entradas</option>
             </select>
         </div>
         <button
