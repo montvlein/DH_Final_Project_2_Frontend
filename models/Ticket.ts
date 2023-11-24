@@ -3,5 +3,5 @@ export interface Ticket {
     idEvent: number;
     idUser: number;
     idTicketType: number;
-    idEventDateTime: number; // idDateTime
+    idDateTime: number;
 }

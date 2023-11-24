@@ -13,14 +13,15 @@ interface DetailsProps {
 
 const Details: React.FC<DetailsProps> = async ({ params }) => {
   const { id } = params
+  const index = id - 1
   const eventList = await GetEvents()
   return (
     <>
       <BuscadorEventos />
-      <Hero1 evento={eventList[id]}/>
-      <Buybar evento={eventList[id]}/>
-      <Info evento={eventList[id]}/>
-      <Hero2 evento={eventList[id]}/>
+      <Hero1 evento={eventList[index]}/>
+      <Buybar evento={eventList[index]}/>
+      <Info evento={eventList[index]}/>
+      <Hero2 evento={eventList[index]}/>
       <TerminosCondiciones />
     </>
   )
