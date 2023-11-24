@@ -6,7 +6,7 @@ import Logo from '@/components/signin/LogoSi'
 import { useState } from 'react'
 import Spinner from '@/components/Spinner'
 
-const signIn: React.FC = () => {
+const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false)
 
   return (
@@ -21,4 +21,4 @@ const signIn: React.FC = () => {
     </div>
   )
 }
-export default signIn
+export default SignIn
