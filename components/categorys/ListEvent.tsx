@@ -1,13 +1,28 @@
 import React from 'react'
 import EventCard from './EventCard'
-import { eventList } from '@/api/data'
+import type { Evento } from '@/models/Event'
 
 interface ListEventProps {
   selectedCategory: string
+  evento: Evento[]
 }
 
-const ListEvent: React.FC<ListEventProps> = ({ selectedCategory }) => {
-  const filteredEvents = eventList.filter((event) => event.category.description === selectedCategory)
+type EventCategoryMappings = Record<string, string>
+
+const ListEvent: React.FC<ListEventProps> = ({ selectedCategory, evento }) => {
+  const categoryMappings: EventCategoryMappings = {
+    Concierto: 'Conciertos',
+    Teatro: 'Teatros',
+    'Evento Deportivo': 'Deportes'
+  }
+  const getMappedCategoryDescription = (originalDescription: string): string => {
+    return categoryMappings[originalDescription] ?? originalDescription
+  }
+
+  const filteredEvents = evento.filter((event) => {
+    const mappedDescription = getMappedCategoryDescription(event.category.description)
+    return mappedDescription === selectedCategory
+  })
 
   return (
     <div className='flex flex-col items-center w-full gap-10 py-10'>

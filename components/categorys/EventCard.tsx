@@ -7,20 +7,29 @@ interface EventCardListProp {
 }
 
 const EventCardList: React.FC<EventCardListProp> = function ({ evento }) {
-  const day = evento.dateList[0].dateTime.getDate()
   const meses = [
     'ENE', 'FEB', 'MAR', 'ABR',
     'MAY', 'JUN', 'JUL', 'AGO',
     'SEP', 'OCT', 'NOV', 'DIC'
   ]
-  const monthNum = evento.dateList[0].dateTime.getMonth()
+  let date: Date
+
+  if (Array.isArray(evento.dateList[0].dateTime)) {
+    const [year, month, day] = evento.dateList[0].dateTime
+    date = new Date(year, month - 1, day)
+  } else {
+    date = new Date(evento.dateList[0].dateTime)
+  }
+
+  const day = date.getDate()
+  const monthNum = date.getMonth()
   const monthName = meses[monthNum]
 
   return (
     <article className='rounded-2xl overflow-hidden shadow-xl max-w-lg'>
       <Link href={`/event/${evento.id}`} passHref className='relative lg:max-h-none'>
         <Image
-          src={evento.miniImageUrl}
+          src={evento.bannerImageUrl}
           alt={evento.name}
           width={1000}
           height={197}
