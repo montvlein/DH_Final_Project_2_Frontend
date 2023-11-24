@@ -39,10 +39,10 @@ const Header: React.FC = () => {
             ? <div className='flex gap-4'>
               <span>{userInfo?.mail}</span>
               <Link href={'/profile/1'}>
-                <FaUser className='text-[#975D93] text-3xl' /></Link> <button
-                  className='text-[#975D93]'
+                <FaUser className='text-[#975D93] text-3xl mt-2' /></Link> <button
+                  className="text-white font-montserrat text-base font-normal border-2 border-slate-100 rounded-full p-2 px-4 hover:border-[#975D93] "
                   onClick={handleLogout}
-                >cerrar sesión</button>
+                >Cerrar sesión</button>
             </div>
             : <div className="hidden md:block">
               <div className="flex items-center space-x-4">
