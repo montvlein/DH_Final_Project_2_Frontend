@@ -15,11 +15,11 @@ interface IPaymentForm {
   cp: number
 }
 
-const PaymentForm = ({ formRef, setLoading  }: { formRef: React.MutableRefObject<HTMLFormElement | null>; setLoading: React.Dispatch<React.SetStateAction<boolean>> }): React.JSX.Element => {
+const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.MutableRefObject<HTMLFormElement | null>; setLoading: React.Dispatch<React.SetStateAction<boolean>>; setSuccess: React.Dispatch<React.SetStateAction<boolean>> }): React.JSX.Element => {
   const { register, handleSubmit, getValues } = useForm<IPaymentForm>()
   const [state, setState] = useState({
     numberCredit: '4507990000004905',
-    expiry: '08/20',
+    expiry: '08/24',
     cvc: '123',
     name: 'John Doe',
     dni: '25123456',
@@ -36,7 +36,7 @@ const PaymentForm = ({ formRef, setLoading  }: { formRef: React.MutableRefObject
     const expiryYear = values.expiry.split('/')[1]
     const cardNumber = values.numberCredit.replace(/\s/g, '')
 
-    const data = {
+    const cardData = {
       "card_number": cardNumber,
       "card_expiration_month": expiryMonth,
       "card_expiration_year": expiryYear,
@@ -48,15 +48,27 @@ const PaymentForm = ({ formRef, setLoading  }: { formRef: React.MutableRefObject
       }
     }
 
-    console.log(data);
+    const publicApiKey = '4ae76f00234843d1af5994ed4674fd76'
+    const privateApiKey = '3891f691dc4f40b6941a25a68d17c7f4'
+    const apiPaywayUrl = 'https://developers.decidir.com/api/v2'
+    const paywayTokenEndpoint = '/tokens'
+    const paywayPaymentEndpoint = '/payment'
+    const setOptions = (apikey:string, data:any) => {
+      return {
+        method: "POST",
+        headers: {
+          "apikey": apikey,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    }
 
-    const apiPaywayUrl = ''
-    const opt = {}
-
-    fetch(apiPaywayUrl, opt)
+    fetch(apiPaywayUrl+paywayTokenEndpoint, setOptions(publicApiKey, cardData))
       .then( res => res.json())
       .then( data => {
         console.log(data)
+        setSuccess(true)
       })
       .catch(err => {
         console.error(err.message)

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import type { User } from '../../models/User'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import type { AppDispatch } from '@/redux/store'
@@ -8,10 +8,9 @@ import ModalSu from './ModalSu'
 import { useDispatch } from 'react-redux'
 import { logIn } from '@/redux/features/auth-slice'
 import { setUser } from '@/redux/features/activeUser-slice'
-import Spinner from '../Spinner'
 
-const FormRegistro: React.FC = () => {
-  const [loading, setLoading] = useState(false)
+const FormRegistro: React.FC<any> = ({setLoading}:{setLoading: React.Dispatch<React.SetStateAction<boolean>>}) => {
+
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
@@ -67,7 +66,6 @@ const FormRegistro: React.FC = () => {
   return (
     <>
       <div className="flex justify-center items-center pb-2">
-        { loading && <Spinner/> }
         <form onSubmit={handleSubmit(createUser)} className="w-full lg:w-[480px]">
           <div className="mb-4">
             <Controller

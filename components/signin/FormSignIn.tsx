@@ -6,11 +6,10 @@ import { setUser } from '@/redux/features/activeUser-slice'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { useState } from 'react'
-import Spinner from '../Spinner'
 
-const FormSignIn: React.FC = () => {
+const FormSignIn: React.FC<any> = ({setLoading}:{setLoading: React.Dispatch<React.SetStateAction<boolean>>}) => {
   const dispatch = useDispatch<AppDispatch>()
-  const [loading, setLoading] = useState(false)
+
   const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<UserLi>()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -26,7 +25,6 @@ const FormSignIn: React.FC = () => {
       body: JSON.stringify(values)
     })
 
-    setLoading(false)
     if (response.status === 202) {
       console.log(values)
       const data = await response.json()
@@ -54,12 +52,12 @@ const FormSignIn: React.FC = () => {
     } else {
       setErrorMessage('Credenciales inválidas')
     }
+    setLoading(false)
   }
 
   return (
     <>
       <div className="flex justify-center items-center pt-6 pb-4">
-        { loading && <Spinner/> }
         <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-[480px]">
           <div className="mb-8">
             <Controller

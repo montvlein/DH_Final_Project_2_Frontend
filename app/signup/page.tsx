@@ -1,15 +1,22 @@
+'use client'
+
 import FormRegistro from '@/components/signup/FormRegistro'
 import Logo from '@/components/signup/Logo'
 import TituloRegistro from '@/components/signup/TituloRegistro'
 import YaTienesCuenta from '@/components/signup/YaTienesCuenta'
+import { useState } from 'react'
+import Spinner from '@/components/Spinner'
 
 const signUp: React.FC = () => {
+  const [loading, setLoading] = useState(false)
+
   return (
-    <><div className='flex h-screen'>
+    <><div className='flex h-screen relative'>
+      { loading && <Spinner/> }
       <Logo />
       <div className='bg-[#F8F7F3]   w-full'>
         <TituloRegistro />
-        <FormRegistro />
+        <FormRegistro setLoading={setLoading} />
         <YaTienesCuenta />
       </div>
     </div>
