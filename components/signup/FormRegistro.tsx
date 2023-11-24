@@ -54,7 +54,6 @@ const FormRegistro: React.FC<any> = ({setLoading}:{setLoading: React.Dispatch<Re
         } else {
           console.error('Second API call failed:', obtenerUser.status)
         }
-
       } else {
         console.error('Error al crear el usuario')
       }

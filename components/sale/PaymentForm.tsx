@@ -73,7 +73,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
       .catch(err => {
         console.error(err.message)
       })
-      .finally(()=>{
+      .finally(() => {
         setLoading(false)
       })
   }
@@ -83,18 +83,20 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }: { formRef: React.Muta
     const { name, value } = evt.target
     switch (name) {
       case 'numberCredit':
+        // eslint-disable-next-line no-case-declarations
         const sanitizedValue = value.replace(/\D/g, '')
+        // eslint-disable-next-line no-case-declarations
         const formattedValue = sanitizedValue.replace(/(\d{4})/g, '$1 ').trim()
         setState((prev) => ({ ...prev, [name]: formattedValue }))
         break
       case 'expiry':
         setState((prev) => {
           if (value.length === 3 && prev.expiry.length === 2) {
-            return { ...prev, [name]: value.substring(0, 2) + '/' + value.substring(2) };
+            return { ...prev, [name]: value.substring(0, 2) + '/' + value.substring(2) }
           }
-          return { ...prev, [name]: value };
-        });
-        break;
+          return { ...prev, [name]: value }
+        })
+        break
       default:
         setState((prev) => ({ ...prev, [name]: value }))
         break

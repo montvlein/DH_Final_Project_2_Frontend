@@ -3,7 +3,7 @@
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
 import type { Evento } from '@/models/Event'
 import { userUseSelector } from '@/redux/store'
-import { useRouter  } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 
 interface IFormValues {
   place: string
@@ -21,9 +21,9 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
 
   const { register, handleSubmit, getValues, watch } = useForm<IFormValues>()
   const eventId = evento.id
-  const selectedPlace = watch('place', '');
-  const selectedPrice = watch('price', '');
-  const selectedAmount = watch('amount', '');
+  const selectedPlace = watch('place', '')
+  const selectedPrice = watch('price', '')
+  const selectedAmount = watch('amount', '')
 
   const onSubmit: SubmitHandler<IFormValues> = async () => {
     const values = getValues()
@@ -34,6 +34,7 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
       idDateTime: values.place,
       amount: values.amount
     }
+    console.log(reserva)
     router.push('/cart/' + eventId)
   }
   const onError: SubmitErrorHandler<IFormValues> = () => { alert('Por favor, revisar los datos.') }
@@ -100,7 +101,8 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
         </div>
         <button
           className="text-white px-6 py-3 lg:rounded-xl bg-gradient-to-t from-[#DCA6D8] to-[#975D93] disabled:from-gray-400 disabled:to-gray-700 disabled:cursor-not-allowed"
-          disabled={!selectedPlace || !selectedPrice || !selectedAmount || userInfo.id == 0 }
+          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+          disabled={!selectedPlace || !selectedPrice || !selectedAmount || userInfo.id === 0 }
         >
           Comprar
         </button>
