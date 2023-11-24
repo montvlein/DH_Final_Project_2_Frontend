@@ -15,7 +15,7 @@ interface IPaymentForm {
   cp: number
 }
 
-const PaymentForm = ({ formRef, setLoading  }: { formRef: React.MutableRefObject<HTMLFormElement | null>; setLoading: React.Dispatch<React.SetStateAction<boolean>> }): React.JSX.Element => {
+const PaymentForm = ({ formRef, setLoading }: { formRef: React.MutableRefObject<HTMLFormElement | null>, setLoading: React.Dispatch<React.SetStateAction<boolean>> }): React.JSX.Element => {
   const { register, handleSubmit, getValues } = useForm<IPaymentForm>()
   const [state, setState] = useState({
     numberCredit: '4507990000004905',
@@ -37,31 +37,31 @@ const PaymentForm = ({ formRef, setLoading  }: { formRef: React.MutableRefObject
     const cardNumber = values.numberCredit.replace(/\s/g, '')
 
     const data = {
-      "card_number": cardNumber,
-      "card_expiration_month": expiryMonth,
-      "card_expiration_year": expiryYear,
-      "security_code": values.cvc,
-      "card_holder_name": values.name,
-      "card_holder_identification": {
-        "type": "dni",
-        "number": values.dni
+      card_number: cardNumber,
+      card_expiration_month: expiryMonth,
+      card_expiration_year: expiryYear,
+      security_code: values.cvc,
+      card_holder_name: values.name,
+      card_holder_identification: {
+        type: 'dni',
+        number: values.dni
       }
     }
 
-    console.log(data);
+    console.log(data)
 
     const apiPaywayUrl = ''
     const opt = {}
 
     fetch(apiPaywayUrl, opt)
-      .then( res => res.json())
-      .then( data => {
+      .then(async res => await res.json())
+      .then(data => {
         console.log(data)
       })
       .catch(err => {
         console.error(err.message)
       })
-      .finally(()=>{
+      .finally(() => {
         setLoading(false)
       })
   }
@@ -71,18 +71,20 @@ const PaymentForm = ({ formRef, setLoading  }: { formRef: React.MutableRefObject
     const { name, value } = evt.target
     switch (name) {
       case 'numberCredit':
+        // eslint-disable-next-line no-case-declarations
         const sanitizedValue = value.replace(/\D/g, '')
+        // eslint-disable-next-line no-case-declarations
         const formattedValue = sanitizedValue.replace(/(\d{4})/g, '$1 ').trim()
         setState((prev) => ({ ...prev, [name]: formattedValue }))
         break
       case 'expiry':
         setState((prev) => {
           if (value.length === 3 && prev.expiry.length === 2) {
-            return { ...prev, [name]: value.substring(0, 2) + '/' + value.substring(2) };
+            return { ...prev, [name]: value.substring(0, 2) + '/' + value.substring(2) }
           }
-          return { ...prev, [name]: value };
-        });
-        break;
+          return { ...prev, [name]: value }
+        })
+        break
       default:
         setState((prev) => ({ ...prev, [name]: value }))
         break

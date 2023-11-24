@@ -55,7 +55,6 @@ const FormRegistro: React.FC = () => {
         } else {
           console.error('Second API call failed:', obtenerUser.status)
         }
-
       } else {
         console.error('Error al crear el usuario')
       }

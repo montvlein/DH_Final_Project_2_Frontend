@@ -8,44 +8,44 @@ const DatosPersonales: React.FC = () => {
   const userInfo = userString !== null ? JSON.parse(userString) : userUseSelector((state) => state.userInfo.activeUser)
   const [userData, setUserData] = useState(userInfo)
 
-  const handleFirstnameChange = (e:any) => {
+  const handleFirstnameChange = (e: any): void => {
     const name = e.target.value
     const updatedUserData = {
       ...userData,
-      firstName: name,
-    };
+      firstName: name
+    }
 
-    setUserData(updatedUserData);
+    setUserData(updatedUserData)
   }
 
-  const handleLastnameChange = (e:any) => {
+  const handleLastnameChange = (e: any): void => {
     const name = e.target.value
     const updatedUserData = {
       ...userData,
-      lastName: name,
-    };
+      lastName: name
+    }
 
-    setUserData(updatedUserData);
+    setUserData(updatedUserData)
   }
 
-  const handleEmailChange = (e:any) => {
+  const handleEmailChange = (e: any): void => {
     const name = e.target.value
     const updatedUserData = {
       ...userData,
-      mail: name,
-    };
+      mail: name
+    }
 
-    setUserData(updatedUserData);
+    setUserData(updatedUserData)
   }
 
-  const handlePhoneChange = (e:any) => {
+  const handlePhoneChange = (e: any): void => {
     const name = e.target.value
     const updatedUserData = {
       ...userData,
-      phone: name,
-    };
+      phone: name
+    }
 
-    setUserData(updatedUserData);
+    setUserData(updatedUserData)
   }
 
   return (
