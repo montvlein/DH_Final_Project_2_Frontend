@@ -47,7 +47,7 @@ const Search: React.FC<SearchProp> = function ({ evento }) {
     console.log(values)
     const selectedEvent = evento.find(e => e.name === getValues().name)
     if (selectedEvent !== undefined && selectedEvent !== null && typeof selectedEvent.id === 'number' && !isNaN(selectedEvent.id)) {
-      router.push(`/event/${selectedEvent.id - 1}`)
+      router.push(`/event/${selectedEvent.id}`)
     } else {
       router.push('/category/Conciertos')
     }
