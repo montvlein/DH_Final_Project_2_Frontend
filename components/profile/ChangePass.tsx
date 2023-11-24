@@ -1,6 +1,11 @@
+'use client'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
 const ChangePassword: React.FC = () => {
+  const param = useParams()
+  const userId = param?.id || 0
+
   return (
 
     <section className="flex flex-col z-10 w-11/12">
@@ -10,9 +15,9 @@ const ChangePassword: React.FC = () => {
       </div>
       <div className="shadow-lg bg-white dark:bg-gray-700 dark:text-white">
         <div className="flex lg:gap-2 justify-around">
-          <Link href={'/profile/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Información personal</button></Link>
+          <Link href={'/profile/'+userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Información personal</button></Link>
           <button className=" py-4 uppercase font-semibold lg:text-2xl text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] text-xs  ">Cambiar contraseña</button>
-          <Link href={'/mytickets/1'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Mis entradas</button></Link>
+          <Link href={'/mytickets/'+userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Mis entradas</button></Link>
         </div>
         <form className="p-8 lg:mx-28">
           <label htmlFor="passOld" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Contraseña actual</label>
