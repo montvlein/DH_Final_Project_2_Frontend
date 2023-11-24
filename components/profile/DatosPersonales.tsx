@@ -57,8 +57,8 @@ const DatosPersonales: React.FC = () => {
       <div className="shadow-lg bg-white dark:bg-gray-700 dark:text-white">
         <div className="flex gap-2 justify-around">
           <button className=" py-4 uppercase font-semibold lg:text-2xl text-xs  text-[#975D93] border-2 border-transparent border-b-[#DCA6D8]">Información personal</button>
-          <Link href={'/newpassword/'+userData.id}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs  ">Cambiar contraseña</button></Link>
-          <Link href={'/mytickets/'+userData.id}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs  ">Mis entradas</button></Link>
+          <Link href={'/newpassword/' + userData.id}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs  ">Cambiar contraseña</button></Link>
+          <Link href={'/mytickets/' + userData.id}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs  ">Mis entradas</button></Link>
         </div>
         <form className="p-8">
           <div className="grid gap-6 mb-6 md:grid-cols-2">

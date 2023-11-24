@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import React, { useState } from 'react'
 import Cards from 'react-credit-cards-2'
 import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store'
+import { useSelector } from 'react-redux'
+import { type RootState } from '@/redux/store'
 
 interface IPaymentForm {
   numberCredit: string
@@ -17,14 +18,12 @@ interface IPaymentForm {
   cp: number
 }
 
-const PaymentForm = ({ formRef, setLoading, setSuccess  }
-  : {
-    formRef: React.MutableRefObject<HTMLFormElement | null>
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-    setSuccess: React.Dispatch<React.SetStateAction<boolean>>
-  }): React.JSX.Element => {
-
-  const { register, handleSubmit, getValues } = useForm<IPaymentForm>()
+const PaymentForm = ({ formRef, setLoading, setSuccess }: {
+  formRef: React.MutableRefObject<HTMLFormElement | null>
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>
+}): React.JSX.Element => {
+  const { register, handleSubmit } = useForm<IPaymentForm>()
   const [state, setState] = useState({
     numberCredit: '',
     expiry: '',
@@ -45,23 +44,23 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
     const apiTicketUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/event/ticket'
 
     fetch(apiTicketUrl, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(selectedTicket)
     })
-    .then( res => res.json())
-    .then( data => {
-      console.log(data)
-      setSuccess(true)
-    })
-    .catch(err => {
-      console.error(err.message)
-    })
-    .finally(() => {
-      setLoading(false)
-    })
+      .then(async res => await res.json())
+      .then(data => {
+        console.log(data)
+        setSuccess(true)
+      })
+      .catch(err => {
+        console.error(err.message)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
   const onError: SubmitErrorHandler<IPaymentForm> = () => { alert('Por favor, revisar los datos.') }
 
@@ -210,20 +209,20 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
 
 export default PaymentForm
 
-function datosPagoTarjeta(values:any) {
+function datosPagoTarjeta (values: any): void {
   const expiryMonth = values.expiry.split('/')[0]
   const expiryYear = values.expiry.split('/')[1]
   const cardNumber = values.numberCredit.replace(/\s/g, '')
 
   const cardData = {
-    "card_number": cardNumber,
-    "card_expiration_month": expiryMonth,
-    "card_expiration_year": expiryYear,
-    "security_code": values.cvc,
-    "card_holder_name": values.name,
-    "card_holder_identification": {
-      "type": "dni",
-      "number": values.dni
+    card_number: cardNumber,
+    card_expiration_month: expiryMonth,
+    card_expiration_year: expiryYear,
+    security_code: values.cvc,
+    card_holder_name: values.name,
+    card_holder_identification: {
+      type: 'dni',
+      number: values.dni
     }
   }
 
@@ -232,20 +231,20 @@ function datosPagoTarjeta(values:any) {
   const apiPaywayUrl = 'https://developers.decidir.com/api/v2'
   const paywayTokenEndpoint = '/tokens'
   const paywayPaymentEndpoint = '/payment'
-  const setOptions = (apikey:string, data:any) => {
+  const setOptions = (apikey: string, data: any): { method: string, headers: Record<string, string>, body: string } => {
     return {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "apikey": apikey,
-        "Content-Type": "application/json"
+        apikey: apikey,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     }
   }
 
-  fetch(apiPaywayUrl+paywayTokenEndpoint, setOptions(publicApiKey, cardData))
-    .then( res => res.json())
-    .then( data => {
+  fetch(apiPaywayUrl + paywayTokenEndpoint, setOptions(publicApiKey, cardData))
+    .then(async res => await res.json())
+    .then(data => {
       console.log(data)
     })
     .catch(err => {

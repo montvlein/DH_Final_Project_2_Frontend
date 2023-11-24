@@ -1,84 +1,84 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 'use client'
 
-import { eventList } from '../../api/data'
 import ModalEE from './ModalEE'
 import type { AppDispatch } from '@/redux/store'
 import { openModal } from '@/redux/features/modalEE-slice'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { Ticket } from '@/models/Ticket'
+import { type Ticket } from '@/models/Ticket'
 
 const DetalleEntradas: React.FC = () => {
   const param = useParams()
-  const ticketId = param?.id || 0
+  const ticketId = param?.id ?? 0
   const [ticket, setTicket] = useState<Ticket>({
     id: 0,
     dateTime: {
-        id: 0,
-        "dateTime": [
-            2024,
-            3,
-            2,
-            20,
-            0
-        ],
-        "capacity": null
+      id: 0,
+      dateTime: [
+        2024,
+        3,
+        2,
+        20,
+        0
+      ],
+      capacity: null
     },
     ticketType: {
-        id: 0,
-        "name": "General",
-        "stock": 0,
-        "price": 0,
-        "urlImage": ""
+      id: 0,
+      name: 'General',
+      stock: 0,
+      price: 0,
+      urlImage: ''
     },
     event: {
-        id: 3,
-        "description": "",
-        "description_title": "",
-        "name": "",
-        "venue": {
-            "id": 0,
-            "venue": "",
-            "country": "",
-            "city": "",
-            "address": ""
-        },
-        "miniImageUrl": "",
-        "bannerImageUrl": "",
-        "detailImageUrl": "",
-        "category": {
-            "id": 0,
-            "description": "",
-            "urlImage": ""
-        }
+      id: 3,
+      description: '',
+      description_title: '',
+      name: '',
+      venue: {
+        id: 0,
+        venue: '',
+        country: '',
+        city: '',
+        address: ''
+      },
+      miniImageUrl: '',
+      bannerImageUrl: '',
+      detailImageUrl: '',
+      category: {
+        id: 0,
+        description: '',
+        urlImage: ''
+      }
     },
-    idUser:0
-})
-  const [date, setDate] = useState("")
+    idUser: 0
+  })
+  const [date, setDate] = useState('')
   const [price, setPrice] = useState(0)
-  const [recargo, setRrcargo] = useState(2700)
+  const [recargo, setRecargo] = useState(2700)
   const [total, setTotal] = useState(0)
 
-  useEffect(()=>{
-    const getTickets = () => {
+  useEffect(() => {
+    const getTickets = (): void => {
       const apiTicketUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/event/ticket/' + ticketId
       fetch(apiTicketUrl)
-      .then( res => res.json())
-      .then( data => {
-        setTicket(data)
-        let year = data.dateTime.dateTime[0]
-        let month = data.dateTime.dateTime[1]
-        let day = data.dateTime.dateTime[2]
-        setDate(`${day}/${month}/${year}`)
-        setPrice(data.ticketType.price)
-        setTotal(data.ticketType.price + recargo)
-      })
-      .catch( err => console.error(err.message))
+        .then(async res => await res.json())
+        .then(data => {
+          setTicket(data)
+          const year = data.dateTime.dateTime[0]
+          const month = data.dateTime.dateTime[1]
+          const day = data.dateTime.dateTime[2]
+          setDate(`${day}/${month}/${year}`)
+          setPrice(data.ticketType.price)
+          setTotal(data.ticketType.price + recargo)
+        })
+        .catch(err => { console.error(err.message) })
     }
     getTickets()
-
-  }, [ticketId] )
+  }, [ticketId])
 
   const dispatch = useDispatch<AppDispatch>()
   const submit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -109,15 +109,15 @@ const DetalleEntradas: React.FC = () => {
               <p>1 X {ticket.ticketType.name } Sin asiento</p>
               <p>{ price.toLocaleString('es-Ar', {
                 style: 'currency',
-                currency: 'ARS',
+                currency: 'ARS'
               }) }</p>
             </div>
             <p className='ml-4 mt-3 text-xl'>Servicios</p>
             <div className='flex justify-between mx-4 pb-2 border-b border-solid border-[#975D93]'>
               <p>Cargos por servicio</p> <p>{ recargo.toLocaleString('es-Ar', {
-              style: 'currency',
-              currency: 'ARS',
-            }) }</p>
+                style: 'currency',
+                currency: 'ARS'
+              }) }</p>
             </div>
             <p className='ml-4 mt-3 text-xl'>E-Ticket</p>
             <div className='flex justify-between mx-4 pb-2 border-b border-solid border-[#975D93]'>
@@ -127,7 +127,7 @@ const DetalleEntradas: React.FC = () => {
               <p className='font-montserrat text-base font-bold leading-6 tracking-normal text-left text-[#3D37F1]'>TOTAL</p>
               <p>{ total.toLocaleString('es-Ar', {
                 style: 'currency',
-                currency: 'ARS',
+                currency: 'ARS'
               }) }</p>
             </div>
           </div>
@@ -141,7 +141,7 @@ const DetalleEntradas: React.FC = () => {
               <p className=' text-xl'>Monto</p>
               <p>{ total.toLocaleString('es-Ar', {
                 style: 'currency',
-                currency: 'ARS',
+                currency: 'ARS'
               }) }</p>
             </div>
             <div className='flex justify-between mx-4 py-6 border-b border-solid border-[#975D93]'>

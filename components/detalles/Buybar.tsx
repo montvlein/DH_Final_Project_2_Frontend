@@ -2,7 +2,7 @@
 
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
 import type { Evento } from '@/models/Event'
-import { AppDispatch, userUseSelector } from '@/redux/store'
+import { type AppDispatch, userUseSelector } from '@/redux/store'
 import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux'
 import { setSelectedTicket } from '../../redux/features/selectEventTicket-slice'
