@@ -1,5 +1,9 @@
+import { GoldenApi } from '@/api/data'
+
 export default async function GetTickets (): Promise<any> {
-  const response = await fetch('http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/event/ticket')
+  const baseApi = GoldenApi.base
+  const endpoint = GoldenApi.endoints.ticket.all
+  const response = await fetch(baseApi + endpoint)
 
   if (!response.ok) {
     throw new Error('Error en la carga de eventos')

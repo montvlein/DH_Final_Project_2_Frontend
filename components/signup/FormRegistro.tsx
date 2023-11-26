@@ -8,14 +8,15 @@ import ModalSu from './ModalSu'
 import { useDispatch } from 'react-redux'
 import { logIn } from '@/redux/features/auth-slice'
 import { setUser } from '@/redux/features/activeUser-slice'
+import { GoldenApi } from '@/api/data'
 
 const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
     console.log(user)
-    const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
-    const endpoint = 'user/register'
+    const baseUrl = GoldenApi.base
+    const endpoint = GoldenApi.endoints.user.signup
     const apiUrl = baseUrl + endpoint
 
     try {
@@ -35,7 +36,7 @@ const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatc
         localStorage.setItem('token', data.jwt)
         dispatch(logIn(data))
 
-        const endpoint2 = 'user/dataUser'
+        const endpoint2 = GoldenApi.endoints.user.data
 
         const obtenerUser = await fetch(baseUrl + endpoint2, {
           method: 'GET',

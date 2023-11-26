@@ -6,6 +6,7 @@ import { setUser } from '@/redux/features/activeUser-slice'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { useState } from 'react'
+import { GoldenApi } from '@/api/data'
 
 const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const dispatch = useDispatch<AppDispatch>()
@@ -17,42 +18,43 @@ const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<
     setLoading(true)
     const values = getValues()
 
-    const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
-    const endpoint = 'user/login'
-    const response = await fetch(baseUrl + endpoint, {
+    const baseUrl = GoldenApi.base
+    const endpoint = GoldenApi.endoints.user.login
+    fetch(baseUrl + endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
     })
-
-    if (response.status === 202) {
-      console.log(values)
-      const data = await response.json()
-      console.log(data)
+    .then( response => response.json())
+    .then( async (data) => {
       localStorage.setItem('token', data.jwt)
-      dispatch(logIn(data))
-      const endpoint2 = 'user/dataUser'
+        dispatch(logIn(data))
+        const endpoint2 = GoldenApi.endoints.user.data
 
-      const obtenerUser = await fetch(baseUrl + endpoint2, {
-        method: 'GET',
-        headers: {
-          token: data.jwt,
-          'Content-Type': 'application/json'
+        const obtenerUser = await fetch(baseUrl + endpoint2, {
+          method: 'GET',
+          headers: {
+            token: data.jwt,
+            'Content-Type': 'application/json'
+          }
+        })
+
+        if (obtenerUser.status === 200) {
+          const infoUser = await obtenerUser.json()
+          console.log('Data del usuario:', infoUser)
+          dispatch(setUser(infoUser))
+          window.location.href = '/'
+        } else {
+          console.error('Second API call failed:', obtenerUser.status)
         }
-      })
-
-      if (obtenerUser.status === 200) {
-        const infoUser = await obtenerUser.json()
-        console.log('Data del usuario:', infoUser)
-        dispatch(setUser(infoUser))
-        window.location.href = '/'
-      } else {
-        console.error('Second API call failed:', obtenerUser.status)
-      }
-    } else {
+    })
+    .catch( err => {
+      console.error(err.message)
       setErrorMessage('Credenciales inválidas')
-    }
-    setLoading(false)
+    })
+    .finally(() => {
+      setLoading(false)
+    })
   }
 
   return (

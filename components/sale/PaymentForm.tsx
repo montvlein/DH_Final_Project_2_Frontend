@@ -7,6 +7,7 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { type RootState } from '@/redux/store'
+import { GoldenApi } from '@/api/data'
 
 interface IPaymentForm {
   numberCredit: string
@@ -41,7 +42,9 @@ const PaymentForm = ({ formRef, setLoading, setSuccess }: {
     setLoading(true)
     // const values = getValues()
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    const apiTicketUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/event/ticket'
+    const baseUrl = GoldenApi.base
+    const endpoint = GoldenApi.endoints.ticket.all
+    const apiTicketUrl = baseUrl + endpoint
 
     fetch(apiTicketUrl, {
       method: 'POST',
