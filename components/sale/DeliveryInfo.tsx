@@ -2,9 +2,9 @@ import React from 'react'
 
 const DeliveryInfo: React.FC = () => {
   const event = {
-    name: "Nombre del evento",
+    name: 'Nombre del evento',
     venue: {
-      venue: "Lugar"
+      venue: 'Lugar'
     }
   }
 

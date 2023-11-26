@@ -15,7 +15,7 @@ const MisEntradas: React.FC = () => {
   const getUserTickets = (id: any): void => {
     void GetTickets()
       .then((eList: any[]) => {
-        const userTicketsList = eList.filter(t => t.idUser == id)
+        const userTicketsList = eList.filter(t => parseInt(t.idUser) === parseInt(id))
         setEventList(userTicketsList)
       })
   }

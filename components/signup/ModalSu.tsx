@@ -3,6 +3,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const customStyles: Modal.Styles = {
   content: {
@@ -22,13 +23,14 @@ const customStyles: Modal.Styles = {
 }
 
 const ModalSu: React.FC = () => {
+  const router = useRouter()
   const isModalOpen = useSelector((state: any) => state.modal.isOpen)
   const dispatch = useDispatch()
 
   const handleCloseModal = (): void => {
     dispatch(closeModal())
-    window.location.href = '/profile/1'
-    // window.location.href = `profile/${data.id}`
+    const data = { id: 1 }
+    router.push(`profile/${data.id}`)
   }
 
   return (

@@ -6,11 +6,12 @@ import { setUser } from '@/redux/features/activeUser-slice'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { GoldenApi } from '@/api/data'
 
 const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
-
   const { register, getValues, control, handleSubmit, formState: { errors } } = useForm<UserLi>()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -25,36 +26,36 @@ const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
     })
-    .then( response => response.json())
-    .then( async (data) => {
-      localStorage.setItem('token', data.jwt)
+      .then(async (response) => await response.json())
+      .then(data => {
+        localStorage.setItem('token', data.jwt)
         dispatch(logIn(data))
         const endpoint2 = GoldenApi.endoints.user.data
 
-        const obtenerUser = await fetch(baseUrl + endpoint2, {
+        fetch(baseUrl + endpoint2, {
           method: 'GET',
           headers: {
             token: data.jwt,
             'Content-Type': 'application/json'
           }
         })
-
-        if (obtenerUser.status === 200) {
-          const infoUser = await obtenerUser.json()
-          console.log('Data del usuario:', infoUser)
-          dispatch(setUser(infoUser))
-          window.location.href = '/'
-        } else {
-          console.error('Second API call failed:', obtenerUser.status)
-        }
-    })
-    .catch( err => {
-      console.error(err.message)
-      setErrorMessage('Credenciales inválidas')
-    })
-    .finally(() => {
-      setLoading(false)
-    })
+          .then(async (obtenerUser) => await obtenerUser.json())
+          .then(infoUser => {
+            dispatch(setUser(infoUser))
+            console.log('Data del usuario:', infoUser)
+            router.push('/')
+          })
+          .catch(err => {
+            console.error('Second API call failed:', err.message)
+          })
+      })
+      .catch(err => {
+        console.error('First API call failed:', err.message)
+        setErrorMessage('Credenciales inválidas')
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   return (
