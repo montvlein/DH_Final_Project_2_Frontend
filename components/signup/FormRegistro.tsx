@@ -9,13 +9,13 @@ import { useDispatch } from 'react-redux'
 import { logIn } from '@/redux/features/auth-slice'
 import { setUser } from '@/redux/features/activeUser-slice'
 
-const FormRegistro: React.FC<any> = ({setLoading}:{setLoading: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
     console.log(user)
-    const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
+    const baseUrl = 'https://api.goldenticket.ar/'
     const endpoint = 'user/register'
     const apiUrl = baseUrl + endpoint
 

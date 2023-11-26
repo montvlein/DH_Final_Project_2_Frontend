@@ -17,7 +17,7 @@ const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<
     setLoading(true)
     const values = getValues()
 
-    const baseUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/'
+    const baseUrl = 'https://api.goldenticket.ar/'
     const endpoint = 'user/login'
     const response = await fetch(baseUrl + endpoint, {
       method: 'POST',

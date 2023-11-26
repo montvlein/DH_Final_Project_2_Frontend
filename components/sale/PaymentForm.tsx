@@ -17,7 +17,7 @@ interface IPaymentForm {
   cp: number
 }
 
-const PaymentForm = ({ formRef, setLoading, setSuccess  }
+const PaymentForm = ({ formRef, setLoading, setSuccess }
   : {
     formRef: React.MutableRefObject<HTMLFormElement | null>
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
@@ -42,7 +42,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
     setLoading(true)
     // const values = getValues()
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    const apiTicketUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/event/ticket'
+    const apiTicketUrl = 'https://api.goldenticket.ar/event/ticket'
 
     fetch(apiTicketUrl, {
       method: "POST",
@@ -51,17 +51,17 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
       },
       body: JSON.stringify(selectedTicket)
     })
-    .then( res => res.json())
-    .then( data => {
-      console.log(data)
-      setSuccess(true)
-    })
-    .catch(err => {
-      console.error(err.message)
-    })
-    .finally(() => {
-      setLoading(false)
-    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setSuccess(true)
+      })
+      .catch(err => {
+        console.error(err.message)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
   const onError: SubmitErrorHandler<IPaymentForm> = () => { alert('Por favor, revisar los datos.') }
 
@@ -103,13 +103,13 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
         name={state.name}
         focused={state.focus as 'number' | 'expiry' | 'cvc' | 'name' | ''}
       />
-      <form ref= {formRef} className='w-full flex flex-col pt-10' onSubmit={handleSubmit(onSubmit, onError)}>
+      <form ref={formRef} className='w-full flex flex-col pt-10' onSubmit={handleSubmit(onSubmit, onError)}>
         <div className='w-full'>
           <div className='w-full'>
             <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Nombre y apellido</label>
             <input
               type="text"
-              { ... register('name')}
+              {...register('name')}
               name='name'
               value={state.name}
               onChange={handleInputChange}
@@ -122,7 +122,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
             <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Número de tarjeta</label>
             <input
               type="text"
-              { ... register('numberCredit')}
+              {...register('numberCredit')}
               name='numberCredit'
               value={state.numberCredit}
               onChange={handleInputChange}
@@ -137,7 +137,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Fecha de vencimiento</label>
               <input
                 type="text"
-                { ... register('expiry')}
+                {...register('expiry')}
                 name="expiry"
                 value={state.expiry}
                 onChange={handleInputChange}
@@ -151,7 +151,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Número de seguridad</label>
               <input
                 type="number"
-                { ... register('cvc')}
+                {...register('cvc')}
                 name="cvc"
                 value={state.cvc}
                 onChange={handleInputChange}
@@ -166,7 +166,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
             <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Documento de identidad</label>
             <input
               type="number"
-              { ... register('dni')}
+              {...register('dni')}
               name="dni"
               value={state.dni}
               onChange={handleInputChange}
@@ -182,7 +182,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
             <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Dirección</label>
             <input
               type="text"
-              { ... register('address')}
+              {...register('address')}
               name="address"
               value={state.address}
               onChange={handleInputChange}
@@ -194,7 +194,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
             <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Codigo Postal</label>
             <input
               type="text"
-              { ... register('cp')}
+              {...register('cp')}
               name="cp"
               value={state.cp}
               onChange={handleInputChange}
@@ -210,7 +210,7 @@ const PaymentForm = ({ formRef, setLoading, setSuccess  }
 
 export default PaymentForm
 
-function datosPagoTarjeta(values:any) {
+function datosPagoTarjeta(values: any) {
   const expiryMonth = values.expiry.split('/')[0]
   const expiryYear = values.expiry.split('/')[1]
   const cardNumber = values.numberCredit.replace(/\s/g, '')
@@ -232,7 +232,7 @@ function datosPagoTarjeta(values:any) {
   const apiPaywayUrl = 'https://developers.decidir.com/api/v2'
   const paywayTokenEndpoint = '/tokens'
   const paywayPaymentEndpoint = '/payment'
-  const setOptions = (apikey:string, data:any) => {
+  const setOptions = (apikey: string, data: any) => {
     return {
       method: "POST",
       headers: {
@@ -243,9 +243,9 @@ function datosPagoTarjeta(values:any) {
     }
   }
 
-  fetch(apiPaywayUrl+paywayTokenEndpoint, setOptions(publicApiKey, cardData))
-    .then( res => res.json())
-    .then( data => {
+  fetch(apiPaywayUrl + paywayTokenEndpoint, setOptions(publicApiKey, cardData))
+    .then(res => res.json())
+    .then(data => {
       console.log(data)
     })
     .catch(err => {
