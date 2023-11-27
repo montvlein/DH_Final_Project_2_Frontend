@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { type Ticket } from '@/models/Ticket'
+import Link from 'next/link'
 
 const DetalleEntradas: React.FC = () => {
   const param = useParams()
@@ -60,10 +61,11 @@ const DetalleEntradas: React.FC = () => {
   const [price, setPrice] = useState(0)
   const [recargo, setRecargo] = useState(2700)
   const [total, setTotal] = useState(0)
+  const [UserId, setUserId] = useState(0)
 
   useEffect(() => {
     const getTickets = (): void => {
-      const apiTicketUrl = 'http://ec2-3-208-12-227.compute-1.amazonaws.com:8080/event/ticket/' + ticketId
+      const apiTicketUrl = 'https://api.goldenticket.ar/event/ticket/' + ticketId
       fetch(apiTicketUrl)
         .then(async res => await res.json())
         .then(data => {
@@ -74,6 +76,7 @@ const DetalleEntradas: React.FC = () => {
           setDate(`${day}/${month}/${year}`)
           setPrice(data.ticketType.price)
           setTotal(data.ticketType.price + recargo)
+          setUserId(data.idUser)
         })
         .catch(err => { console.error(err.message) })
     }
@@ -106,18 +109,18 @@ const DetalleEntradas: React.FC = () => {
           <div className='p-4 h-fit'>
             <p className='ml-4 text-xl'>Tipo de entrada</p>
             <div className='flex justify-between mx-4 pb-2 border-b border-solid border-[#975D93]'>
-              <p>1 X {ticket.ticketType.name } Sin asiento</p>
-              <p>{ price.toLocaleString('es-Ar', {
+              <p>1 X {ticket.ticketType.name} Sin asiento</p>
+              <p>{price.toLocaleString('es-Ar', {
                 style: 'currency',
                 currency: 'ARS'
-              }) }</p>
+              })}</p>
             </div>
             <p className='ml-4 mt-3 text-xl'>Servicios</p>
             <div className='flex justify-between mx-4 pb-2 border-b border-solid border-[#975D93]'>
-              <p>Cargos por servicio</p> <p>{ recargo.toLocaleString('es-Ar', {
+              <p>Cargos por servicio</p> <p>{recargo.toLocaleString('es-Ar', {
                 style: 'currency',
                 currency: 'ARS'
-              }) }</p>
+              })}</p>
             </div>
             <p className='ml-4 mt-3 text-xl'>E-Ticket</p>
             <div className='flex justify-between mx-4 pb-2 border-b border-solid border-[#975D93]'>
@@ -125,10 +128,10 @@ const DetalleEntradas: React.FC = () => {
               <p>$ 0.00</p></div>
             <div className='flex justify-between mx-4 pb-2 mt-6'>
               <p className='font-montserrat text-base font-bold leading-6 tracking-normal text-left text-[#3D37F1]'>TOTAL</p>
-              <p>{ total.toLocaleString('es-Ar', {
+              <p>{total.toLocaleString('es-Ar', {
                 style: 'currency',
                 currency: 'ARS'
-              }) }</p>
+              })}</p>
             </div>
           </div>
         </div>
@@ -139,10 +142,10 @@ const DetalleEntradas: React.FC = () => {
           <div>
             <div className='flex justify-between mx-4 mt-14 pb-2 border-b border-solid border-[#975D93]'>
               <p className=' text-xl'>Monto</p>
-              <p>{ total.toLocaleString('es-Ar', {
+              <p>{total.toLocaleString('es-Ar', {
                 style: 'currency',
                 currency: 'ARS'
-              }) }</p>
+              })}</p>
             </div>
             <div className='flex justify-between mx-4 py-6 border-b border-solid border-[#975D93]'>
               <p className=' text-xl'>Tarjeta</p><p>XXXXXXXXXXXX4905</p>
@@ -151,11 +154,13 @@ const DetalleEntradas: React.FC = () => {
               <p className=' text-xl'>Estado</p>
               <p className='text-[#3D37F1] font-bold'>Pagado</p></div>
             <div className='flex justify-between mx-4 mt-4'>
-              <p className=' text-xl'>Fecha</p><p>{ date }</p>
+              <p className=' text-xl'>Fecha</p><p>{date}</p>
             </div>
           </div>
         </div>
       </div>
+      <Link href={'/profile/{userId}'}>
+        <button className="text-white font-poppins text-base font-medium mt-4 w-full  h-12 bg-gradient-to-b from-[#975D93] to-[#DCA6D8] transition duration-300 hover:to-[#975D93]">  Volver </button></Link>
       <form onSubmit={submit} className='hidden' >
         <button type="submit" className="text-white font-poppins text-base font-medium mt-4 w-full  h-12 bg-gradient-to-b from-[#975D93] to-[#DCA6D8] transition duration-300 hover:to-[#975D93]">  Reenviar entrada </button></form>
       <ModalEE />
