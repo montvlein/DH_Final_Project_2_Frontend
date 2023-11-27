@@ -10,7 +10,7 @@ import Image from 'next/image'
 
 const ShoppingCart: React.FC = () => {
   const [loading, setLoading] = useState(false)
-  const [ successPayment, setSuccess ] = useState(false)
+  const [successPayment, setSuccess] = useState(false)
   const router = useRouter()
   const params: any = useParams()
   const eventId = params.id
@@ -56,10 +56,10 @@ const ShoppingCart: React.FC = () => {
 }
 export default ShoppingCart
 
-const ModalSuccess = () => {
+const ModalSuccess: React.FC = () => {
   const router = useRouter()
 
-  return(
+  return (
     <section className='absolute inset-0 z-50 bg-transparent backdrop-blur-sm z-40 flex items-center justify-center'>
       <article className='relative bg-white shadow-xl rounded-xl w-fit p-8 flex flex-col justify-center items-center gap-4'>
         <Image
@@ -71,7 +71,7 @@ const ModalSuccess = () => {
         <h3>Compra existosa</h3>
         <button
           className="text-white font-poppins text-base font-medium w-[240px] rounded-xl h-10 bg-gradient-to-b from-[#975D93] to-[#DCA6D8] transition duration-300 hover:to-[#975D93]"
-          onClick={()=>{
+          onClick={() => {
             router.push('/')
           }}
         >  Ok

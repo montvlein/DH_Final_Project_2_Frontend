@@ -7,7 +7,7 @@ import YaTienesCuenta from '@/components/signup/YaTienesCuenta'
 import { useState } from 'react'
 import Spinner from '@/components/Spinner'
 
-const signUp: React.FC = () => {
+const SignUp: React.FC = () => {
   const [loading, setLoading] = useState(false)
 
   return (
@@ -23,4 +23,4 @@ const signUp: React.FC = () => {
     </>
   )
 }
-export default signUp
+export default SignUp

@@ -64,7 +64,7 @@ const Chooser: React.FC<ChooserProps> = function ({ categories, selectedCategory
       >
         Top Selling
       </button>
-      {categories.map((cat) => (
+      {categories?.map((cat) => (
         <button
           key={cat.description}
           onClick={() => { setSelectedCategory(cat.description) }}

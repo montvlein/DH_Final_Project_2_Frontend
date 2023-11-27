@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import React, { useState } from 'react'
 import Cards from 'react-credit-cards-2'
 import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store'
+import { useSelector } from 'react-redux'
+import { type RootState } from '@/redux/store'
+import { GoldenApi } from '@/api/data'
 
 interface IPaymentForm {
   numberCredit: string
@@ -17,6 +19,7 @@ interface IPaymentForm {
   cp: number
 }
 
+<<<<<<< HEAD
 const PaymentForm = ({ formRef, setLoading, setSuccess }
   : {
     formRef: React.MutableRefObject<HTMLFormElement | null>
@@ -25,6 +28,14 @@ const PaymentForm = ({ formRef, setLoading, setSuccess }
   }): React.JSX.Element => {
 
   const { register, handleSubmit, getValues } = useForm<IPaymentForm>()
+=======
+const PaymentForm = ({ formRef, setLoading, setSuccess }: {
+  formRef: React.MutableRefObject<HTMLFormElement | null>
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>
+}): React.JSX.Element => {
+  const { register, handleSubmit } = useForm<IPaymentForm>()
+>>>>>>> dev
   const [state, setState] = useState({
     numberCredit: '',
     expiry: '',
@@ -42,16 +53,26 @@ const PaymentForm = ({ formRef, setLoading, setSuccess }
     setLoading(true)
     // const values = getValues()
     window.scrollTo({ top: 0, behavior: 'smooth' })
+<<<<<<< HEAD
     const apiTicketUrl = 'https://api.goldenticket.ar/event/ticket'
+=======
+    const baseUrl = GoldenApi.base
+    const endpoint = GoldenApi.endoints.ticket.all
+    const apiTicketUrl = baseUrl + endpoint
+>>>>>>> dev
 
     fetch(apiTicketUrl, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(selectedTicket)
     })
+<<<<<<< HEAD
       .then(res => res.json())
+=======
+      .then(async res => await res.json())
+>>>>>>> dev
       .then(data => {
         console.log(data)
         setSuccess(true)
@@ -210,20 +231,24 @@ const PaymentForm = ({ formRef, setLoading, setSuccess }
 
 export default PaymentForm
 
+<<<<<<< HEAD
 function datosPagoTarjeta(values: any) {
+=======
+function datosPagoTarjeta (values: any): void {
+>>>>>>> dev
   const expiryMonth = values.expiry.split('/')[0]
   const expiryYear = values.expiry.split('/')[1]
   const cardNumber = values.numberCredit.replace(/\s/g, '')
 
   const cardData = {
-    "card_number": cardNumber,
-    "card_expiration_month": expiryMonth,
-    "card_expiration_year": expiryYear,
-    "security_code": values.cvc,
-    "card_holder_name": values.name,
-    "card_holder_identification": {
-      "type": "dni",
-      "number": values.dni
+    card_number: cardNumber,
+    card_expiration_month: expiryMonth,
+    card_expiration_year: expiryYear,
+    security_code: values.cvc,
+    card_holder_name: values.name,
+    card_holder_identification: {
+      type: 'dni',
+      number: values.dni
     }
   }
 
@@ -232,19 +257,27 @@ function datosPagoTarjeta(values: any) {
   const apiPaywayUrl = 'https://developers.decidir.com/api/v2'
   const paywayTokenEndpoint = '/tokens'
   const paywayPaymentEndpoint = '/payment'
+<<<<<<< HEAD
   const setOptions = (apikey: string, data: any) => {
+=======
+  const setOptions = (apikey: string, data: any): { method: string, headers: Record<string, string>, body: string } => {
+>>>>>>> dev
     return {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "apikey": apikey,
-        "Content-Type": "application/json"
+        apikey: apikey,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     }
   }
 
   fetch(apiPaywayUrl + paywayTokenEndpoint, setOptions(publicApiKey, cardData))
+<<<<<<< HEAD
     .then(res => res.json())
+=======
+    .then(async res => await res.json())
+>>>>>>> dev
     .then(data => {
       console.log(data)
     })

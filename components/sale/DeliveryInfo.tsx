@@ -1,7 +1,13 @@
 import React from 'react'
-import { eventList } from '../../api/data'
 
 const DeliveryInfo: React.FC = () => {
+  const event = {
+    name: 'Nombre del evento',
+    venue: {
+      venue: 'Lugar'
+    }
+  }
+
   return (
     <>
       <h3 className='font-montserrat text-18 font-bold m-5'>Modo en que recibes tus tickets</h3>
@@ -14,7 +20,7 @@ const DeliveryInfo: React.FC = () => {
           <p className='text-black font-montserrat text-base font-medium'>Al finalizar, el ticket estará disponible en tu historial de compra, para que lo imprimas o lo presentes, desde tu dispositivo móvil, al ingresar al recinto.</p>
         </div>
       </div>
-      <div className=" bg-[#F8F8F8] p-5 mt-4 text-black font-montserrat text-base font-bold">{eventList[0].name} | {eventList[0].venue.name} | 09 DE NOVIEMBRE 2023 </div>
+      <div className=" bg-[#F8F8F8] p-5 mt-4 text-black font-montserrat text-base font-bold">{event.name} | {event.venue.venue} | 09 DE NOVIEMBRE 2023 </div>
       <div className='bg-[#D9D9D9] flex flex-col p-4 md:justify-between md:mx-4'>
         <div>
           <h4 className='text-black font-montserrat text-base font-bold'>UBICACIONES</h4>
