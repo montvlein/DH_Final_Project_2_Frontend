@@ -18,58 +18,55 @@ const Footer: React.FC = () => {
         {/* Company */}
         <div className="w-full md:w-1/5 pl-2 text-center md:text-left hidden md:block">
           <h5 className="mb-4 font-poppins text-xl font-semibold">
-            Compañia
+            Links de interés
           </h5>
 
           <ul className="font-poppins text-base font-medium text-gray-500">
             <li>
-              <Link href="/about">
-                About Us
+              <Link href="/category/Teatros">
+                Teatros
               </Link>
             </li>
             <li>
-              <Link href="/career">
-                Career
+              <Link href="/category/Conciertos">
+                Conciertos
               </Link>
             </li>
             <li>
-              <Link href="/faq">
-                FAQ
+              <Link href="/category/Deportes">
+                Deportes
               </Link>
             </li>
           </ul>
         </div>
-
+        {/* More */}
+        <div className="w-full md:w-1/5 text-center md:text-left hidden md:block">
+          <h5 className="mb-4 font-poppins text-xl font-semibold">
+            Clientes
+          </h5>
+          <ul className="font-poppins text-base font-medium text-gray-500">
+            <li>
+              <Link href="/signin">
+                Iniciar sesión
+              </Link>
+            </li>
+            <li>
+              <Link href="/signup">
+                Resgistrarse
+              </Link>
+            </li>
+          </ul>
+        </div>
         {/* Contact */}
         <div className="w-full md:w-1/5 text-center md:text-left hidden md:block mr-2">
           <h5 className="mb-4 font-poppins text-xl font-semibold">
             Contacto
           </h5>
           <address className="not-italic mb-4 font-poppins text-base font-medium text-gray-500">
-            contacto@goldenticket.com<br />
+            contacto@goldenticket.ar<br />
             +54 (342) 5087-277
           </address>
         </div>
-
-        {/* More */}
-        <div className="w-full md:w-1/5 text-center md:text-left hidden md:block">
-          <h5 className="mb-4 font-poppins text-xl font-semibold">
-            Más
-          </h5>
-          <ul className="font-poppins text-base font-medium text-gray-500">
-            <li>
-              <Link href="/privacy">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link href="/termsofservice">
-                Terms of Service
-              </Link>
-            </li>
-          </ul>
-        </div>
-
         {/* Social Media */}
         <div className="w-1/3 md:w-1/4 text-center md:text-center mr-1">
           <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
@@ -123,7 +120,7 @@ const Footer: React.FC = () => {
       </div>
       <div className="w-full text-center mt-6 mb-4">
         <div className="w-full text-center mt-6 mb-4 font-poppins md:text-base text-sm font-medium text-gray-500">
-          All rights reserved@goldenticket.com.ar
+          All rights reserved@goldenticket.ar
         </div>
       </div>
 
