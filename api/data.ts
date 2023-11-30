@@ -12,10 +12,11 @@ export const GoldenApi = {
     user: {
       login: 'user/login',
       signup: 'user/register',
-      data: 'user/dataUser'
+      data: 'user/dataUser',
+      changePass: 'user/updatePassword'
     },
     event: {
-      all: 'event',
+      all: 'event'
     },
     ticket: {
       all: 'event/ticket'

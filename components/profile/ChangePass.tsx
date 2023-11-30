@@ -14,30 +14,36 @@ const ChangePassword: React.FC = () => {
   const userId = param?.id ?? 0
   const { control, register, handleSubmit, formState: { errors } } = useForm<pass>()
 
-  const cambiarPass: SubmitHandler = async (pass: pass) => {
-    console.log(pass)
+  const cambiarPass: SubmitHandler<pass> = async ({ oldPassword, password }: pass) => {
     const baseUrl = GoldenApi.base
-    const endpoint = GoldenApi.endoints.user.signup
+    const endpoint = GoldenApi.endoints.user.changePass
     const apiUrl = baseUrl + endpoint
+    const jwt = localStorage.getItem('token')
+    console.log(jwt)
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
+          Authorization: `Bearer ${jwt}`,
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pass)
+        } as HeadersInit,
+        body: JSON.stringify({
+          currentPassword: oldPassword,
+          newPassword: password
+        })
       })
-      if (response.status === 201) {
+      if (response.ok) {
         const data = await response.json()
         console.log('Contraseña guardada con éxito:', data)
       } else {
-        console.error('Error al cambiar contraseña')
+        console.error('Error al cambiar contraseña:', response.status, response.statusText, await response.text())
       }
     } catch (error) {
       console.error('Error de red:', error)
     }
   }
+
   return (
     <section className="flex flex-col z-10 w-11/12">
       <div className="m-4">
