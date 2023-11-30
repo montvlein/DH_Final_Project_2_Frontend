@@ -4,17 +4,22 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import { GoldenApi } from '@/api/data'
+import { useState } from 'react'
 export interface pass {
-  oldPassword?: string
-  password?: string
-  password2?: string
+  currentPassword: string
+  newPassword: string
+  password2: string
 }
 const ChangePassword: React.FC = () => {
   const param = useParams()
   const userId = param?.id ?? 0
   const { control, register, handleSubmit, formState: { errors } } = useForm<pass>()
-
-  const cambiarPass: SubmitHandler<pass> = async ({ oldPassword, password }: pass) => {
+  const [errorPass, seterrorPass] = useState("")
+  const cambiarPass: SubmitHandler<pass> = async ({ currentPassword, newPassword, password2 }: pass) => {
+    if (newPassword !== password2) {
+      seterrorPass('Las contraseñas no coinciden')
+      return
+    }
     const baseUrl = GoldenApi.base
     const endpoint = GoldenApi.endoints.user.changePass
     const apiUrl = baseUrl + endpoint
@@ -25,18 +30,17 @@ const ChangePassword: React.FC = () => {
       const response = await fetch(apiUrl, {
         method: 'PATCH',
         headers: {
-          Authorization: `Bearer ${jwt}`,
+          token: jwt,
           'Content-Type': 'application/json'
-        } as HeadersInit,
-        body: JSON.stringify({
-          currentPassword: oldPassword,
-          newPassword: password
-        })
+        },
+        body: JSON.stringify({ currentPassword, newPassword })
       })
       if (response.ok) {
-        const data = await response.json()
-        console.log('Contraseña guardada con éxito:', data)
+        alert('Cambio de contrasena exitoso')
+        //   const data = await response.json()
+        alert('contraseña guardada con éxito')
       } else {
+        alert('error1')
         console.error('Error al cambiar contraseña:', response.status, response.statusText, await response.text())
       }
     } catch (error) {
@@ -57,18 +61,18 @@ const ChangePassword: React.FC = () => {
           <Link href={'/mytickets/' + userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Mis entradas</button></Link>
         </div>
         <form onSubmit={handleSubmit(cambiarPass)} className="p-8 lg:mx-28">
-          <label htmlFor="passOld" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Contraseña actual</label>
+          <label htmlFor="passOld" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">contraseña actual</label>
           <Controller
-            name="oldPassword"
+            name="currentPassword"
             control={control}
             rules={{ required: 'Escribe tu contraseña actual' }}
             render={({ field }) => (
               <input
-                {...register('oldPassword')}
+                {...register('currentPassword')}
                 id="oldPassword"
                 type="password"
                 placeholder='******'
-                className={`border border-gray-300 pl-4 w-full rounded-xl h-14 ${errors.oldPassword !== null && errors.oldPassword !== undefined ? 'border-red-500' : ''}`}
+                className={`border border-gray-300 pl-4 w-full rounded-xl h-14 ${errors.currentPassword !== null && errors.currentPassword !== undefined ? 'border-red-500' : ''}`}
                 style={{
                   fontFamily: 'Poppins',
                   fontSize: '16px',
@@ -80,11 +84,11 @@ const ChangePassword: React.FC = () => {
               />
             )}
           />
-          {errors.oldPassword !== null && errors.oldPassword !== undefined && <p className="text-red-500 w-full text-sm">{errors.oldPassword.message}</p>}
-          <label htmlFor="PassNew" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Contraseña nueva</label>
+          {errors.currentPassword !== null && errors.currentPassword !== undefined && <p className="text-red-500 w-full text-sm">{errors.currentPassword.message}</p>}
+          <label htmlFor="PassNew" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">contraseña nueva</label>
           <div className="mb-4">
             <Controller
-              name="password"
+              name="newPassword"
               control={control}
               rules={{
                 required: 'Ingresa una nueva contraseña',
@@ -100,11 +104,11 @@ const ChangePassword: React.FC = () => {
               }}
               render={({ field }) => (
                 <input
-                  {...register('password')}
-                  id="password"
+                  {...register('newPassword')}
+                  id="newPassword"
                   type="password"
                   placeholder='******'
-                  className={`border border-gray-300 pl-4 w-full  rounded-xl h-14 ${errors.password !== null && errors.password !== undefined ? 'border-red-500' : ''}`}
+                  className={`border border-gray-300 pl-4 w-full  rounded-xl h-14 ${errors.newPassword !== null && errors.newPassword !== undefined ? 'border-red-500' : ''}`}
                   style={{
                     fontFamily: 'Poppins',
                     fontSize: '16px',
@@ -116,12 +120,12 @@ const ChangePassword: React.FC = () => {
                 />
               )}
             />
-            {errors.password !== null && errors.password !== undefined && <p className="text-red-500 w-full text-sm">{errors.password.message}</p>}
+            {errors.newPassword !== null && errors.newPassword !== undefined && <p className="text-red-500 w-full text-sm">{errors.newPassword.message}</p>}
           </div>
 
           <label htmlFor="passNew2" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Repetir contraseña</label>
           <Controller
-            name="password2"
+            name="newPassword"
             control={control}
             rules={{
               required: 'Repite tu nueva contraseña'
@@ -144,7 +148,7 @@ const ChangePassword: React.FC = () => {
               />
             )}
           />
-          {errors.password2 !== null && errors.password2 !== undefined && <p className="text-red-500 w-full text-sm">{errors.password2.message}</p>}
+          {<p className="text-red-500 w-full text-sm">{errorPass}</p>}
 
           <div className="flex lg:justify-end gap-2 lg:gap-4 border-2 border-transparent border-t-gray-100 p-8">
             <button className="p-4 border-2">Cancelar</button>
