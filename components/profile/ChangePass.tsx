@@ -5,6 +5,10 @@ import { useParams } from 'next/navigation'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
 import { GoldenApi } from '@/api/data'
 import { useState } from 'react'
+import { openModal } from '@/redux/features/modal-slice'
+import ModalSu from './ModalSu'
+import { useDispatch } from 'react-redux'
+import type { AppDispatch } from '@/redux/store'
 export interface pass {
   currentPassword: string
   newPassword: string
@@ -14,7 +18,8 @@ const ChangePassword: React.FC = () => {
   const param = useParams()
   const userId = param?.id ?? 0
   const { control, register, handleSubmit, formState: { errors } } = useForm<pass>()
-  const [errorPass, seterrorPass] = useState("")
+  const [errorPass, seterrorPass] = useState('')
+  const dispatch = useDispatch<AppDispatch>()
   const cambiarPass: SubmitHandler<pass> = async ({ currentPassword, newPassword, password2 }: pass) => {
     if (newPassword !== password2) {
       seterrorPass('Las contraseñas no coinciden')
@@ -36,11 +41,11 @@ const ChangePassword: React.FC = () => {
         body: JSON.stringify({ currentPassword, newPassword })
       })
       if (response.ok) {
-        alert('Cambio de contrasena exitoso')
+        dispatch(openModal())
+        seterrorPass('')
         //   const data = await response.json()
-        alert('contraseña guardada con éxito')
       } else {
-        alert('error1')
+        alert('Contraseña actual incorrecta')
         console.error('Error al cambiar contraseña:', response.status, response.statusText, await response.text())
       }
     } catch (error) {
@@ -49,12 +54,12 @@ const ChangePassword: React.FC = () => {
   }
 
   return (
-    <section className="flex flex-col z-10 w-11/12">
-      <div className="m-4">
-        <h2 className="text-white font-semibold text-2xl">Mi cuenta</h2>
-        <p className="font-semibold text-base">Modifica tu contraseña</p>
+    <section className="flex flex-col  w-11/12">
+      <div className="m-4 ">
+        <h2 className="text-white font-semibold text-2xl ">Mi cuenta</h2>
+        <p className="font-semibold text-base ">Modifica tu contraseña</p>
       </div>
-      <div className="shadow-lg bg-white dark:bg-gray-700 dark:text-white">
+      <div className="shadow-lg bg-white dark:bg-gray-700 dark:text-white ">
         <div className="flex lg:gap-2 justify-around">
           <Link href={'/profile/' + userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Información personal</button></Link>
           <button className=" py-4 uppercase font-semibold lg:text-2xl text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] text-xs  ">Cambiar contraseña</button>
@@ -128,7 +133,7 @@ const ChangePassword: React.FC = () => {
             name="newPassword"
             control={control}
             rules={{
-              required: 'Repite tu nueva contraseña'
+              required: 'Escribe tu nueva contraseña'
             }}
             render={({ field }) => (
               <input
@@ -151,11 +156,13 @@ const ChangePassword: React.FC = () => {
           {<p className="text-red-500 w-full text-sm">{errorPass}</p>}
 
           <div className="flex lg:justify-end gap-2 lg:gap-4 border-2 border-transparent border-t-gray-100 p-8">
-            <button className="p-4 border-2">Cancelar</button>
+            <Link href={'/'}><button className="p-4 border-2">Cancelar</button></Link>
             <button type='submit' className="p-4 bg-gradient-to-t from-[#DCA6D8] to-[#975D93] text-white fonr-bold">Guardar cambios</button>
           </div>
         </form>
       </div >
+      <div className='z-50'>
+        <ModalSu></ModalSu></div>
     </section >
 
   )
