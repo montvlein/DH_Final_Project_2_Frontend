@@ -19,11 +19,13 @@ const ChangePassword: React.FC = () => {
   const userId = param?.id ?? 0
   const { control, register, handleSubmit, formState: { errors } } = useForm<pass>()
   const [errorPass, seterrorPass] = useState('')
+  const [errorOldPass, seterrorOldPass] = useState('')
   const dispatch = useDispatch<AppDispatch>()
   const cambiarPass: SubmitHandler<pass> = async ({ currentPassword, newPassword, password2 }: pass) => {
     if (newPassword !== password2) {
       seterrorPass('Las contraseñas no coinciden')
-      return
+    } else {
+      seterrorPass('')
     }
     const baseUrl = GoldenApi.base
     const endpoint = GoldenApi.endoints.user.changePass
@@ -42,10 +44,10 @@ const ChangePassword: React.FC = () => {
       })
       if (response.ok) {
         dispatch(openModal())
-        seterrorPass('')
+        seterrorOldPass('')
         //   const data = await response.json()
       } else {
-        alert('Contraseña actual incorrecta')
+        seterrorOldPass('Contraseña actual incorrecta, vuelve a intentarlo')
         console.error('Error al cambiar contraseña:', response.status, response.statusText, await response.text())
       }
     } catch (error) {
@@ -154,10 +156,11 @@ const ChangePassword: React.FC = () => {
             )}
           />
           {<p className="text-red-500 w-full text-sm">{errorPass}</p>}
+          {<p className="text-red-500 w-full text-sm">{errorOldPass}</p>}
 
           <div className="flex lg:justify-end gap-2 lg:gap-4 border-2 border-transparent border-t-gray-100 p-8">
-            <Link href={'/'}><button className="p-4 border-2">Cancelar</button></Link>
-            <button type='submit' className="p-4 bg-gradient-to-t from-[#DCA6D8] to-[#975D93] text-white fonr-bold">Guardar cambios</button>
+            <Link href={'/'}><button className="p-4 border-2 ">Cancelar</button></Link>
+            <button type='submit' className="p-4 bg-gradient-to-t from-[#DCA6D8] to-[#975D93] text-white font-bold">Guardar cambios</button>
           </div>
         </form>
       </div >
