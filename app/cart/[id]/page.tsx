@@ -27,22 +27,22 @@ const ShoppingCart: React.FC = () => {
   return (
     <div className='min-h-screen relative'>
       <NavigationPayBar activeButton={activeButton} onButtonClick={handleButtonClick} />
-      { successPayment && <ModalSuccess/> }
-      { loading && <Spinner/> }
+      {successPayment && <ModalSuccess />}
+      {loading && <Spinner />}
       {activeButton === 'entrega'
         ? (<DeliveryInfo />)
         : (
           <div className='flex flex-col md:flex-row md:justify-between'>
-              <PaymentForm formRef={formRef} setLoading={setLoading} setSuccess={setSuccess} />
-              <PurchaseSummary />
-            </div>
-          )}
+            <PaymentForm formRef={formRef} setLoading={setLoading} setSuccess={setSuccess} />
+            <PurchaseSummary />
+          </div>
+        )}
       <div className='m-4 flex justify-end'>
         <button
-        className='border-solid border-2 border-[#6A6A6A] px-6'
-        onClick={() => {
-          activeButton === 'entrega' ? router.push('/event/' + eventId) : handleButtonClick('entrega')
-        }}
+          className='border-solid border-2 border-[#6A6A6A] px-6'
+          onClick={() => {
+            activeButton === 'entrega' ? router.push('/event/' + eventId) : handleButtonClick('entrega')
+          }}
         >Volver</button>
         <button
           className="text-white px-6 py-3 ml-3 bg-gradient-to-t from-[#DCA6D8] to-[#975D93]"
@@ -60,7 +60,7 @@ const ModalSuccess: React.FC = () => {
   const router = useRouter()
 
   return (
-    <section className='absolute inset-0 z-50 bg-transparent backdrop-blur-sm z-40 flex items-center justify-center'>
+    <section className='absolute inset-0 z-50 bg-transparent backdrop-blur-sm flex items-center justify-center'>
       <article className='relative bg-white shadow-xl rounded-xl w-fit p-8 flex flex-col justify-center items-center gap-4'>
         <Image
           src="/logoModal.svg"
