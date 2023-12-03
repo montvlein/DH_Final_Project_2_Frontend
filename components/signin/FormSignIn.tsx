@@ -8,6 +8,7 @@ import type { AppDispatch } from '@/redux/store'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { GoldenApi } from '@/api/data'
+import GetUserInfo from '@/services/GetUser'
 
 const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const router = useRouter()
@@ -27,27 +28,14 @@ const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<
       body: JSON.stringify(values)
     })
       .then(async (response) => await response.json())
-      .then(data => {
+      .then(async (data) => {
+        if (data.error) throw new Error(data.message)
         localStorage.setItem('token', data.jwt)
-        dispatch(logIn(data))
-        const endpoint2 = GoldenApi.endoints.user.data
+        dispatch(logIn(data.jwt))
 
-        fetch(baseUrl + endpoint2, {
-          method: 'GET',
-          headers: {
-            token: data.jwt,
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(async (obtenerUser) => await obtenerUser.json())
-          .then(infoUser => {
-            dispatch(setUser(infoUser))
-            console.log('Data del usuario:', infoUser)
-            router.push('/')
-          })
-          .catch(err => {
-            console.error('Second API call failed:', err.message)
-          })
+        const infoUser = await GetUserInfo()
+        dispatch(setUser(infoUser))
+        router.push('/')
       })
       .catch(err => {
         console.error('First API call failed:', err.message)

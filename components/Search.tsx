@@ -64,10 +64,8 @@ const Search: React.FC<SearchProp> = function ({ evento }) {
             style={{ border: '0', borderBottom: '2px solid #7778B0', backgroundColor: '#2B2B2B' }}
             className="px-2 py-1 text-white font-bold xl:w-72"
             onChange={(e) => { handleNameChange(e.target.value) }}>
-              <option value="" disabled selected></option>
-              {evento.map(e => (
-                <option key={e.id} value={e.name}>{e.name}</option>
-              ))}
+              <option value="" hidden disabled selected></option>
+              {evento.map(e => <option key={e.id} value={e.name}>{e.name}</option> )}
           </select>
         </div>
         <div className="flex flex-col md:justify-end">
@@ -76,7 +74,7 @@ const Search: React.FC<SearchProp> = function ({ evento }) {
             {...register('place')}
             style={{ border: '0', borderBottom: '2px solid #7778B0', backgroundColor: '#2B2B2B' }}
             className="px-2 py-1 text-white font-bold xl:w-72">
-              <option value="" disabled selected></option>
+              <option value="" hidden disabled></option>
                 {filteredPlaces.map(place => (
                   <option key={place} value={place}>{place}</option>
                 ))}
@@ -88,7 +86,7 @@ const Search: React.FC<SearchProp> = function ({ evento }) {
             {...register('date')}
             style={{ border: '0', borderBottom: '2px solid #7778B0', backgroundColor: '#2B2B2B' }}
             className="border rounded px-2 py-1 text-white lg:w-52 xl:w-72">
-              <option value="" disabled selected></option>
+              <option value="" hidden disabled></option>
               {filteredDates.map(date => (
                 <option key={date} value={date}>{date}</option>
               ))}

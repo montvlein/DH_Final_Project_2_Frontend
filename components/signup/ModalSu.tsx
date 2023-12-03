@@ -25,11 +25,12 @@ const customStyles: Modal.Styles = {
 const ModalSu: React.FC = () => {
   const router = useRouter()
   const isModalOpen = useSelector((state: any) => state.modal.isOpen)
+  const user = useSelector( (state: any) => state.userInfo.activeUser)
+  const data = { id: user?.id }
   const dispatch = useDispatch()
 
   const handleCloseModal = (): void => {
     dispatch(closeModal())
-    const data = { id: 1 }
     router.push(`profile/${data.id}`)
   }
 

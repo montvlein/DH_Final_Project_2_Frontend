@@ -1,24 +1,30 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { User } from '@/models/User'
+import GetUserInfo from '@/services/GetUser'
 
 interface InitialState {
   activeUser: User
 }
 
-const initialState: InitialState = {
-  activeUser: {
-    id: 0,
-    firstName: '',
-    lastName: '',
-    mail: '',
-    birthDate: '',
-    phone: '',
-    role: '',
-    documentType: '',
-    documentNumber: ''
-  }
+const nullUser = {
+  id: 0,
+  firstName: '',
+  lastName: '',
+  mail: '',
+  birthDate: '',
+  phone: '',
+  role: '',
+  documentType: '',
+  documentNumber: ''
 }
+
+const storedUserJson = sessionStorage?.getItem("user");
+const storedUser = storedUserJson ? JSON.parse(storedUserJson) : null;
+
+const initialState: InitialState = {
+  activeUser: storedUser || nullUser
+};
 
 export const userInfo = createSlice({
   name: 'userInfo',
@@ -28,7 +34,6 @@ export const userInfo = createSlice({
       state.activeUser = initialState.activeUser
       localStorage.removeItem('token')
       sessionStorage.removeItem('user')
-      console.log(state)
       return initialState
     },
     setUser: (state, action: PayloadAction<User>) => {

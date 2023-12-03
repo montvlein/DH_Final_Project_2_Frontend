@@ -9,12 +9,12 @@ import { useDispatch } from 'react-redux'
 import { logIn } from '@/redux/features/auth-slice'
 import { setUser } from '@/redux/features/activeUser-slice'
 import { GoldenApi } from '@/api/data'
+import GetUserInfo from '@/services/GetUser'
 
 const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
-    console.log(user)
     const baseUrl = GoldenApi.base
     const endpoint = GoldenApi.endoints.user.signup
     const apiUrl = baseUrl + endpoint
@@ -32,28 +32,11 @@ const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatc
       if (response.status === 201) {
         const data = await response.json()
         console.log('Usuario creado con éxito:', data)
+        dispatch(logIn(data.jwt))
 
-        localStorage.setItem('token', data.jwt)
-        dispatch(logIn(data))
-
-        const endpoint2 = GoldenApi.endoints.user.data
-
-        const obtenerUser = await fetch(baseUrl + endpoint2, {
-          method: 'GET',
-          headers: {
-            token: data.jwt,
-            'Content-Type': 'application/json'
-          }
-        })
-
-        if (obtenerUser.status === 200) {
-          const infoUser = await obtenerUser.json()
-          console.log('Data del usuario:', infoUser)
-          dispatch(setUser(infoUser))
-          dispatch(openModal())
-        } else {
-          console.error('Second API call failed:', obtenerUser.status)
-        }
+        const infoUser = await GetUserInfo()
+        dispatch(setUser(infoUser))
+        dispatch(openModal())
       } else {
         console.error('Error al crear el usuario')
       }

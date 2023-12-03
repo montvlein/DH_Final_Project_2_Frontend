@@ -3,22 +3,22 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { CiMenuFries } from 'react-icons/ci'
-import { userUseSelector } from '@/redux/store'
-import { useDispatch } from 'react-redux'
-import type { AppDispatch } from '@/redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+import type { AppDispatch, RootState } from '@/redux/store'
 import { logOut } from '@/redux/features/auth-slice'
 import { clearUser } from '@/redux/features/activeUser-slice'
 import { FaUser } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 
 const Header: React.FC = () => {
+  const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
-  const userString = typeof window !== 'undefined' ? window.sessionStorage.getItem('user') : null
-  const userInfo = userString !== null ? JSON.parse(userString) : userUseSelector((state) => state.userInfo.activeUser)
+  const userInfo = useSelector( (state: RootState) => state.userInfo.activeUser)
 
   const handleLogout = (): any => {
     dispatch(clearUser())
     dispatch(logOut())
-    window.location.href = '/'
+    router.push('/')
   }
 
   return (

@@ -24,6 +24,7 @@ export const auth = createSlice({
       return initialState
     },
     logIn: (state, action: PayloadAction<string>) => {
+      localStorage.setItem('token', action.payload)
       return {
         value: {
           isAuth: true,
