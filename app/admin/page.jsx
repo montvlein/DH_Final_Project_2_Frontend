@@ -101,12 +101,18 @@ function AdminEventSection() {
     )
 }
 
+import LinesChart from '@/components/admin/LineChart'
+import BarsChart from '@/components/admin/BarChart'
+import PiesChart from '@/components/admin/PieChart'
+
 function AdminReportSection() {
     return(
         <>
-        <h2>Reportes</h2>
-        <div>
-            <article>data</article>
+        <h2 className="uppercase text-white text-7xl font-bold">Reportes</h2>
+        <div className="flex flex-col gap-16">
+            <PiesChart/>
+            <LinesChart/>
+            <BarsChart/>
         </div>
         </>
     )
