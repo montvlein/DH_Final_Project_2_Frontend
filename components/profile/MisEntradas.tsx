@@ -32,7 +32,7 @@ const MisEntradas: React.FC = () => {
       <div className="shadow-lg bg-white dark:bg-gray-700 dark:text-white">
         <div className="flex gap-2 justify-around">
           <Link href={'/profile/' + userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Información personal</button></Link>
-          <Link href={'/newpassword/' + userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Cambiar contraseña</button></Link>
+          <Link href={'password/'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Cambiar contraseña</button></Link>
           <button className=" py-4 uppercase font-semibold lg:text-2xl text-xs  text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] ">Mis entradas</button>
         </div>
         <div className="p-8 flex flex-col gap-4">

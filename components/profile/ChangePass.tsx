@@ -65,7 +65,7 @@ const ChangePassword: React.FC = () => {
         <div className="flex lg:gap-2 justify-around">
           <Link href={'/profile/' + userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Información personal</button></Link>
           <button className=" py-4 uppercase font-semibold lg:text-2xl text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] text-xs  ">Cambiar contraseña</button>
-          <Link href={'/mytickets/' + userId}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Mis entradas</button></Link>
+          <Link href={'tickets/'}><button className="grow py-4 uppercase font-semibold lg:text-2xl text-xs ">Mis entradas</button></Link>
         </div>
         <form onSubmit={handleSubmit(cambiarPass)} className="p-8 lg:mx-28">
           <label htmlFor="passOld" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">contraseña actual</label>
