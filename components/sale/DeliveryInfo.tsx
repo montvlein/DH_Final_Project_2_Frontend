@@ -2,52 +2,47 @@
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { type Ticket } from '@/models/Ticket'
+import { Evento } from '@/models/Event'
 
 const DeliveryInfo: React.FC = () => {
   const param = useParams()
   const ticketId = param?.id ?? 0
-  const [ticket, setTicket] = useState<Ticket>({
+  const [ticket, setTicket] = useState<Evento>({
     id: 0,
-    dateTime: {
-      id: 0,
-      dateTime: [
-        2024,
-        3,
-        2,
-        20,
-        0
-      ],
-      capacity: null
-    },
-    ticketType: {
-      id: 0,
-      name: 'General',
-      stock: 0,
-      price: 0,
-      urlImage: ''
-    },
-    event: {
-      id: 3,
-      description: '',
-      description_title: '',
-      name: '',
-      venue: {
+    dateList: [
+      {
         id: 0,
-        venue: '',
-        country: '',
-        city: '',
-        address: ''
+        dateTime: [0, 0, 0, 0, 0],
+        ticketTypeList: [
+          {
+            id: 0,
+            name: '',
+            stock: 0,
+            urlImage: '',
+            price: 0,
+          },
+        ],
+        capacity: 0,
       },
-      miniImageUrl: '',
-      bannerImageUrl: '',
-      detailImageUrl: '',
-      category: {
-        id: 0,
-        description: '',
-        urlImage: ''
-      }
+    ],
+    description: '',
+    description_title: '',
+    name: '',
+    venue: {
+      id: 0,
+      venue: '',
+      country: '',
+      city: '',
+      address: '',
     },
-    idUser: 0
+    miniImageUrl: '',
+    bannerImageUrl: '',
+    detailImageUrl: '',
+    category: {
+      id: 0,
+      description: '',
+      urlImage: ''
+    }
   })
   const [price, setPrice] = useState(0)
   const [recargo, setRecargo] = useState(2700)
@@ -55,13 +50,14 @@ const DeliveryInfo: React.FC = () => {
 
   useEffect(() => {
     const getTickets = (): void => {
-      const apiTicketUrl = 'https://api.goldenticket.ar/event/ticket/' + ticketId
+      const apiTicketUrl = 'https://api.goldenticket.ar/event/' + ticketId
       fetch(apiTicketUrl)
         .then(async res => await res.json())
         .then(data => {
           setTicket(data)
-          setPrice(data.ticketType.price)
-          setTotal(data.ticketType.price + recargo)
+          console.log(data)
+          setPrice(data.dateList[0].ticketTypeList[0].price)
+          setTotal(data.dateList[0].ticketTypeList[0].price + recargo)
           console.log(data)
         })
         .catch(err => { console.error(err.message) })
@@ -80,12 +76,12 @@ const DeliveryInfo: React.FC = () => {
           <p className='text-black font-montserrat text-base font-medium'>Al finalizar, el ticket estará disponible en tu historial de compra, para que lo imprimas o lo presentes, desde tu dispositivo móvil, al ingresar al recinto.</p>
         </div>
       </div>
-      <div className=" bg-[#F8F8F8] p-5 mt-4 text-black font-montserrat text-base font-bold">{ticket.event.name}  | {ticket.event.venue.venue} </div>
+      <div className=" bg-[#F8F8F8] p-5 mt-4 text-black font-montserrat text-base font-bold">{ticket.name}  | {ticket.venue.venue}</div>
       <div className='bg-[#D9D9D9] flex flex-col p-4 md:justify-between md:mx-4'>
         <div>
           <h4 className='text-black font-montserrat text-base font-bold'>UBICACIONES</h4>
           <div className='flex justify-between'>
-            <p className='md:pr-40'>{ticket.ticketType.name}</p>
+            <p className='md:pr-40'>{ticket.dateList[0].ticketTypeList[0].name}</p>
             <p>{price.toLocaleString('es-Ar', {
               style: 'currency',
               currency: 'ARS'
