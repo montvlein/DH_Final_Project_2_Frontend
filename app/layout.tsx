@@ -23,7 +23,7 @@ export default function RootLayout ({
       <body className='relative flex flex-col h-screen w-full min-w-fit'>
         <ReduxProvider>
           <Header />
-          <main className="flex-1 w-full flex flex-col bg-white text-gray-900">
+          <main className="flex-1 w-full flex flex-col bg-white text-gray-900 dark:bg-gray-800">
             {children}
           </main>
           <Footer />
