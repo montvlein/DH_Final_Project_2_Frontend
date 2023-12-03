@@ -16,7 +16,7 @@ const SignUp: React.FC = () => {
       <Logo />
       <div className='bg-[#F8F7F3]   w-full'>
         <TituloRegistro />
-        <FormRegistro setLoading={setLoading} />
+        <FormRegistro setLoading={setLoading} isAdmin={false} />
         <YaTienesCuenta />
       </div>
     </div>

@@ -14,12 +14,12 @@ const nullUser = {
   mail: '',
   birthDate: '',
   phone: '',
-  role: '',
+  role: 'USER',
   documentType: '',
   documentNumber: ''
 }
 
-const storedUserJson = sessionStorage?.getItem("user");
+const storedUserJson = typeof window !== 'undefined' ? window.sessionStorage.getItem("user"): ""
 const storedUser = storedUserJson ? JSON.parse(storedUserJson) : null;
 
 const initialState: InitialState = {
@@ -31,10 +31,11 @@ export const userInfo = createSlice({
   initialState,
   reducers: {
     clearUser: (state) => {
-      state.activeUser = initialState.activeUser
       localStorage.removeItem('token')
       sessionStorage.removeItem('user')
-      return initialState
+      return {
+        activeUser: nullUser,
+      }
     },
     setUser: (state, action: PayloadAction<User>) => {
       state.activeUser = {

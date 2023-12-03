@@ -6,7 +6,7 @@ const AdminPage = () => {
     const titles = {
         viewUser:'usuarios',
         viewEvent: 'eventos',
-        viewReport: 'estadisticas'
+        viewReport: 'reportes'
     }
 
     const [viewUser, setViewUser] = useState(false)
@@ -33,9 +33,9 @@ const AdminPage = () => {
       <div className="relative lg:grid lg:grid-cols-6 h-full">
         <NavBarAdmin active={active} setActive={setActive} titles={titles} />
         <section className="lg:col-span-3 p-8">
-            { viewUser && <AdminUserSection /> }
-            { viewEvent && <AdminEventSection /> }
-            { viewReport && <AdminReportSection /> }
+            { viewUser && <AdminSectionWraper title={"administrar usuarios"}> <AdminUserSection /> </AdminSectionWraper> }
+            { viewEvent && <AdminSectionWraper title={"administrar eventos"}> <AdminEventSection /> </AdminSectionWraper> }
+            { viewReport && <AdminSectionWraper title={"reportes"}> <AdminReportSection /> </AdminSectionWraper> }
         </section>
       </div >
       </>
@@ -79,13 +79,38 @@ function NavBarAdmin({active, setActive, titles}) {
     )
 }
 
-function AdminUserSection() {
+function AdminSectionWraper({ title, children }) {
     return(
         <>
-        <h2>Administrar Usuarios</h2>
-        <div>
-            <article>data</article>
+        <h2 className="uppercase text-white text-2xl lg:text-7xl font-bold">{title}</h2>
+        <div className="flex flex-col gap-16 m-4 p-16 bg-white rounded-lg shadow-lg relative">
+            { children }
         </div>
+        </>
+    )
+}
+
+import FormRegistro from "@/components/signup/FormRegistro"
+import Spinner from "@/components/Spinner"
+import Link from "next/link"
+import { useSelector } from 'react-redux'
+
+function AdminUserSection() {
+    const [loading, setLoading] = useState(false)
+    const userInfo = useSelector( (state) => state.userInfo.activeUser)
+
+    return(
+        <>
+            <div className="flex justify-evenly items-center">
+                <p className="text-center uppercase cursor-pointer border-b-2 border-rose-500 max-w-[50%]">Crear usuario administrador</p>
+                <p className="text-center uppercase cursor-pointer max-w-[50%] hover:border-b-2 border-rose-500">Listar usuarios</p>
+                <Link
+                 href={'/profile/' + userInfo.id}
+                 className="text-center uppercase cursor-pointer max-w-[50%] hover:border-b-2 border-rose-500"
+                >Mi perfil</Link>
+            </div>
+            { loading && <Spinner/> }
+            <FormRegistro setLoading={setLoading} isAdmin={true} />
         </>
     )
 }
@@ -93,10 +118,6 @@ function AdminUserSection() {
 function AdminEventSection() {
     return(
         <>
-        <h2>Administrar Eventos</h2>
-        <div>
-            <article>data</article>
-        </div>
         </>
     )
 }
@@ -108,7 +129,6 @@ import PiesChart from '@/components/admin/PieChart'
 function AdminReportSection() {
     return(
         <>
-        <h2 className="uppercase text-white text-7xl font-bold">Reportes</h2>
         <div className="flex flex-col gap-16">
             <PiesChart/>
             <LinesChart/>
