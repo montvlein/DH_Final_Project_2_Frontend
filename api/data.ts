@@ -22,6 +22,9 @@ export const GoldenApi = {
     ticket: {
       all: 'event/ticket'
     },
+    report: {
+      get: 'report?'
+    },
     subscription: {}
   }
 }
