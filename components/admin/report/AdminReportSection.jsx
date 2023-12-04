@@ -80,7 +80,7 @@ const AdminReportSection = () => {
             { reportInfo?.quantityList?.length > 0 ?
                 <BarsChart info={reportInfo}/>
                 :
-                <p className='uppercase text-6xl text-gray-700 admin-font tracking-widest text-center'>No data</p>
+                <p className='uppercase text-6xl text-gray-700 admin-font tracking-widest text-center'>Sin datos</p>
             }
         </div>
         </>
