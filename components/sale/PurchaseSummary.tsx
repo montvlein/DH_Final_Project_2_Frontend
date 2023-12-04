@@ -11,17 +11,15 @@ const PurchaseSummary: React.FC = () => {
     dateList: [
       {
         id: 0,
-        dateTime: [0, 0, 0, 0, 0],
+        dateTime: new Date(),
         ticketTypeList: [
           {
             id: 0,
             name: '',
             stock: 0,
-            urlImage: '',
             price: 0,
           },
         ],
-        capacity: 0,
       },
     ],
     description: '',

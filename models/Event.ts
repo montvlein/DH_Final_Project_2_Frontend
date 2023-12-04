@@ -10,6 +10,7 @@ export interface Evento {
   bannerImageUrl: string
   detailImageUrl: string
   description?: string
+  description_title?:string
   category: Category
   venue: Venue
 }

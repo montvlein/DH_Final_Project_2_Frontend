@@ -1,7 +1,6 @@
 'use client'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { type Ticket } from '@/models/Ticket'
 import { Evento } from '@/models/Event'
 
 const DeliveryInfo: React.FC = () => {
@@ -12,17 +11,15 @@ const DeliveryInfo: React.FC = () => {
     dateList: [
       {
         id: 0,
-        dateTime: [0, 0, 0, 0, 0],
+        dateTime: new Date(),
         ticketTypeList: [
           {
             id: 0,
             name: '',
             stock: 0,
-            urlImage: '',
             price: 0,
           },
         ],
-        capacity: 0,
       },
     ],
     description: '',
