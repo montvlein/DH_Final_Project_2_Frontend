@@ -36,7 +36,7 @@ const ShoppingCart: React.FC = () => {
             <PaymentForm formRef={formRef} setLoading={setLoading} setSuccess={setSuccess} />
             <PurchaseSummary />
           </div>
-        )}
+          )}
       <div className='m-4 flex justify-end'>
         <button
           className='border-solid border-2 border-[#6A6A6A] px-6'

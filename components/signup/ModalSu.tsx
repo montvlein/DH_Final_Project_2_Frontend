@@ -25,7 +25,7 @@ const customStyles: Modal.Styles = {
 const ModalSu: React.FC = () => {
   const router = useRouter()
   const isModalOpen = useSelector((state: any) => state.modal.isOpen)
-  const user = useSelector( (state: any) => state.userInfo.activeUser)
+  const user = useSelector((state: any) => state.userInfo.activeUser)
   const dispatch = useDispatch()
 
   const handleCloseModal = (): void => {

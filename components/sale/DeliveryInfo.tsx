@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { Evento } from '@/models/Event'
+import { type Evento } from '@/models/Event'
 
 const DeliveryInfo: React.FC = () => {
   const param = useParams()
@@ -17,10 +19,10 @@ const DeliveryInfo: React.FC = () => {
             id: 0,
             name: '',
             stock: 0,
-            price: 0,
-          },
-        ],
-      },
+            price: 0
+          }
+        ]
+      }
     ],
     description: '',
     description_title: '',
@@ -30,7 +32,7 @@ const DeliveryInfo: React.FC = () => {
       venue: '',
       country: '',
       city: '',
-      address: '',
+      address: ''
     },
     miniImageUrl: '',
     bannerImageUrl: '',

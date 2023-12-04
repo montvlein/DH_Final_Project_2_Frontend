@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Evento } from '@/models/Event'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -17,10 +19,10 @@ const PurchaseSummary: React.FC = () => {
             id: 0,
             name: '',
             stock: 0,
-            price: 0,
-          },
-        ],
-      },
+            price: 0
+          }
+        ]
+      }
     ],
     description: '',
     description_title: '',

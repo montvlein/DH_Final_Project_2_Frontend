@@ -1,19 +1,10 @@
-import GetEvents from '@/services/GetEvents'
-import { useState, useEffect } from "react"
+import GetAllUsers from '@/services/GetAllUsers'
+import type { User } from '@/models/User'
 
-export default function EventListTable() {
-    const [list, setList] = useState([])
+export default async function UserListTable (): Promise<JSX.Element> {
+  const userList = await GetAllUsers()
 
-    useEffect(()=>{
-        const getlist = async () => {
-            const eventList = await GetEvents()
-            setList(eventList)
-            return
-        }
-        getlist()
-    }, [])
-
-    return(
+  return (
     <div className="relative overflow-x-auto rounded">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -25,29 +16,28 @@ export default function EventListTable() {
                         Nombre
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Categoria
+                        Email
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Acción
+                        Role
                     </th>
                 </tr>
             </thead>
             <tbody>
                 {
-                    list.map( eventData => (
-                        <tr key={eventData.id} className="bg-white border-b">
+                    userList.map((userData: User) => (
+                        <tr key={userData.id} className="bg-white border-b">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                { eventData.id }
+                                { userData.id }
                             </th>
                             <td className="px-6 py-4">
-                                { eventData.name }
+                                { userData.firstName }
                             </td>
                             <td className="px-6 py-4">
-                                { eventData?.category?.description }
+                                { userData.mail }
                             </td>
-                            <td className="px-6 py-4 flex items-center justify-center gap-4">
-                                <button disabled className='bg-sky-200 text-white rounded py-2 px-4 disabled:cursor-not-allowed'>Editar</button>
-                                <button disabled className='bg-white border-2 border-red-300 rounded py-2 px-4 disabled:cursor-not-allowed'>Eliminar</button>
+                            <td className="px-6 py-4">
+                                { userData.role }
                             </td>
                         </tr>
                     ))
@@ -55,5 +45,5 @@ export default function EventListTable() {
             </tbody>
         </table>
     </div>
-    )
+  )
 }

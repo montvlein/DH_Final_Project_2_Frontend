@@ -11,7 +11,7 @@ import { setUser } from '@/redux/features/activeUser-slice'
 import { GoldenApi } from '@/api/data'
 import GetUserInfo from '@/services/GetUser'
 
-const FormRegistro: React.FC<any> = ({ setLoading, isAdmin }: { setLoading: React.Dispatch<React.SetStateAction<boolean>>; isAdmin: boolean }) => {
+const FormRegistro: React.FC<any> = ({ setLoading, isAdmin }: { setLoading: React.Dispatch<React.SetStateAction<boolean>>, isAdmin: boolean }) => {
   const { register, control, handleSubmit, formState: { errors }, reset } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
@@ -21,7 +21,7 @@ const FormRegistro: React.FC<any> = ({ setLoading, isAdmin }: { setLoading: Reac
 
     try {
       setLoading(true)
-      user.role = isAdmin ? "ADMIN" : "USER"
+      user.role = isAdmin ? 'ADMIN' : 'USER'
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 'use client'
 import Link from 'next/link'
@@ -29,7 +30,7 @@ const ChangePassword: React.FC = () => {
     }
 
     try {
-      const response = await UpdateUserPass({currentPassword, newPassword})
+      const response = await UpdateUserPass(currentPassword, newPassword)
       if (response.ok) {
         dispatch(openModal())
         seterrorOldPass('')

@@ -65,7 +65,7 @@ const Search: React.FC<SearchProp> = function ({ evento }) {
             className="px-2 py-1 text-white font-bold xl:w-72"
             onChange={(e) => { handleNameChange(e.target.value) }}>
               <option value="" hidden disabled selected></option>
-              {evento.map(e => <option key={e.id} value={e.name}>{e.name}</option> )}
+              {evento.map(e => <option key={e.id} value={e.name}>{e.name}</option>)}
           </select>
         </div>
         <div className="flex flex-col md:justify-end">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 'use client'
 
 import Link from 'next/link'
@@ -14,7 +15,7 @@ import { useEffect, useState } from 'react'
 const Header: React.FC = () => {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
-  const userInfo: any = useSelector( (state: RootState) => state.userInfo.activeUser)
+  const userInfo: any = useSelector((state: RootState) => state.userInfo.activeUser)
 
   const handleLogout = (): any => {
     dispatch(clearUser())
@@ -22,13 +23,13 @@ const Header: React.FC = () => {
     router.push('/')
   }
 
-  const [user, setUser] = useState({id:0, mail:'', role:'USER'})
+  const [user, setUser] = useState({ id: 0, mail: '', role: 'USER' })
 
-  useEffect(()=>{
+  useEffect(() => {
     if (userInfo.role) {
-      setUser(userInfo);
+      setUser(userInfo)
     }
-  },[userInfo])
+  }, [userInfo])
 
   return (
     <header className='w-full sticky top-0 z-50 min-h-[4.75rem]'>

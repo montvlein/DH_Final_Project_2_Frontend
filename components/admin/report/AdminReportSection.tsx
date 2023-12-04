@@ -1,56 +1,66 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 'use client'
 
-import LinesChart from '@/components/admin/report/LineChart'
 import BarsChart from '@/components/admin/report/BarChart'
-import PiesChart from '@/components/admin/report/PieChart'
 import GetEvents from '@/services/GetEvents'
 import GetReport from '@/services/GetReport'
 import Spinner from '@/components/Spinner'
 import { useState, useEffect } from 'react'
+import type { Evento } from '@/models/Event'
+import type { EventData } from '@/models/ReportEventData'
 
-const AdminReportSection = () => {
-    const [eventList, setEventList] = useState([])
-    const [reportInfo, setReportInfo] = useState({})
-    const [loading, setLoading] = useState(false)
+const initialReportInfo: EventData = {
+  event: '',
+  dateList: [],
+  quantityList: []
+}
 
-    useEffect(()=>{
-        const callApi = async () => {
-            const list = await GetEvents()
-            setEventList(list)
-        }
-        callApi()
-        return
-    }, [])
+const AdminReportSection = (): JSX.Element => {
+  const [eventList, setEventList] = useState<Evento[]>([])
+  const [reportInfo, setReportInfo] = useState<EventData>(initialReportInfo)
+  const [loading, setLoading] = useState<boolean>(false)
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setLoading(true)
-        const form = e.target
-        const formData = new FormData(form)
-
-        const eventSelectorValue = formData.get('eventName')
-        const eventId = eventList.find( e => e.name === eventSelectorValue)?.id
-        const startDateValue = formData.get('start')
-        const endDateValue = formData.get('end')
-
-        GetReport(eventId, startDateValue, endDateValue)
-        .then( reportData => {
-            console.log(reportData)
-            setReportInfo(reportData)
-            setLoading(false)
-        })
-        .catch(err => console.error(err.message))
-        .finally(()=>setLoading(false))
+  useEffect(() => {
+    const callApi = async () => {
+      try {
+        const list = await GetEvents()
+        setEventList(list)
+      } catch (error) {
+        console.error(error)
+      }
     }
+    void callApi()
+  }, [])
 
-    return(
+  const handleSubmit = (e: { preventDefault: () => void, target: any }) => {
+    e.preventDefault()
+    setLoading(true)
+    const form = e.target
+    const formData = new FormData(form)
+
+    const eventSelectorValue = formData.get('eventName')
+    const eventId = eventList.find(e => e.name === eventSelectorValue)?.id
+    const startDateValue = formData.get('start')
+    const endDateValue = formData.get('end')
+
+    GetReport(eventId, startDateValue, endDateValue)
+      .then(reportData => {
+        console.log(reportData)
+        setReportInfo(reportData)
+        setLoading(false)
+      })
+      .catch(err => { console.error(err.message) })
+      .finally(() => { setLoading(false) })
+  }
+
+  return (
         <>
         <form className='flex justify-evenly' onSubmit={handleSubmit}>
             <div className="relative z-0">
                 <input required list='eventList' type="text" name='eventName' id="eventName" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                 <label htmlFor="eventName" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Evento ID</label>
                 <datalist id='eventList'>
-                    {eventList.map( (e, i) => <option key={i} value={e.name}>{e.name}</option>)}
+                    {eventList.map((e, i) => <option key={i} value={e.name}>{e.name}</option>)}
                 </datalist>
             </div>
             <div className="flex items-center">
@@ -77,14 +87,13 @@ const AdminReportSection = () => {
         <div className="relative flex flex-col gap-16">
             { loading && <Spinner/> }
             <h3>Información del evento: <span className='uppercase font-semibold'>{reportInfo.event}</span></h3>
-            { reportInfo?.quantityList?.length > 0 ?
-                <BarsChart info={reportInfo}/>
-                :
-                <p className='uppercase text-6xl text-gray-700 admin-font tracking-widest text-center'>Sin datos</p>
+            { reportInfo?.quantityList?.length > 0
+              ? <BarsChart event={reportInfo.event} dateList={reportInfo.dateList} quantityList={reportInfo.quantityList}/>
+              : <p className='uppercase text-6xl text-gray-700 admin-font tracking-widest text-center'>Sin datos</p>
             }
         </div>
         </>
-    )
+  )
 }
 
 export default AdminReportSection
