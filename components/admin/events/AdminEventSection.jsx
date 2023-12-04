@@ -1,6 +1,6 @@
 'use client'
 
-import EventListTable from "@/components/admin/events/adminListEvent"
+import EventListTable from "@/components/admin/events/AdminListEvent"
 import Spinner from "@/components/Spinner"
 import { useState } from "react"
 
