@@ -4,12 +4,13 @@
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
-import UpdateUserPass from '@/services/UpdateUSerPass'
+// import UpdateUserPass from '@/services/UpdateUSerPass'
 import { useState } from 'react'
 import { openModal } from '@/redux/features/modal-slice'
 import ModalSu from './ModalSu'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/redux/store'
+import { GoldenApi } from '@/api/data'
 export interface pass {
   currentPassword: string
   newPassword: string
@@ -27,23 +28,35 @@ const ChangePassword: React.FC = () => {
       seterrorPass('Las contraseñas no coinciden')
     } else {
       seterrorPass('')
-    }
 
-    try {
-      const response = await UpdateUserPass(currentPassword, newPassword)
-      if (response.ok) {
-        dispatch(openModal())
-        seterrorOldPass('')
-        //   const data = await response.json()
-      } else {
-        seterrorOldPass('Contraseña actual incorrecta, vuelve a intentarlo')
-        console.error('Error al cambiar contraseña:', response.status, response.statusText, await response.text())
+      const baseUrl = GoldenApi.base
+      const endpoint = GoldenApi.endoints.user.changePass
+      const apiUrl = baseUrl + endpoint
+      const jwt = localStorage.getItem('token')
+      console.log(jwt)
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'PATCH',
+          headers: {
+            token: jwt ?? '',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ currentPassword, newPassword })
+        })
+        if (response.ok) {
+          dispatch(openModal())
+          seterrorOldPass('')
+          //   const data = await response.json()
+        } else {
+          seterrorOldPass('Contraseña actual incorrecta, vuelve a intentarlo')
+          console.error('Error al cambiar contraseña:', response.status, response.statusText, await response.text())
+        }
+      } catch (error) {
+        console.error('Error de red:', error)
       }
-    } catch (error) {
-      console.error('Error de red:', error)
     }
   }
-
   return (
     <section className="flex flex-col  w-11/12">
       <div className="m-4 ">

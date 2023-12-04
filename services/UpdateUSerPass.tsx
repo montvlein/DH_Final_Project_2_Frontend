@@ -1,6 +1,6 @@
 import { GoldenApi } from '@/api/data'
 
-export default async function UpdateUserPass (currentPassword: any, newPassword: any): Promise<any> {
+export default async function UpdateUserPass(currentPassword: any, newPassword: any): Promise<any> {
   const baseApi = GoldenApi.base
   const endpoint = GoldenApi.endoints.user.changePass
   const storedToken = localStorage.getItem('token')
