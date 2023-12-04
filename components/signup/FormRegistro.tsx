@@ -11,8 +11,8 @@ import { setUser } from '@/redux/features/activeUser-slice'
 import { GoldenApi } from '@/api/data'
 import GetUserInfo from '@/services/GetUser'
 
-const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
-  const { register, control, handleSubmit, formState: { errors } } = useForm<User>()
+const FormRegistro: React.FC<any> = ({ setLoading, isAdmin }: { setLoading: React.Dispatch<React.SetStateAction<boolean>>; isAdmin: boolean }) => {
+  const { register, control, handleSubmit, formState: { errors }, reset } = useForm<User>()
   const dispatch = useDispatch<AppDispatch>()
   const createUser: SubmitHandler<User> = async (user: User) => {
     const baseUrl = GoldenApi.base
@@ -21,6 +21,7 @@ const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatc
 
     try {
       setLoading(true)
+      user.role = isAdmin ? "ADMIN" : "USER"
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -31,14 +32,19 @@ const FormRegistro: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatc
       setLoading(false)
       if (response.status === 201) {
         const data = await response.json()
-        console.log('Usuario creado con éxito:', data)
-        dispatch(logIn(data.jwt))
+        reset()
 
-        const infoUser = await GetUserInfo()
-        dispatch(setUser(infoUser))
+        if (!isAdmin) {
+          dispatch(logIn(data.jwt))
+
+          const infoUser = await GetUserInfo()
+          dispatch(setUser(infoUser))
+        }
+
         dispatch(openModal())
       } else {
         console.error('Error al crear el usuario')
+        throw new Error('Error al crear el usuario')
       }
     } catch (error) {
       console.error('Error de red:', error)

@@ -1,9 +1,10 @@
 import { GoldenApi } from '@/api/data'
 
-export default async function GetUserInfo (): Promise<any> {
+export default async function GetAllUsers () {
   const baseApi = GoldenApi.base
-  const endpoint = GoldenApi.endoints.user.data
+  const endpoint = GoldenApi.endoints.user.all
   const storedToken = localStorage.getItem('token')
+
   if (storedToken) {
     try {
       const opt = {

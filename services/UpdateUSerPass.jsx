@@ -1,17 +1,18 @@
 import { GoldenApi } from '@/api/data'
 
-export default async function GetUserInfo (): Promise<any> {
+export default async function UpdateUserPass({currentPassword, newPassword}) {
   const baseApi = GoldenApi.base
-  const endpoint = GoldenApi.endoints.user.data
+  const endpoint = GoldenApi.endoints.user.changePass
   const storedToken = localStorage.getItem('token')
   if (storedToken) {
     try {
       const opt = {
-        method: 'GET',
+        method: 'PATCH',
         headers: {
           token: storedToken,
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ currentPassword, newPassword })
       }
       const response = await fetch(baseApi + endpoint, opt)
       if (!response.ok) {

@@ -26,12 +26,11 @@ const ModalSu: React.FC = () => {
   const router = useRouter()
   const isModalOpen = useSelector((state: any) => state.modal.isOpen)
   const user = useSelector( (state: any) => state.userInfo.activeUser)
-  const data = { id: user?.id }
   const dispatch = useDispatch()
 
   const handleCloseModal = (): void => {
     dispatch(closeModal())
-    router.push(`profile/${data.id}`)
+    if (user.role === 'USER') router.push(`profile/${user.id}`)
   }
 
   return (

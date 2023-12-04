@@ -9,11 +9,12 @@ import { logOut } from '@/redux/features/auth-slice'
 import { clearUser } from '@/redux/features/activeUser-slice'
 import { FaUser } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const Header: React.FC = () => {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
-  const userInfo = useSelector( (state: RootState) => state.userInfo.activeUser)
+  const userInfo: any = useSelector( (state: RootState) => state.userInfo.activeUser)
 
   const handleLogout = (): any => {
     dispatch(clearUser())
@@ -21,8 +22,16 @@ const Header: React.FC = () => {
     router.push('/')
   }
 
+  const [user, setUser] = useState({id:0, mail:'', role:'USER'})
+
+  useEffect(()=>{
+    if (userInfo.role) {
+      setUser(userInfo);
+    }
+  },[userInfo])
+
   return (
-    <div className='w-full sticky top-0 z-50 min-h-[4.75rem]'>
+    <header className='w-full sticky top-0 z-50 min-h-[4.75rem]'>
       <nav className='mx-auto flex justify-between items-center sm:px-16 px-6 py-4 bg-black shadow-md'>
         <Link href='/' className='flex justify-center items-center'>
           <Image
@@ -35,10 +44,10 @@ const Header: React.FC = () => {
         </Link>
         <CiMenuFries size='2rem' color="white" className="md:hidden" />
         {
-          userInfo.id !== 0
+          user.id !== 0
             ? <div className='flex gap-4 items-center'>
-              <span>{userInfo?.mail}</span>
-              <Link href={'/profile/' + userInfo.id}>
+              <div>{user.mail}</div>
+              <Link href={user.role === 'ADMIN' ? '/admin' : '/profile/' + user.id}>
                 <FaUser className='text-[#975D93] text-3xl mt-2' /></Link> <button
                   className="text-white font-montserrat text-base font-normal border-2 border-slate-100 rounded-full p-2 px-4 hover:border-[#975D93] "
                   onClick={handleLogout}
@@ -52,7 +61,7 @@ const Header: React.FC = () => {
             </div>
         }
       </nav>
-    </div>
+    </header>
   )
 }
 

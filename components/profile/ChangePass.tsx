@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form'
-import { GoldenApi } from '@/api/data'
+import UpdateUserPass from '@/services/UpdateUSerPass'
 import { useState } from 'react'
 import { openModal } from '@/redux/features/modal-slice'
 import ModalSu from './ModalSu'
@@ -27,21 +27,9 @@ const ChangePassword: React.FC = () => {
     } else {
       seterrorPass('')
     }
-    const baseUrl = GoldenApi.base
-    const endpoint = GoldenApi.endoints.user.changePass
-    const apiUrl = baseUrl + endpoint
-    const jwt = localStorage.getItem('token')
-    console.log(jwt)
 
     try {
-      const response = await fetch(apiUrl, {
-        method: 'PATCH',
-        headers: {
-          token: jwt,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ currentPassword, newPassword })
-      })
+      const response = await UpdateUserPass({currentPassword, newPassword})
       if (response.ok) {
         dispatch(openModal())
         seterrorOldPass('')

@@ -10,6 +10,7 @@ export const GoldenApi = {
   base: 'https://api.goldenticket.ar/',
   endoints: {
     user: {
+      all: 'user',
       login: 'user/login',
       signup: 'user/register',
       data: 'user/dataUser',
@@ -20,6 +21,9 @@ export const GoldenApi = {
     },
     ticket: {
       all: 'event/ticket'
+    },
+    report: {
+      get: 'report?'
     },
     subscription: {}
   }

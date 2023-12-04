@@ -20,10 +20,10 @@ export default function RootLayout ({
       <head>
         <script src="https://live.decidir.com/static/v2.6.4/decidir.js"></script>
       </head>
-      <body className='relative flex flex-col h-screen w-full'>
+      <body className='relative flex flex-col h-screen w-full min-w-fit'>
         <ReduxProvider>
           <Header />
-          <main className="flex-1 w-full flex flex-col bg-white text-gray-900">
+          <main className="flex-1 w-full flex flex-col bg-white text-gray-900 dark:bg-gray-800">
             {children}
           </main>
           <Footer />
