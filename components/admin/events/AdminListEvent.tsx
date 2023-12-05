@@ -5,12 +5,13 @@ import type { Evento } from '@/models/Event'
 import { useEffect, useState } from 'react'
 
 export default function EventListTable (): JSX.Element {
-    const [ eventList, setList ] = useState([])
+  const [eventList, setList] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     GetEvents()
-      .then( data => setList(data))
-  },[])
+      .then(data => { setList(data) })
+      .catch(err => { console.error(err) })
+  }, [])
 
   return (
     <div className="relative overflow-x-auto rounded">

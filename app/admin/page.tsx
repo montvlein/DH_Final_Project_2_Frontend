@@ -48,8 +48,8 @@ const AdminPage: React.FC = () => {
 export default AdminPage
 
 interface AdminSectionWrapperProps {
-  title: string;
-  children: React.ReactNode;
+  title: string
+  children: React.ReactNode
 }
 
 function AdminSectionWraper ({ title, children }: AdminSectionWrapperProps): JSX.Element {

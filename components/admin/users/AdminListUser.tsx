@@ -5,12 +5,13 @@ import type { User } from '@/models/User'
 import { useEffect, useState } from 'react'
 
 export default function UserListTable (): JSX.Element {
-  const [ userList, setUserList ] = useState([])
+  const [userList, setUserList] = useState([])
 
-  useEffect(()=>{
-      GetAllUsers()
-      .then( data => setUserList(data))
-  },[])
+  useEffect(() => {
+    GetAllUsers()
+      .then(data => { setUserList(data) })
+      .catch(err => { console.error(err) })
+  }, [])
 
   return (
     <div className="relative overflow-x-auto rounded">

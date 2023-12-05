@@ -44,7 +44,7 @@ const misoptions = {
 } as const
 
 export default function BarsChart (info: EventData): JSX.Element {
-  const days = info.dateList.map((d: [number, number, number]) => new Date(d[0], d[1]-1, d[2]).toLocaleDateString('es-Ar'))
+  const days = info.dateList.map((d: [number, number, number]) => new Date(d[0], d[1] - 1, d[2]).toLocaleDateString('es-Ar'))
   const quantity = info.quantityList
 
   const midata = {
