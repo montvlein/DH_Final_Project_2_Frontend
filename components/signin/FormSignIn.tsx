@@ -36,7 +36,7 @@ const FormSignIn: React.FC<any> = ({ setLoading }: { setLoading: React.Dispatch<
 
         const infoUser = await GetUserInfo()
         dispatch(setUser(infoUser))
-        router.push('/')
+        infoUser.role === 'ADMIN' ? router.push('/admin') : router.push('/')
       })
       .catch(err => {
         console.error('First API call failed:', err.message)
