@@ -2,6 +2,7 @@
 'use client'
 
 import EventListTable from '@/components/admin/events/AdminListEvent'
+import AdminCreateEvent from '@/components/admin/events/AdminCreateEvent'
 import Spinner from '@/components/Spinner'
 import { useState } from 'react'
 
@@ -24,7 +25,7 @@ export default function AdminEventSection (): JSX.Element {
                   className={`text-center font-semibold uppercase cursor-pointer ${view === actions.list ? 'border-b-2' : ''}  hover:border-b-2 border-[#975D93] max-w-[50%]`}>Listar eventos</p>
             </div>
             { loading && <Spinner/> }
-            { view === actions.create && <p>crear evento</p>}
+            { view === actions.create && <AdminCreateEvent/>}
             { view === actions.list && <EventListTable/>}
         </>
   )

@@ -10,7 +10,7 @@ const AdminPage: React.FC = () => {
   const titles = {
     viewUser: 'usuarios',
     viewEvent: 'eventos',
-    viewReport: 'Dashboard'
+    viewReport: 'reportes'
   }
 
   const [viewUser, setViewUser] = useState(false)

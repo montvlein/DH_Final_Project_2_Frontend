@@ -29,7 +29,7 @@ const NavBarAdmin: React.FC<NavBarAdminProps> = ({ active, setActive, titles }) 
                 <li
                 onClick={(e) => { handleChangeView(titles.viewReport) }}
                 className={`
-                cursor-pointer uppercase font-semibold transition-all duration-300 w-fit flex gap-4 items-center
+                cursor-pointer uppercase font-montserrat font-semibold transition-all duration-300 w-fit flex gap-4 items-center
                 hover:text-[#975D93] hover:scale-100 hover:translate-x-14
                 ${active === titles.viewReport ? 'text-white scale-100 translate-x-14' : ''}
                 `}>
@@ -43,7 +43,7 @@ const NavBarAdmin: React.FC<NavBarAdminProps> = ({ active, setActive, titles }) 
                 <li
                 onClick={(e) => { handleChangeView(titles.viewUser) }}
                 className={`
-                cursor-pointer uppercase font-semibold transition-all duration-300 w-fit flex gap-4 items-center
+                cursor-pointer uppercase font-montserrat font-semibold transition-all duration-300 w-fit flex gap-4 items-center
                 hover:text-[#975D93] hover:scale-100 hover:translate-x-14
                 ${active === titles.viewUser ? 'text-white scale-100 translate-x-14' : ''}
                 `}>
@@ -68,7 +68,7 @@ const NavBarAdmin: React.FC<NavBarAdminProps> = ({ active, setActive, titles }) 
                 <li
                 onClick={(e) => { handleChangeView(titles.viewEvent) }}
                 className={`
-                cursor-pointer uppercase font-semibold transition-all duration-300 w-fit flex gap-4 items-center
+                cursor-pointer uppercase font-montserrat font-semibold transition-all duration-300 w-fit flex gap-4 items-center
                 hover:text-[#975D93] hover:scale-100 hover:translate-x-14
                 ${active === titles.viewEvent ? 'text-white scale-100 translate-x-14' : ''}
                 `}>
