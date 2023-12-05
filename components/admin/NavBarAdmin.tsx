@@ -30,22 +30,22 @@ const NavBarAdmin: React.FC<NavBarAdminProps> = ({ active, setActive, titles }) 
                 onClick={(e) => { handleChangeView(titles.viewReport) }}
                 className={`
                 cursor-pointer uppercase font-semibold transition-all duration-300 w-fit flex gap-4 items-center
-                hover:text-rose-500 hover:scale-150 hover:translate-x-14
-                ${active === titles.viewReport ? 'text-white scale-150 translate-x-14' : ''}
+                hover:text-[#975D93] hover:scale-100 hover:translate-x-14
+                ${active === titles.viewReport ? 'text-white scale-100 translate-x-14' : ''}
                 `}>
                     <Image
-                     src='/dashboard_ico.svg'
-                     alt=""
-                     width={24}
-                     height={24}
+                      src='/dashboard_ico.svg'
+                      alt=""
+                      width={24}
+                      height={24}
                     />
                     {titles.viewReport}</li>
                 <li
                 onClick={(e) => { handleChangeView(titles.viewUser) }}
                 className={`
                 cursor-pointer uppercase font-semibold transition-all duration-300 w-fit flex gap-4 items-center
-                hover:text-rose-500 hover:scale-150 hover:translate-x-14
-                ${active === titles.viewUser ? 'text-white scale-150 translate-x-14' : ''}
+                hover:text-[#975D93] hover:scale-100 hover:translate-x-14
+                ${active === titles.viewUser ? 'text-white scale-100 translate-x-14' : ''}
                 `}>
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -69,15 +69,15 @@ const NavBarAdmin: React.FC<NavBarAdminProps> = ({ active, setActive, titles }) 
                 onClick={(e) => { handleChangeView(titles.viewEvent) }}
                 className={`
                 cursor-pointer uppercase font-semibold transition-all duration-300 w-fit flex gap-4 items-center
-                hover:text-rose-500 hover:scale-150 hover:translate-x-14
-                ${active === titles.viewEvent ? 'text-white scale-150 translate-x-14' : ''}
+                hover:text-[#975D93] hover:scale-100 hover:translate-x-14
+                ${active === titles.viewEvent ? 'text-white scale-100 translate-x-14' : ''}
                 `}>
                     <Image
-                     src='/ticket-ico.svg'
-                     alt=""
-                     width={24}
-                     height={24}
-                     className='w-4 h-4'/>
+                      src='/ticket-ico.svg'
+                      alt=""
+                      width={24}
+                      height={24}
+                      className='w-4 h-4'/>
                     {titles.viewEvent}</li>
             </ul>
         </aside>

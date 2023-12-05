@@ -18,16 +18,16 @@ export default function AdminUserSection (): JSX.Element {
 
   return (
         <>
-            <div className="flex justify-evenly items-center">
+            <div className="flex justify-evenly items-end gap-3">
                 <p
                   onClick={(e) => { setView(actions.create) }}
-                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.create ? 'border-b-2' : ''}  hover:border-b-2 border-rose-500 max-w-[50%]`}>Crear usuario administrador</p>
+                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.create ? 'border-b-2' : ''}  hover:border-b-2 border-[#975D93] max-w-[30%]`}>Crear usuario administrador</p>
                 <p
                   onClick={(e) => { setView(actions.list) }}
-                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.list ? 'border-b-2' : ''}  hover:border-b-2 border-rose-500 max-w-[50%]`}>Listar usuarios</p>
+                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.list ? 'border-b-2' : ''}  hover:border-b-2 border-[#975D93] max-w-[50%]`}>Listar usuarios</p>
                 <Link
                   href={'/profile/' + userInfo.id}
-                  className="text-center font-semibold uppercase cursor-pointer max-w-[50%] hover:border-b-2 border-rose-500"
+                  className="text-center font-semibold uppercase cursor-pointer max-w-[50%] hover:border-b-2 border-[#975D93]"
                 >Mi perfil</Link>
             </div>
             { loading && <Spinner/> }

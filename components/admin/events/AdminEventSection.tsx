@@ -18,10 +18,10 @@ export default function AdminEventSection (): JSX.Element {
             <div className="flex justify-evenly items-center">
                 <p
                   onClick={(e) => { setView(actions.create) }}
-                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.create ? 'border-b-2' : ''}  hover:border-b-2 border-rose-500 max-w-[50%]`}>Crear evento</p>
+                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.create ? 'border-b-2' : ''}  hover:border-b-2 border-[#975D93] max-w-[50%]`}>Crear evento</p>
                 <p
                   onClick={(e) => { setView(actions.list) }}
-                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.list ? 'border-b-2' : ''}  hover:border-b-2 border-rose-500 max-w-[50%]`}>Listar eventos</p>
+                  className={`text-center font-semibold uppercase cursor-pointer ${view === actions.list ? 'border-b-2' : ''}  hover:border-b-2 border-[#975D93] max-w-[50%]`}>Listar eventos</p>
             </div>
             { loading && <Spinner/> }
             { view === actions.create && <p>crear evento</p>}
