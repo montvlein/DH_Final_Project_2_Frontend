@@ -58,9 +58,8 @@ const AdminCreateEvent: React.FC = () => {
         {[1, 2, 3, 4].map((step: number) => (
           <li
             key={step}
-            className={`flex items-center justify-center w-8 h-8 rounded-full ${
-              currentStep === step ? 'bg-[#DCA6D8]' : 'bg-gray-300'
-            }`}
+            className={`flex items-center justify-center w-8 h-8 rounded-full ${currentStep === step ? 'bg-[#DCA6D8]' : 'bg-gray-300'
+              }`}
           >
             {step}
           </li>
@@ -75,7 +74,7 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Nombre del evento o Artista</label>
               <input
                 type="text"
-                { ... register('name')}
+                {...register('name')}
                 name='name'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
@@ -84,7 +83,7 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Lugar del evento</label>
               <input
                 type="text"
-                { ... register('venue.venue')}
+                {...register('venue.venue')}
                 name='place'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
@@ -95,7 +94,7 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Dirección del evento</label>
               <input
                 type="text"
-                { ... register('venue.address')}
+                {...register('venue.address')}
                 name='address'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
@@ -105,7 +104,10 @@ const AdminCreateEvent: React.FC = () => {
               <select
                 {...register('category')}
                 className="w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold">
-                  <option value=""hidden disabled></option>
+                <option value="" disabled selected></option>
+                <option value="Deportes" >Deportes</option>
+                <option value="Conciertos" >Conciertos</option>
+                <option value="Teatros" >Teatros</option>
               </select>
             </div>
           </div>
@@ -114,7 +116,7 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Hora de inicio de evento</label>
               <input
                 type="text"
-                { ... register('dateList')}
+                {...register('dateList')}
                 name='hour'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
@@ -123,7 +125,7 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Titulo de descripción</label>
               <input
                 type="text"
-                { ... register('description_title')}
+                {...register('description_title')}
                 name='description_title'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
@@ -134,7 +136,7 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Descripción</label>
               <input
                 type="text"
-                { ... register('description')}
+                {...register('description')}
                 name='description'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
@@ -158,40 +160,40 @@ const AdminCreateEvent: React.FC = () => {
             <h4 className='text-gray-600 font-montserrat text-xl font-semibold'>Banner</h4>
             <p className='text-gray-600 font-montserrat text-base font-normal'>Dimensiones óptimas 1559x446 px.</p>
             <input
-                type="text"
-                { ... register('bannerImageUrl')}
-                name='bannerImageUrl'
-                className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
-              />
+              type="text"
+              {...register('bannerImageUrl')}
+              name='bannerImageUrl'
+              className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
+            />
           </div>
           <div className='my-5'>
             <h4 className='text-gray-600 font-montserrat text-xl font-semibold'>Imagen detalle del evento</h4>
             <p className='text-gray-600 font-montserrat text-base font-normal'>Dimensiones óptimas 1450x815 px.</p>
             <input
-                type="text"
-                { ... register('detailImageUrl')}
-                name='detailImageUrl'
-                className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
-              />
+              type="text"
+              {...register('detailImageUrl')}
+              name='detailImageUrl'
+              className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
+            />
           </div>
           <div className='my-5'>
             <h4 className='text-gray-600 font-montserrat text-xl font-semibold'>Imagen tarjeta del evento</h4>
             <p className='text-gray-600 font-montserrat text-base font-normal'>Dimensiones óptimas 350x200 px.</p>
             <input
-                type="text"
-                { ... register('miniImageUrl')}
-                name='miniImageUrl'
-                className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
-              />
+              type="text"
+              {...register('miniImageUrl')}
+              name='miniImageUrl'
+              className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
+            />
           </div>
           <div className="flex justify-end gap-3">
-            <button type="button" onClick={handlePrev}className='border-2 px-6 py-3'>
+            <button type="button" onClick={handlePrev} className='border-2 px-6 py-3'>
               Anterior
             </button>
             <button type="button" onClick={handleNext} className="text-white px-6 py-3"
-                style={{
-                  background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
-                }}>
+              style={{
+                background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
+              }}>
               Siguiente
             </button>
           </div>
@@ -207,6 +209,7 @@ const AdminCreateEvent: React.FC = () => {
                 <div className="flex gap-4 mb-5">
                   <input
                     type="text"
+
                     name={`dateList${index}`}
                     className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
                   />
@@ -236,9 +239,9 @@ const AdminCreateEvent: React.FC = () => {
               Anterior
             </button>
             <button type="button" onClick={handleNext} className="text-white px-6 py-3"
-                style={{
-                  background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
-                }}>
+              style={{
+                background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
+              }}>
               Siguiente
             </button>
           </div>
@@ -292,10 +295,10 @@ const AdminCreateEvent: React.FC = () => {
             <button type="button" onClick={handlePrev} className='border-2 px-6 py-3'>
               Anterior
             </button>
-            <button type='submit' onClick={handleNext} className="text-white px-6 py-3"
-                style={{
-                  background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
-                }}>
+            <button type='submit' onClick={onSubmit} className="text-white px-6 py-3"
+              style={{
+                background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
+              }}>
               Guardar cambios
             </button>
           </div>
