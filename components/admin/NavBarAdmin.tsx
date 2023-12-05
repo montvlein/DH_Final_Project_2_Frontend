@@ -33,7 +33,12 @@ const NavBarAdmin: React.FC<NavBarAdminProps> = ({ active, setActive, titles }) 
                 hover:text-rose-500 hover:scale-150 hover:translate-x-14
                 ${active === titles.viewReport ? 'text-white scale-150 translate-x-14' : ''}
                 `}>
-                    <Image src='/dashboard_ico.svg' alt="" />
+                    <Image
+                     src='/dashboard_ico.svg'
+                     alt=""
+                     width={24}
+                     height={24}
+                    />
                     {titles.viewReport}</li>
                 <li
                 onClick={(e) => { handleChangeView(titles.viewUser) }}
@@ -67,7 +72,12 @@ const NavBarAdmin: React.FC<NavBarAdminProps> = ({ active, setActive, titles }) 
                 hover:text-rose-500 hover:scale-150 hover:translate-x-14
                 ${active === titles.viewEvent ? 'text-white scale-150 translate-x-14' : ''}
                 `}>
-                    <Image src='/ticket-ico.svg' alt="" className='w-4 h-4'/>
+                    <Image
+                     src='/ticket-ico.svg'
+                     alt=""
+                     width={24}
+                     height={24}
+                     className='w-4 h-4'/>
                     {titles.viewEvent}</li>
             </ul>
         </aside>

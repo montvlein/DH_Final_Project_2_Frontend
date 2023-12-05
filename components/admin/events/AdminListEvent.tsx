@@ -1,8 +1,16 @@
+'use client'
+
 import GetEvents from '@/services/GetEvents'
 import type { Evento } from '@/models/Event'
+import { useEffect, useState } from 'react'
 
-export default async function EventListTable (): Promise<JSX.Element> {
-  const eventList = await GetEvents()
+export default function EventListTable (): JSX.Element {
+    const [ eventList, setList ] = useState([])
+
+  useEffect(()=>{
+    GetEvents()
+      .then( data => setList(data))
+  },[])
 
   return (
     <div className="relative overflow-x-auto rounded">

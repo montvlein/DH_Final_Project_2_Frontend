@@ -1,8 +1,16 @@
+'use client'
+
 import GetAllUsers from '@/services/GetAllUsers'
 import type { User } from '@/models/User'
+import { useEffect, useState } from 'react'
 
-export default async function UserListTable (): Promise<JSX.Element> {
-  const userList = await GetAllUsers()
+export default function UserListTable (): JSX.Element {
+  const [ userList, setUserList ] = useState([])
+
+  useEffect(()=>{
+      GetAllUsers()
+      .then( data => setUserList(data))
+  },[])
 
   return (
     <div className="relative overflow-x-auto rounded">

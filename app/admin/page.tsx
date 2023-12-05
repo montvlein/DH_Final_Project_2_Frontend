@@ -47,7 +47,12 @@ const AdminPage: React.FC = () => {
 
 export default AdminPage
 
-function AdminSectionWraper (title: any, children: any): JSX.Element {
+interface AdminSectionWrapperProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+function AdminSectionWraper ({ title, children }: AdminSectionWrapperProps): JSX.Element {
   return (
         <>
         <h2 className="uppercase text-slate-700 text-2xl lg:text-7xl font-bold">{title}</h2>
