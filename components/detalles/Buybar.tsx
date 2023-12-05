@@ -6,6 +6,8 @@ import { type AppDispatch, userUseSelector } from '@/redux/store'
 import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux'
 import { setSelectedTicket } from '../../redux/features/selectEventTicket-slice'
+import ModalEE from './ModalEE'
+import { openModal } from '@/redux/features/modalEE-slice'
 
 interface IFormValues {
   place: string
@@ -43,8 +45,12 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
       idUser: userInfo.id,
       amount: parseInt(values.amount)
     }
-    dispatch(setSelectedTicket(reserva))
-    router.push('/cart/' + eventId)
+    if (userInfo.id === 0) {
+      dispatch(openModal())
+    } else {
+      dispatch(setSelectedTicket(reserva))
+      router.push('/cart/' + eventId)
+    }
   }
   const onError: SubmitErrorHandler<IFormValues> = () => { alert('Por favor, revisar los datos.') }
 
@@ -82,8 +88,8 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
             {...register('place')}
             style={{ border: '0', borderBottom: '2px solid #7778B0', backgroundColor: '#2B2B2B' }}
             className="border rounded px-2 py-1 text-white lg:w-52 xl:w-96">
-              <option value="" disabled selected hidden>Fecha y Lugar</option>
-              {fechaLugarOptions}
+            <option value="" disabled selected hidden>Fecha y Lugar</option>
+            {fechaLugarOptions}
           </select>
         </div>
         <div className="flex flex-col md:justify-end">
@@ -92,8 +98,8 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
             {...register('price')}
             style={{ border: '0', borderBottom: '2px solid #7778B0', backgroundColor: '#2B2B2B' }}
             className="border rounded px-2 py-1 text-white lg:w-52 xl:w-96">
-              <option value=""disabled selected hidden>Precio</option>
-              {ticketOptions}
+            <option value="" disabled selected hidden>Precio</option>
+            {ticketOptions}
           </select>
         </div>
         <div className="flex flex-col md:justify-end">
@@ -102,19 +108,20 @@ const Buybar: React.FC<InfoProps> = ({ evento }) => {
             {...register('amount')}
             style={{ border: '0', borderBottom: '2px solid #7778B0', backgroundColor: '#2B2B2B' }}
             className="border rounded px-2 py-1 text-white lg:w-52 xl:w-96">
-              <option value=""disabled selected hidden>Cantidad</option>
-              <option value={1}>1 entrada</option>
-              <option value={2}>2 entradas</option>
-              <option value={3}>3 entradas</option>
-            </select>
+            <option value="" disabled selected hidden>Cantidad</option>
+            <option value={1}>1 entrada</option>
+            <option value={2}>2 entradas</option>
+            <option value={3}>3 entradas</option>
+          </select>
         </div>
         <button
           className="text-white px-6 py-3 lg:rounded-xl bg-gradient-to-t from-[#DCA6D8] to-[#975D93] disabled:from-gray-400 disabled:to-gray-700 disabled:cursor-not-allowed"
           // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-          disabled={!selectedPlace || !selectedPrice || !selectedAmount || userInfo.id === 0 }
+          disabled={!selectedPlace || !selectedPrice || !selectedAmount}
         >
           Comprar
         </button>
+        <ModalEE />
       </form>
     </div>
   )
