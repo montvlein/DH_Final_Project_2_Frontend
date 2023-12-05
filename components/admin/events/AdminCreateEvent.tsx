@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useState } from 'react'
-import { useForm, type SubmitErrorHandler, type SubmitHandler } from 'react-hook-form'
+import { useForm, type SubmitErrorHandler, type SubmitHandler, useFieldArray } from 'react-hook-form'
 import type { Evento } from '@/models/Event'
 
 interface Entry {
@@ -10,10 +10,47 @@ interface Entry {
 
 const AdminCreateEvent: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1)
-  const { register, handleSubmit, getValues } = useForm<Evento>()
   const [dates, setDates] = useState([''])
   const [entries, setEntries] = useState<Entry[]>([{ nameTicket: '', priceTicket: 0 }])
 
+  const { register, handleSubmit, getValues, control } = useForm<Evento>({
+    defaultValues: {
+      dates: [{ dateList: '' }],
+      entries: [{ nameTicket: '', priceTicket: 0 }]
+    }
+  })
+
+  const { fields: dateFields, append: appendDate, remove: removeDate } = useFieldArray({
+    control,
+    name: 'dates'
+  })
+
+  const { fields: entryFields, append: appendEntry, remove: removeEntry } = useFieldArray({
+    control,
+    name: 'entries'
+  })
+
+  const handleAddDate = () => {
+    appendDate({ dateList: '' })
+  }
+
+  const handleRemoveDate = (index: number) => {
+    if (index === 0) {
+      return
+    }
+    removeDate(index)
+  }
+
+  // const handleAddEntry = () => {
+  //  appendEntry({ nameTicket: '', priceTicket: 0 })
+  // }
+
+  // const handleRemoveEntry = (index: number) => {
+  //  if (entryFields.length === 1) {
+  //    return
+  //  }
+  //  removeEntry(index)
+  // }
   const handleAddFields = () => {
     setEntries([...entries, { nameTicket: '', priceTicket: 0 }])
   }
@@ -25,18 +62,6 @@ const AdminCreateEvent: React.FC = () => {
     const newEntries = [...entries]
     newEntries.splice(index, 1)
     setEntries(newEntries)
-  }
-
-  const handleAddDate = () => {
-    setDates([...dates, ''])
-  }
-  const handleRemoveDate = (index: number) => {
-    if (index === 0) {
-      return
-    }
-    const newDates = [...dates]
-    newDates.splice(index, 1)
-    setDates(newDates)
   }
 
   const handleNext = (): void => {
@@ -203,14 +228,13 @@ const AdminCreateEvent: React.FC = () => {
         <div>
           <h2 className='text-[#975D93] font-montserrat font-semibold text-2xl'>FECHAS</h2>
           <div className="my-2">
-            {dates.map((date, index) => (
+            {dateFields.map((date, index) => (
               <div key={index} className='w-full mb-2 flex flex-col'>
                 <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Fecha del evento</label>
                 <div className="flex gap-4 mb-5">
                   <input
                     type="text"
-
-                    name={`dateList${index}`}
+                    {...register(`dates.${index}.dateList`)}
                     className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
                   />
                   <button
