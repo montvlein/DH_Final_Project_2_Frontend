@@ -7,7 +7,10 @@ import { useForm, type SubmitErrorHandler, type SubmitHandler, useFieldArray } f
 import type { Evento } from '@/models/Event'
 import type { EventDateTime } from '@/models/DateTime'
 import { GoldenApi } from '@/api/data'
-
+import { openModal } from '@/redux/features/modal-slice'
+import { useDispatch } from 'react-redux'
+import type { AppDispatch } from '@/redux/store'
+import ModalAdm from './ModalEE'
 interface Entry {
   nameTicket: string
   priceTicket: number
@@ -21,6 +24,7 @@ type EventoOther = Evento & {
 const AdminCreateEvent: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1)
   const [entries, setEntries] = useState<Entry[]>([{ nameTicket: '', priceTicket: 0 }])
+  const dispatch = useDispatch<AppDispatch>()
 
   const { register, handleSubmit, getValues, control } = useForm<EventoOther>({
     defaultValues: {
@@ -70,12 +74,9 @@ const AdminCreateEvent: React.FC = () => {
   }
 
   const onSubmit: SubmitHandler<Evento> = async () => {
-    console.log('onSubmit function is called')
-
     // setLoading(true)
     const values = getValues()
     let eventDateTimes: EventDateTime[] = []
-    console.log('lavues', values)
     const dateListForm = values.dates
     const hourForm = values.dateList[0].id
 
@@ -124,7 +125,7 @@ const AdminCreateEvent: React.FC = () => {
     const baseUrl = GoldenApi.base
     const endpoint = GoldenApi.endoints.event.all
     const apiTicketUrl = baseUrl + endpoint
-    fetch('https://api.goldenticket.ar/event', {
+    fetch(apiTicketUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -134,7 +135,7 @@ const AdminCreateEvent: React.FC = () => {
       .then(async res => await res.json())
       .then(data => {
         console.log(data)
-        alert('evento guardato con exito')
+        dispatch(openModal())
       })
       .catch(err => {
         console.error(err.message)
@@ -409,6 +410,7 @@ const AdminCreateEvent: React.FC = () => {
           </div>
         </div>
       )}
+      <ModalAdm></ModalAdm>
     </form>
   )
 }
