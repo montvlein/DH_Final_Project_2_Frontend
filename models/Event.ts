@@ -4,7 +4,7 @@ import type { Venue } from './Venue'
 
 export interface Evento {
   id: number
-  dateList: EventDateTime[]
+  dateList: EventDateTime[] | []
   name: string
   miniImageUrl: string
   bannerImageUrl: string

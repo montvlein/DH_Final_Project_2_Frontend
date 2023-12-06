@@ -1,19 +1,28 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useState } from 'react'
 import { useForm, type SubmitErrorHandler, type SubmitHandler, useFieldArray } from 'react-hook-form'
 import type { Evento } from '@/models/Event'
+import type { EventDateTime } from '@/models/DateTime'
+import { GoldenApi } from '@/api/data'
 
 interface Entry {
   nameTicket: string
   priceTicket: number
 }
 
+type EventoOther = Evento & {
+  dates?: Array<{ dateList: string }>
+  entries?: Array<{ nameTicket: string, priceTicket: number }>
+}
+
 const AdminCreateEvent: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1)
-  const [dates, setDates] = useState([''])
   const [entries, setEntries] = useState<Entry[]>([{ nameTicket: '', priceTicket: 0 }])
 
-  const { register, handleSubmit, getValues, control } = useForm<Evento>({
+  const { register, handleSubmit, getValues, control } = useForm<EventoOther>({
     defaultValues: {
       dates: [{ dateList: '' }],
       entries: [{ nameTicket: '', priceTicket: 0 }]
@@ -41,27 +50,15 @@ const AdminCreateEvent: React.FC = () => {
     removeDate(index)
   }
 
-  // const handleAddEntry = () => {
-  //  appendEntry({ nameTicket: '', priceTicket: 0 })
-  // }
-
-  // const handleRemoveEntry = (index: number) => {
-  //  if (entryFields.length === 1) {
-  //    return
-  //  }
-  //  removeEntry(index)
-  // }
   const handleAddFields = () => {
-    setEntries([...entries, { nameTicket: '', priceTicket: 0 }])
+    appendEntry({ nameTicket: '', priceTicket: 0 })
   }
 
   const handleRemoveFields = (index: number) => {
-    if (entries.length === 1) {
+    if (index === 0) {
       return
     }
-    const newEntries = [...entries]
-    newEntries.splice(index, 1)
-    setEntries(newEntries)
+    removeEntry(index)
   }
 
   const handleNext = (): void => {
@@ -71,9 +68,60 @@ const AdminCreateEvent: React.FC = () => {
   const handlePrev = (): void => {
     setCurrentStep(currentStep - 1)
   }
+
   const onSubmit: SubmitHandler<Evento> = async () => {
+    // setLoading(true)
     const values = getValues()
-    console.log(values)
+    let eventDateTimes: EventDateTime[] = []
+
+    const dateListForm = values.dates
+    const hourForm = values.dateList[0].id
+
+    if (dateListForm) {
+      eventDateTimes = dateListForm.map(data => {
+        const dateString = data.dateList
+        const year = +dateString.slice(0, 4)
+        const month = +dateString.slice(4, 6) - 1
+        const day = +dateString.slice(6, 8)
+        const hour = Math.floor(hourForm / 100)
+        const minutes = hourForm % 100
+        const date = new Date(year, month, day, hour, minutes)
+        return {
+          id: 1, // Asigna un ID según tu lógica
+          dateTime: date,
+          ticketTypeList: values.dateList[0].ticketTypeList // Asegúrate de tener una lista de tickets definida
+        }
+      })
+    }
+
+    const eventData: Evento = {
+      id: 1,
+      name: values.name,
+      miniImageUrl: values.miniImageUrl,
+      bannerImageUrl: values.bannerImageUrl,
+      detailImageUrl: values.detailImageUrl,
+      description: values.description,
+      description_title: values.description_title,
+      category: {
+        id: values.category.id,
+        description: values.category.description,
+        urlImage: values.category.urlImage
+      },
+      venue: {
+        id: values.venue.id,
+        venue: values.venue.venue,
+        country: 'Argentina',
+        city: 'Buenos Aires',
+        address: values.venue.address
+      },
+      dateList: eventDateTimes
+    }
+
+    console.log(eventData)
+
+    const baseUrl = GoldenApi.base
+    const endpoint = GoldenApi.endoints.event.all
+    const apiTicketUrl = baseUrl + endpoint
   }
   const onError: SubmitErrorHandler<Evento> = () => { alert('Por favor, revisar los datos.') }
 
@@ -109,7 +157,7 @@ const AdminCreateEvent: React.FC = () => {
               <input
                 type="text"
                 {...register('venue.venue')}
-                name='place'
+                name='venue.venue'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
             </div>
@@ -120,7 +168,7 @@ const AdminCreateEvent: React.FC = () => {
               <input
                 type="text"
                 {...register('venue.address')}
-                name='address'
+                name='venue.address'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
             </div>
@@ -130,9 +178,9 @@ const AdminCreateEvent: React.FC = () => {
                 {...register('category')}
                 className="w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold">
                 <option value="" disabled selected></option>
-                <option value="Deportes" >Deportes</option>
-                <option value="Conciertos" >Conciertos</option>
-                <option value="Teatros" >Teatros</option>
+                  <option value="Deportes">Evento Deportivo</option>
+                  <option value="Conciertos">Concierto</option>
+                  <option value="Teatros">Teatro</option>
               </select>
             </div>
           </div>
@@ -141,8 +189,11 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Hora de inicio de evento</label>
               <input
                 type="text"
-                {...register('dateList')}
-                name='hour'
+                {...register('dateList.0.id', {
+                  pattern: /^(0[0-9]|1[0-9]|2[0-3])[0-5][0-9]$/
+                })}
+                placeholder='Hora en formato HHmm'
+                name='dateList.0.id'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
             </div>
@@ -234,7 +285,10 @@ const AdminCreateEvent: React.FC = () => {
                 <div className="flex gap-4 mb-5">
                   <input
                     type="text"
-                    {...register(`dates.${index}.dateList`)}
+                    {...register(`dates.${index}.dateList`, {
+                      pattern: /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[0-2])\d{4}$/
+                    })}
+                    placeholder='Fecha en formato ddmmyyyy'
                     className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
                   />
                   <button
@@ -275,14 +329,15 @@ const AdminCreateEvent: React.FC = () => {
         <div>
           <h2 className='text-[#975D93] font-montserrat font-semibold text-2xl'>ENTRADAS</h2>
           <div className="my-2">
-            {entries.map((entry, index) => (
+            {entryFields.map((entry, index) => (
               <div key={index} className='w-full mb-2 flex flex-col'>
                 <div className="flex gap-4 mb-5">
                   <div className='flex flex-col'>
                     <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Tipo de entrada</label>
                     <input
                       type="text"
-                      name={`nameTicket${index}`}
+                      {...register(`dateList.${index}.ticketTypeList.${index}.name`)}
+                      name={`dateList.${index}.ticketTypeList.${index}.name`}
                       className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
                     />
                   </div>
@@ -290,7 +345,8 @@ const AdminCreateEvent: React.FC = () => {
                     <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Precio de entrada</label>
                     <input
                       type="text"
-                      name={`priceTicket${index}`}
+                      {...register(`dateList.${index}.ticketTypeList.${index}.price`)}
+                      name={`dateList.${index}.ticketTypeList.${index}.price`}
                       className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
                     />
                   </div>
@@ -319,7 +375,7 @@ const AdminCreateEvent: React.FC = () => {
             <button type="button" onClick={handlePrev} className='border-2 px-6 py-3'>
               Anterior
             </button>
-            <button type='submit' onClick={onSubmit} className="text-white px-6 py-3"
+            <button type='submit' className="text-white px-6 py-3"
               style={{
                 background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)'
               }}>
