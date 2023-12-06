@@ -70,10 +70,12 @@ const AdminCreateEvent: React.FC = () => {
   }
 
   const onSubmit: SubmitHandler<Evento> = async () => {
+    console.log('onSubmit function is called')
+
     // setLoading(true)
     const values = getValues()
     let eventDateTimes: EventDateTime[] = []
-
+    console.log('lavues', values)
     const dateListForm = values.dates
     const hourForm = values.dateList[0].id
 
@@ -86,42 +88,57 @@ const AdminCreateEvent: React.FC = () => {
         const hour = Math.floor(hourForm / 100)
         const minutes = hourForm % 100
         const date = new Date(year, month, day, hour, minutes)
+
+        const ticketTypeList = values.dateList[0].ticketTypeList.map(ticketType => ({
+          ...ticketType,
+          stock: 1000,
+          urlImage: 'urlimagen'
+        }))
+
         return {
-          id: 1, // Asigna un ID según tu lógica
           dateTime: date,
-          ticketTypeList: values.dateList[0].ticketTypeList // Asegúrate de tener una lista de tickets definida
+          ticketTypeList: ticketTypeList
         }
       })
     }
-
     const eventData: Evento = {
-      id: 1,
+      dateList: eventDateTimes,
+      description: values.description,
+      description_title: values.description_title,
       name: values.name,
       miniImageUrl: values.miniImageUrl,
       bannerImageUrl: values.bannerImageUrl,
       detailImageUrl: values.detailImageUrl,
-      description: values.description,
-      description_title: values.description_title,
+
       category: {
-        id: values.category.id,
-        description: values.category.description,
-        urlImage: values.category.urlImage
+        id: values.category
       },
       venue: {
-        id: values.venue.id,
-        venue: values.venue.venue,
-        country: 'Argentina',
-        city: 'Buenos Aires',
-        address: values.venue.address
-      },
-      dateList: eventDateTimes
+        id: values.venue.venue
+      }
+
     }
 
-    console.log(eventData)
+    console.log('eventdata', eventData)
 
     const baseUrl = GoldenApi.base
     const endpoint = GoldenApi.endoints.event.all
     const apiTicketUrl = baseUrl + endpoint
+    fetch('https://api.goldenticket.ar/event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(eventData)
+    })
+      .then(async res => await res.json())
+      .then(data => {
+        console.log(data)
+        alert('evento guardato con exito')
+      })
+      .catch(err => {
+        console.error(err.message)
+      })
   }
   const onError: SubmitErrorHandler<Evento> = () => { alert('Por favor, revisar los datos.') }
 
@@ -154,16 +171,24 @@ const AdminCreateEvent: React.FC = () => {
             </div>
             <div className='w-full mb-2'>
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Lugar del evento</label>
-              <input
-                type="text"
+              <select
                 {...register('venue.venue')}
-                name='venue.venue'
-                className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
-              />
+                className="w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold">
+                <option value="" disabled selected></option>
+                <option value="2">Estadio Unico de La Plata</option>
+                <option value="8">Estadio Eva Perón</option>
+                <option value="5">La Trastienda</option>
+                <option value="1">River Plate</option>
+                <option value="4">Teatro Vorterix</option>
+                <option value="9">Estadio José María Minella</option>
+                <option value="3">Estadio Boca Juniors</option>
+                <option value="6">Teatro Maipo</option>
+                <option value="7">Hipodromo de San Isidro</option>
+              </select>
             </div>
           </div>
           <div className="my-2 flex flex-col lg:flex-row lg:gap-5">
-            <div className='w-full mb-2'>
+            {/*  <div className='w-full mb-2'>
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Dirección del evento</label>
               <input
                 type="text"
@@ -171,16 +196,16 @@ const AdminCreateEvent: React.FC = () => {
                 name='venue.address'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
-            </div>
+            </div> */}
             <div className='w-full flex flex-col mb-2'>
               <label htmlFor="place" className="text-[#6A6A6A] font-montserrat text-base font-normal">Categorias</label>
               <select
                 {...register('category')}
                 className="w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold">
                 <option value="" disabled selected></option>
-                  <option value="Deportes">Evento Deportivo</option>
-                  <option value="Conciertos">Concierto</option>
-                  <option value="Teatros">Teatro</option>
+                <option value="1">Evento Deportivo</option>
+                <option value="1">Concierto</option>
+                <option value="2">Teatro</option>
               </select>
             </div>
           </div>
