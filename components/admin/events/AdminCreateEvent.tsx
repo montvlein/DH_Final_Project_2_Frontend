@@ -81,6 +81,8 @@ const AdminCreateEvent: React.FC = () => {
     const hourForm = values.dateList[0].id
 
     if (dateListForm) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       eventDateTimes = dateListForm.map(data => {
         const dateString = data.dateList
         const year = +dateString.slice(0, 4)
@@ -98,7 +100,7 @@ const AdminCreateEvent: React.FC = () => {
 
         return {
           dateTime: date,
-          ticketTypeList: ticketTypeList
+          ticketTypeList
         }
       })
     }
@@ -112,9 +114,13 @@ const AdminCreateEvent: React.FC = () => {
       detailImageUrl: values.detailImageUrl,
 
       category: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         id: values.category
       },
       venue: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         id: values.venue.venue
       }
 
