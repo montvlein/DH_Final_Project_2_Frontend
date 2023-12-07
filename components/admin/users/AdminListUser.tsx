@@ -9,7 +9,11 @@ export default function UserListTable (): JSX.Element {
 
   useEffect(() => {
     GetAllUsers()
-      .then(data => { setUserList(data) })
+      .then(data => {
+      // Ordenar la lista por ID
+        const sortedUserList = data.sort((a: any, b: any) => a.id - b.id)
+        setUserList(sortedUserList)
+      })
       .catch(err => { console.error(err) })
   }, [])
 

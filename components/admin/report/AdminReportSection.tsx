@@ -58,7 +58,7 @@ const AdminReportSection = (): JSX.Element => {
         <form className='flex justify-evenly gap-3 flex-col' onSubmit={handleSubmit}>
             <div className="relative z-0">
                 <input required list='eventList' type="text" name='eventName' id="eventName" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#975D93] peer" placeholder=" " />
-                <label htmlFor="eventName" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-[#975D93] peer-focus:dark:text-[#975D93] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Evento ID</label>
+                <label htmlFor="eventName" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-[#975D93] peer-focus:dark:text-[#975D93] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Evento</label>
                 <datalist id='eventList'>
                     {eventList.map((e, i) => <option key={i} value={e.name}>{e.name}</option>)}
                 </datalist>
