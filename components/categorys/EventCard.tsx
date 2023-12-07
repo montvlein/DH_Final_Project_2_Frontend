@@ -35,7 +35,7 @@ const EventCardList: React.FC<EventCardListProp> = function ({ evento }) {
           height={197}
           className='object-cover w-full'
         />
-        <div className='p-4 flex gap-6'>
+        <div className='p-4 flex gap-6 bg-white dark:bg-gray-400'>
           <p className='flex flex-col items-center font-bold'>
             <span className='text-blue-500'>{monthName}</span>
             <span className='text-3xl'>{day}</span>
