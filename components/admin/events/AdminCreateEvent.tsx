@@ -2,9 +2,11 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm, type SubmitErrorHandler, type SubmitHandler, useFieldArray } from 'react-hook-form'
 import type { Evento } from '@/models/Event'
+import type { Venue } from '@/models/Venue'
+import type { Category } from '@/models/Category'
 import type { EventDateTime } from '@/models/DateTime'
 import { GoldenApi } from '@/api/data'
 import { openModal } from '@/redux/features/modal-slice'
@@ -25,6 +27,36 @@ const AdminCreateEvent: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1)
   const [entries, setEntries] = useState<Entry[]>([{ nameTicket: '', priceTicket: 0 }])
   const dispatch = useDispatch<AppDispatch>()
+  const [venueOptions, setVenueOptions] = useState<Venue[]>([])
+  const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null)
+  const [categoryOptions, setCategoryOptions] = useState<Category[]>([])
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
+
+  useEffect(() => {
+    if (venueOptions.length === 0) {
+      fetch('https://api.goldenticket.ar/event/venue')
+        .then(async (response) => await response.json())
+        .then((data) => {
+          setVenueOptions(data)
+        })
+        .catch((error) => {
+          console.error('Error fetching venue options:', error)
+        })
+    }
+  }, [venueOptions])
+
+  useEffect(() => {
+    if (categoryOptions.length === 0) {
+      fetch('https://api.goldenticket.ar/event/category')
+        .then(async (response) => await response.json())
+        .then((data) => {
+          setCategoryOptions(data)
+        })
+        .catch((error) => {
+          console.error('Error fetching category options:', error)
+        })
+    }
+  }, [categoryOptions])
 
   const { register, handleSubmit, getValues, control } = useForm<EventoOther>({
     defaultValues: {
@@ -73,6 +105,17 @@ const AdminCreateEvent: React.FC = () => {
     setCurrentStep(currentStep - 1)
   }
 
+  const handleVenueChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = parseInt(event.target.value)
+    const selected = venueOptions.find((venue) => venue.id === selectedId)
+    setSelectedVenue(selected ?? null)
+  }
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = parseInt(event.target.value)
+    const category = categoryOptions.find((category) => category.id === selectedId)
+    setSelectedCategory(category ?? null)
+  }
+
   const onSubmit: SubmitHandler<Evento> = async () => {
     // setLoading(true)
     const values = getValues()
@@ -112,18 +155,26 @@ const AdminCreateEvent: React.FC = () => {
       miniImageUrl: values.miniImageUrl,
       bannerImageUrl: values.bannerImageUrl,
       detailImageUrl: values.detailImageUrl,
-
-      category: {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        id: values.category
-      },
-      venue: {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        id: values.venue.venue
-      }
-
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      category: selectedCategory
+        ? {
+            id: selectedCategory.id,
+            description: selectedCategory.description,
+            urlImage: selectedCategory.urlImage
+          }
+        : null,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      venue: selectedVenue
+        ? {
+            id: selectedVenue.id,
+            venue: selectedVenue.venue,
+            country: selectedVenue.country,
+            city: selectedVenue.city,
+            address: selectedVenue.address
+          }
+        : null
     }
 
     console.log('eventdata', eventData)
@@ -180,39 +231,40 @@ const AdminCreateEvent: React.FC = () => {
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Lugar del evento</label>
               <select
                 {...register('venue.venue')}
+                onChange={handleVenueChange}
                 className="w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold">
                 <option value="" disabled selected></option>
-                <option value="2">Estadio Unico de La Plata</option>
-                <option value="8">Estadio Eva Perón</option>
-                <option value="5">La Trastienda</option>
-                <option value="1">River Plate</option>
-                <option value="4">Teatro Vorterix</option>
-                <option value="9">Estadio José María Minella</option>
-                <option value="3">Estadio Boca Juniors</option>
-                <option value="6">Teatro Maipo</option>
-                <option value="7">Hipodromo de San Isidro</option>
+                {venueOptions.map((venue) => (
+                <option key={venue.id} value={venue.id}>
+                  {venue.venue}
+                </option>
+                ))}
               </select>
             </div>
           </div>
           <div className="my-2 flex flex-col lg:flex-row lg:gap-5">
-            {/*  <div className='w-full mb-2'>
+              <div className='w-full mb-2'>
               <label className='text-[#6A6A6A] font-montserrat text-base font-normal'>Dirección del evento</label>
               <input
                 type="text"
+                defaultValue={selectedVenue?.address}
                 {...register('venue.address')}
                 name='venue.address'
                 className='w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold'
               />
-            </div> */}
+            </div>
             <div className='w-full flex flex-col mb-2'>
               <label htmlFor="place" className="text-[#6A6A6A] font-montserrat text-base font-normal">Categorias</label>
               <select
                 {...register('category')}
+                onChange={handleCategoryChange}
                 className="w-full border-b border-black p-3 focus:outline-none focus:border-b-2 focus:border-[#975D93] focus:font-semibold">
-                <option value="" disabled selected></option>
-                <option value="1">Evento Deportivo</option>
-                <option value="1">Concierto</option>
-                <option value="2">Teatro</option>
+                <option value='' disabled selected></option>
+                {categoryOptions.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.description}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
