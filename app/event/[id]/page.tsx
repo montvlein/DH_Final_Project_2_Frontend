@@ -1,4 +1,4 @@
-import BuscadorEventos from '@/components/detalles/BuscadorEventos'
+// import BuscadorEventos from '@/components/detalles/BuscadorEventos'
 import Hero1 from '@/components/detalles/Hero1'
 import Buybar from '@/components/detalles/Buybar'
 import Info from '@/components/detalles/Info'
@@ -17,7 +17,11 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
   const eventList = await GetEvents()
   return (
     <>
+    {
+      /*
       <BuscadorEventos />
+      */
+    }
       <Hero1 evento={eventList[index]}/>
       <Buybar evento={eventList[index]}/>
       <Info evento={eventList[index]}/>

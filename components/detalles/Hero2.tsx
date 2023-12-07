@@ -35,7 +35,7 @@ const Hero2: React.FC<HeroDetailsListProps> = ({ evento }) => {
               background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)',
               borderRadius: '50px',
               padding: '20px',
-              width: '350px'
+              width: '400px'
             }}
             >
               <h4 className='ml-4'>Fecha: {dayOfMonth} de {monthName} 2023</h4>
@@ -45,7 +45,7 @@ const Hero2: React.FC<HeroDetailsListProps> = ({ evento }) => {
             style={{
               borderRadius: '50px',
               border: '1.5px solid #FFF',
-              width: '350px'
+              width: '400px'
             }}
             >
               <h4 className='ml-4'>Lugar: {evento.venue.venue}</h4>
@@ -56,7 +56,7 @@ const Hero2: React.FC<HeroDetailsListProps> = ({ evento }) => {
               background: 'linear-gradient(180deg, #975D93 0%, #DCA6D8 100%)',
               borderRadius: '50px',
               padding: '15px',
-              width: '350px'
+              width: '400px'
             }}
             >
               <h4 className='ml-4'>Dirección: {evento.venue.address}</h4>
@@ -66,7 +66,7 @@ const Hero2: React.FC<HeroDetailsListProps> = ({ evento }) => {
             style={{
               borderRadius: '50px',
               border: '1.5px solid #FFF',
-              width: '350px'
+              width: '400px'
             }}
             >
               <h4 className='ml-4'>Show comienza: 20 hs</h4>
