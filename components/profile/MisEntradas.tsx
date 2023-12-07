@@ -6,10 +6,12 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import GetTickets from '../../services/GetTikets'
+import Spinner from '../Spinner'
 
 const MisEntradas: React.FC = () => {
   const param = useParams()
   const userId = param?.id ?? 0
+  const [loading, setLoading] = useState(true)
   const [eventList, setEventList] = useState<any[]>([])
 
   const getUserTickets = (id: any): void => {
@@ -17,6 +19,7 @@ const MisEntradas: React.FC = () => {
       .then((eList: any[]) => {
         const userTicketsList = eList.filter(t => parseInt(t.idUser) === parseInt(id))
         setEventList(userTicketsList)
+        setLoading(false)
       })
   }
 
@@ -36,9 +39,10 @@ const MisEntradas: React.FC = () => {
           <button className=" py-4 uppercase font-semibold lg:text-2xl text-xs  text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] ">Mis entradas</button>
         </div>
         <div className="p-8 flex flex-col gap-4">
-          {eventList.map((ticket, index) => (
+          { loading ? <Spinner/> : eventList.map((ticket, index) => (
             <CardsProfile key={index} ticket={ticket} />
-          ))}
+            ))
+          }
         </div>
       </div>
     </section>
