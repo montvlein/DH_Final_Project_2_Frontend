@@ -38,10 +38,11 @@ const MisEntradas: React.FC = () => {
           <button className=" py-4 uppercase font-semibold lg:text-2xl text-xs  text-[#975D93] border-2 border-transparent border-b-[#DCA6D8] ">Mis entradas</button>
         </div>
         <div className="p-8 flex flex-col gap-4">
-          { loading ?
-            <div className='h-[50vh]'>
+          { loading
+            ? <div className='h-[50vh]'>
               <Skeleton />
-            </div>   : eventList.map((ticket, index) => (
+            </div>
+            : eventList.map((ticket, index) => (
             <CardsProfile key={index} ticket={ticket} />
             ))
           }
@@ -54,7 +55,7 @@ const MisEntradas: React.FC = () => {
 export default MisEntradas
 
 const Skeleton: React.FC = () => {
-  return(
+  return (
     <article className='animate-pulse rounded-2xl bg-slate-900 overflow-hidden shadow-xl  md:mx-24 my-2'>
         <div className='bg-slate-600 w-full h-48'></div>
         <div className='p-4 flex gap-6 bg-gray-100 dark:bg-gray-700'>
